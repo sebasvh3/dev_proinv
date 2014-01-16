@@ -62,9 +62,10 @@ function editEntity(id,control){
             dataType: "json",
             url: "app.php/"+control+"/editarAjax",
             success: function(datos){
+                console.debug("Datos editarAjax:");
                 console.dir(datos);
                 llenarFormulario(datos);
-                console.debug("Datos llenados");
+                
                 for(i in datos){
                     console.debug(i+" : "+datos[i]);
                 }
@@ -76,8 +77,24 @@ function editEntity(id,control){
 }
 
 function llenarFormulario(datos){
-    for(item in datos[0]){
-        $("#input_"+item).val(datos[0][item]);
+    var entity = datos[0];
+    
+    for(item in entity){
+        $("#input_"+item).val(entity[item]);
+    }
+    
+    if(datos.length === 2){
+        var categorias = datos[1];
+//        var select = $("#id_categoria");
+        var options = "";
+        for(cat in categorias){
+            options+="<option value='"+categorias[cat]['id']+"'>";
+            options+=categorias[cat]['descripcion'];
+            options+="</option>";
+            console.debug("----");
+            console.dir(categorias[cat]);
+        }
+        $("#select_id_categoria").append(options);
     }
     
 //    console.debug("Los datos fueron llenados");

@@ -13,11 +13,11 @@
    </div>    
     <div class="row">
      <div class="form-group">
-       <div class="col-md-1"><label for="exampleInputEmail1">Código:</label></div>
+       <div class="col-md-1"><label for="exampleInputEmail1">Cód Ean 13:</label></div>
        <div class="col-md-4"><input type="text" class="form-control" id="inputDescripcion" name="codigo"></div>
        <div class="col-md-1"><label for="exampleInputEmail1">Categoria:</label></div>
        <div class="col-md-2">
-           <select  class="form-control"  name="id_categoria">
+           <select  class="form-control"  name="id_categoria" >
                <option value='10'>Otro valor</option>
                <?php foreach ($this->categorias as $categoria):  ?>
                    <option value='<?php echo $categoria['id'] ?>'><?php echo $categoria['descripcion'] ?></option>
@@ -30,3 +30,6 @@
       <div class="col-md-2 col-md-offset-8"><button type="submit" class="btn btn-default btn-info btn-sm">Guardar</button></div>
    </div>
 </form>
+
+
+

@@ -25,7 +25,7 @@
             <th>Ean 13</th>
             <th>Descripción Producto</th>
             <th>Cantidad(gr)</th>
-            <th>Tercero</th>
+            <th>Categoria</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -36,7 +36,7 @@
             <td class='td_codigo'><?php echo $producto->getCodigo() ?></td>
             <td class='td_descripcion'><?php echo $producto->getDescripcion() ?></td>
             <td class='td_cantidad_gr'><?php echo $producto->getCantidad_gr() ?></td>
-            <td class='td_id_tercero'><?php echo $producto->getId_tercero() ?></td>
+            <td class='td_id_categoria'><?php echo $producto->getId_categoria() ?></td>
             <td class='text-center'>
                 <span onclick="editEntity(<?php echo $producto->getId()?>,'Producto')" class="accion editar"  data-original-title="Editar el proyecto">
                     <i class="fa fa-pencil-square-o fa-2x fa-fw text-IconEditar"></i>
@@ -83,10 +83,14 @@
               </div>    
               <div class="row">
                   <div class="form-group">
-                      <div class="col-md-2"><label for="exampleInputEmail1">Código:</label></div>
+                      <div class="col-md-2"><label for="exampleInputEmail1">Cod Ean 13:</label></div>
                       <div class="col-md-4"><input type="text" class="form-control" id="input_codigo" name="codigo"></div>
-                      <div class="col-md-2"><label for="exampleInputEmail1">Tercero:</label></div>
-                      <div class="col-md-4"><input type="text" class="form-control" id="input_tercero" name="tercero"></div>
+                      <div class="col-md-2"><label for="exampleInputEmail1">Categoría:</label></div>
+                      <div class="col-md-4">
+                        <select  class="form-control"  class="form-control" name="id_categoria" id="select_id_categoria">
+                              <option value='10'>Otro valor</option>
+                        </select>
+                      </div>    
                   </div>
               </div>
           </form>
