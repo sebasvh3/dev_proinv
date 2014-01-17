@@ -68,10 +68,11 @@ class MysqlModel {
     function executeQueryObject($sqlStatement){
         $lista = array();
         $resultado = mysql_query($sqlStatement, $this->getConexion());
-        while($entidad = mysql_fetch_object($resultado)){
-            $lista[] = $this->decodeHtml($entidad);
-        }
-        return $lista;
+        if(!is_bool($resultado))    
+            while($entidad = mysql_fetch_object($resultado)){
+                $lista[] = $this->decodeHtml($entidad);
+            }
+            return $lista;
     }
 
     function ejecutarConsulta($sql) {

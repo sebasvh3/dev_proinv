@@ -590,6 +590,7 @@ class AbstractFacade {
         $comma = "";
         
         $atributos = $this->getPublicEntityProperties();
+//        print_r($atributos);
         
         $params = array_change_key_case($params);
                
@@ -600,7 +601,11 @@ class AbstractFacade {
             } else if(isset($params[$atributo])){
                 $consulta .= $comma.$atributo."='".$params[$atributo]."'";
                 $comma = ",";
-            }            
+                }
+//                else{
+//                    $consulta .= $params[$atributo] == null ? $comma.$atributo."=null": "";
+//                    $comma = ",";
+//                }
         }
         //***
         $consulta .= " WHERE 1=1 ";

@@ -92,6 +92,9 @@ Class Producto /*extends EntidadAuditoria*/ {
         }
         foreach ($objects as $key => $value)
             $this->$key = $value;
+        
+//        if(!isset($this->id_categoria) or $this->getId_categoria()=='')
+//            $this->setId_categoria (null);
     }
     
     
@@ -191,6 +194,14 @@ Class Producto /*extends EntidadAuditoria*/ {
         $categoriaFacade= new CategoriaFacade();
         $categorias = $categoriaFacade->getCategoriasActivas();
         $this->categorias = $categorias;
+    }
+    
+    public function getCategoriaDescripcion(){
+        $categoriaFacade= new CategoriaFacade();
+        if(isset($this->id_categoria) && $this->getId_categoria()!='')
+            return $categoriaFacade->getDescripcionCategoria($this->getId_categoria());
+        else
+            return "";
     }
 
 

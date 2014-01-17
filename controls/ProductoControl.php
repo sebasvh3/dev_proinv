@@ -39,8 +39,8 @@ class ProductoControl extends AbstractControl {
 //        $this->getListaEntidades($params);
 //        echo "Si señor esta listando";
 //        
-        $this->setVistaAccion('producto/listar');
         $this->getListaEntidades();
+        $this->setVistaAccion('producto/listar');
     }
 
     public function nuevo() {
@@ -110,9 +110,11 @@ class ProductoControl extends AbstractControl {
         $entidad->setEstado('ACT');
         $response = array();
         if ($this->facade->guardarEdicionProducto($parametros)) {
+//            $this->facade->showSql();
             $response['msj']= "El producto ".$parametros['id']." se guardó correctamente";
             $response['tipo']="success";
-            $response['objEnt']= $this->facade->queryEditarProducto($parametros['id']);
+            $response['objEnt']= $this->facade->queryActualizarTable($parametros['id']);
+//            $this->facade->showSql();
         } else {
             $response['msj'] = "El producto ".$parametros['id']." no se guardó correctamente"; 
             $response['tipo'] = "danger";

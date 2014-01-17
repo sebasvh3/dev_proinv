@@ -13,7 +13,7 @@
   <i class="fa fa-ban fa-stack-2x text-info"></i>
 </span>-->
 
-<?php $this->verObj($this); ?>
+<?php // $this->verObj($this); ?>
 
 <div class="link"><a href="app.php/Producto/nuevo"><i class="fa fa-plus"></i> Nuevo Producto </a><br></div>
 <br>
@@ -36,7 +36,7 @@
             <td class='td_codigo'><?php echo $producto->getCodigo() ?></td>
             <td class='td_descripcion'><?php echo $producto->getDescripcion() ?></td>
             <td class='td_cantidad_gr'><?php echo $producto->getCantidad_gr() ?></td>
-            <td class='td_id_categoria'><?php echo $producto->getId_categoria() ?></td>
+            <td class='td_categoria'><?php echo $producto->getCategoriaDescripcion() ?></td>
             <td class='text-center'>
                 <span onclick="editEntity(<?php echo $producto->getId()?>,'Producto')" class="accion editar"  data-original-title="Editar el proyecto">
                     <i class="fa fa-pencil-square-o fa-2x fa-fw text-IconEditar"></i>
@@ -44,6 +44,7 @@
                 <span onclick="eliminarEntity(<?php echo $producto->getId()?>,'Producto')" class="accion editar"  data-original-title="Editar el proyecto">
                     <i class="fa fa fa-trash-o fa-2x fa-fw text-IconEliminar"></i>
                 </span>
+            <!--<td><?php // var_dump($producto->getCategoriaDescripcion()); ?></td>-->
             </td>
         </tr>
         <?php endforeach; ?>
@@ -88,7 +89,6 @@
                       <div class="col-md-2"><label for="exampleInputEmail1">Categoría:</label></div>
                       <div class="col-md-4">
                         <select  class="form-control"  class="form-control" name="id_categoria" id="select_id_categoria">
-                              <option value='10'>Otro valor</option>
                         </select>
                       </div>    
                   </div>

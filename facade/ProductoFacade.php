@@ -7,7 +7,8 @@ class ProductoFacade extends AbstractFacade{
     
     public $id;
     public static $editarProducto = "editarProducto";
-    public static $buscarPorCucod = "buscarPorCucod";
+    public static $sinCategoria = "sinCategoria";
+    public static $ActualizarProductoTable = "ActualizarProductoTable";
     
     public function ProductoFacade(){
         $this->idcolum='id';
@@ -17,6 +18,12 @@ class ProductoFacade extends AbstractFacade{
     }
     
     public function guardarEdicionProducto($parametros){
+        $this->id=$parametros['id'];
+        if(!isset($parametros['id_categoria']) or $parametros['id_categoria']==''){
+             $this->runNamedQuery(ProductoFacade::$sinCategoria);
+             unset($parametros['id_categoria']);
+        }
+//        var_dump($parametros);
         $filtros = array("and id=".$parametros['id']);
         $this->updateEntities($parametros,$filtros,true);
         return true;
@@ -25,6 +32,9 @@ class ProductoFacade extends AbstractFacade{
     
     public function getNamedQuery($nameQuery) {
         $querys['editarProducto'] = "SELECT t.id, t.descripcion, t.codigo, t.cantidad_gr, t.id_categoria  FROM " . $this->schema . "." . $this->entidad . " t where t.id=".$this->id;
+        $querys['sinCategoria'] = "UPDATE " . $this->schema . "." . $this->entidad . " SET id_categoria=null WHERE id=".$this->id;
+        $querys['ActualizarProductoTable'] = "SELECT p.id, p.descripcion, p.codigo, p.cantidad_gr, c.descripcion as categoria "
+                                            ."FROM producto p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.id=".$this->id;
         return $querys[$nameQuery];
     }
     
@@ -38,6 +48,12 @@ class ProductoFacade extends AbstractFacade{
         $productoEditable[]=$categorias;
         
         return $productoEditable;
+    }
+    
+    public function queryActualizarTable($id){
+        $this->id=$id;
+        $productoResponse = $this->runNamedQuery(ProductoFacade::$ActualizarProductoTable);
+        return $productoResponse;
     }
     
 }

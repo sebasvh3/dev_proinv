@@ -66,9 +66,9 @@ function editEntity(id,control){
                 console.dir(datos);
                 llenarFormulario(datos);
                 
-                for(i in datos){
-                    console.debug(i+" : "+datos[i]);
-                }
+//                for(i in datos){
+//                    console.debug(i+" : "+datos[i]);
+//                }
             },
             error: function(){
                 alert("Error en consulta ajax");
@@ -86,14 +86,19 @@ function llenarFormulario(datos){
     if(datos.length === 2){
         var categorias = datos[1];
 //        var select = $("#id_categoria");
-        var options = "";
+        $("#select_id_categoria").empty();
+        var options = "<option></option>";
         for(cat in categorias){
-            options+="<option value='"+categorias[cat]['id']+"'>";
+            if(entity['id_categoria']===categorias[cat]['id'])
+                options+="<option value='"+categorias[cat]['id']+"' selected='selected'>";
+            else
+                options+="<option value='"+categorias[cat]['id']+"'>";
             options+=categorias[cat]['descripcion'];
             options+="</option>";
-            console.debug("----");
-            console.dir(categorias[cat]);
+//            console.debug("----");
+//            console.dir(categorias[cat]);
         }
+//        console.debug(options);
         $("#select_id_categoria").append(options);
     }
     
@@ -121,6 +126,8 @@ function guardarFormulario(){
             url: "app.php/"+entity+"/guardarAjax",
             success: function(datos){
                 actualizarNotificarRegistroEnTabla(datos);
+                console.debug("datos: ");
+                console.dir(datos);
             },
             error: function(){
                 mostrar_mensaje("danger","Error en el servidor!");
