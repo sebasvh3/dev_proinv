@@ -93,8 +93,8 @@ Class Producto /*extends EntidadAuditoria*/ {
         foreach ($objects as $key => $value)
             $this->$key = $value;
         
-//        if(!isset($this->id_categoria) or $this->getId_categoria()=='')
-//            $this->setId_categoria (null);
+        if(!isset($this->id_categoria) or $this->getId_categoria()=='')
+            $this->setId_categoria (null);
     }
     
     

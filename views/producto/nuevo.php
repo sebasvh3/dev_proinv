@@ -18,7 +18,7 @@
        <div class="col-md-1"><label for="exampleInputEmail1">Categoria:</label></div>
        <div class="col-md-2">
            <select  class="form-control"  name="id_categoria" >
-               <option value='10'>Otro valor</option>
+               <option ></option>
                <?php foreach ($this->categorias as $categoria):  ?>
                    <option value='<?php echo $categoria['id'] ?>'><?php echo $categoria['descripcion'] ?></option>
                <?php endforeach;?>

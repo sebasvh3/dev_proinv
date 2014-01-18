@@ -38,8 +38,6 @@ CREATE TABLE tercero(
     PRIMARY KEY ( id )
 );
 
-ALTER TABLE `producto` ADD INDEX ( `id_categoria` ) 
-
 
 Insertar datos;
 
