@@ -12,6 +12,7 @@ setlocale("LC_ALL", "es_CO.UTF-8");
         <link rel="stylesheet" type="text/css" href="resources/bootstrap3/css/bootstrap.css" media="screen"/>
         <link rel="stylesheet" type="text/css" href="resources/bootstrap3/css/bootstrap-theme.css" media="screen"/>
         <link rel="stylesheet" type="text/css" href="resources/font-awesome-4.0.3/css/font-awesome.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="resources/datepicker/css/datepicker.css" />
         
         <link rel="stylesheet" type="text/css" href="resources/datatables/extras/ColReorder/media/css/ColReorder.css" media="screen"/>
         <link rel="stylesheet" type="text/css" href="resources/datatables/extras/ColVis/media/css/ColVis.css" media="screen"/>
@@ -46,7 +47,7 @@ alt="nuevo" />-->
                 <li id="inicio"><a href="app.php/Index/inicio">Inicio</a></li>
                 <li id="producto"><a href="app.php/Producto/listar">Productos</a></li>
                 <li id="categoria"><a href="app.php/Categoria/listar">Categorias</a></li>
-                <li id="entrada"><a href="app.php/Index/entrada">Entrada</a></li>
+                <li id="movimiento"><a href="app.php/Movimiento/entrada">Entrada</a></li>
                 <li id="salida"><a href="app.php/Index/salida">Salida</a></li>
                 
                 <li class="dropdown active">
