@@ -2,6 +2,7 @@
 require_once rutaModel.'AbstractControl.php';
 require_once rutaFacades.'MovimientoFacade.php';
 require_once rutaFacades.'CategoriaFacade.php';
+require_once rutaFacades.'ProductoFacade.php';
 //require_once rutaEntidades.'Categoria.php';
 
 class MovimientoControl extends AbstractControl {
@@ -28,6 +29,25 @@ class MovimientoControl extends AbstractControl {
 
     public function getCategorias(){
         return $this->categorias;
+    }
+    
+    public function guardar(){
+        //probar velocidad del servidor
+        var_dump($_POST);
+        $existencia=$_POST['existencia'];
+        $idproducto=$_POST['id_producto'];
+        
+        $productoFacade = new ProductoFacade();
+        $valorActual =  $productoFacade->consultarExistencia($idproducto);
+        
+        $parametros=array("existencia"=>$existencia+$valorActual);
+        $filtros = array("and id=".$idproducto);
+        
+        $productoFacade->updateEntities($parametros,$filtros,false);
+        var_dump($parametros['existencia']);
+        echo"el producto ".$idproducto." Se ha actualizado <br>";
+        
+//        $this->setVistaAccion('movimiento/entrada');
     }
 }
 

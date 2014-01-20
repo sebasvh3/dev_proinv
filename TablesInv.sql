@@ -3,6 +3,7 @@ CREATE TABLE producto(
     descripcion VARCHAR(256) NOT NULL,
     codigo DECIMAL(15,0) NOT NULL,
     cantidad_gr INT NOT NULL,
+    existencia DECIMAL( 12, 2 ) NULL
     estado VARCHAR(4) NOT NULL,
     id_categoria INT NULL,
     id_tercero INT NULL,
@@ -66,6 +67,7 @@ ALTER TABLE `producto` ADD INDEX ( `id_categoria` )
 
 ALTER TABLE  `bodega` CHANGE  `existencia`  `existencia` DECIMAL( 12 ) NOT NULL DEFAULT  '0'
 ALTER TABLE  `bodega` CHANGE  `existencia`  `existencia` DECIMAL( 12, 3 ) NOT NULL DEFAULT  '0'
+ALTER TABLE  `producto` ADD  `existencia` DECIMAL( 12, 2 ) NULL AFTER  `cantidad_gr`
 
 
 Insertar datos;
