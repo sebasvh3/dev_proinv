@@ -44,7 +44,6 @@
       <div class="col-md-2 col-md-offset-8"><button type="submit" class="btn btn-default btn-info btn-sm">Guardar</button></div>
    </div>
 </form>
-<script>ProductosSegunCategoria();</script>
 <pre>
     <?php var_dump($this->getCategorias());?>
 </pre>

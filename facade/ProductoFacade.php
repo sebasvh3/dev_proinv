@@ -70,7 +70,9 @@ class ProductoFacade extends AbstractFacade{
     public function consultarExistencia($id){
         $this->id=$id;
         $response = $this->runNamedQuery(ProductoFacade::$consultarExistencia);
-        return $response[0]['existencia'];
+        if(isset($response[0]['existencia']) && $response[0]['existencia']!='')
+            return $response[0]['existencia'];
+        else return 0;
     }
     
 }

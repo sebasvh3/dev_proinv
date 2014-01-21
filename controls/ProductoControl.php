@@ -152,6 +152,13 @@ class ProductoControl extends AbstractControl {
         echo json_encode($productos);
     }
     
+    public function findExistenciaByProducto(){
+        $this->layout=false;
+        $idproducto = $_POST['idproducto'];
+        $existencia = $this->facade->consultarExistencia($idproducto);
+        echo json_encode($existencia);
+    }
+    
     
     public function prepararNuevo() {
         $this->entidadSeleccionada = new Tipo_activo(array());

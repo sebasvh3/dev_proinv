@@ -19,6 +19,7 @@ class MovimientoControl extends AbstractControl {
     }
     
     public function salida(){
+        $this->setCategorias();
         $this->setVistaAccion('movimiento/salida');
     }
     

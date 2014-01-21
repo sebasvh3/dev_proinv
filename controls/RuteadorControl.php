@@ -25,11 +25,11 @@ class RuteadorControl {
         
 //        echo "<pre>";
 //        var_dump($this->getParametros());
-        
+
         if(!isset($_SESSION['permisos'])){
             $_SESSION['permisos'] = array();
-//            $this->setCredenciales();
-//            $this->setPermisos(simplexml_load_file('permisosRutas.xml'));
+            $this->setCredenciales(array('usuario'));
+            $this->setPermisos(simplexml_load_file('enviroment/Permisos.xml'));
         }
 
 //        if(in_array($this->getRequestUri(), $this->getPermisos())){
@@ -96,21 +96,21 @@ class RuteadorControl {
         $this->vistaAccion = $vistaAccion;
     }
     
-    public function setPermisos($xml, $base = ''){        
+    public function setPermisos($xml, $base = ''){
         foreach ($xml->ruta as $ruta){
             if(count((array) $ruta->usuario) == 0){
-                $_SESSION['permisos'][] = $base.$ruta['path'];
+                $_SESSION['permisos'][] = $base.$ruta['ruta'];
             } else if(count($this->getCredenciales())){
                 foreach ($ruta->usuario as $usuario){
-                    if(in_array($usuario['username'], $this->getCredenciales())){
-                        $_SESSION['permisos'][] = $base.$ruta['path'];
+                    if(in_array($usuario['usuario'], $this->getCredenciales())){
+                        $_SESSION['permisos'][] = $base.$ruta['ruta'];
                         break;
                     }
                 }
             }
             
             if(count((array) $ruta->rutas)){
-                $this->setPermisos($ruta->rutas, $base.$ruta['path']);
+                $this->setPermisos($ruta->rutas, $base.$ruta['ruta']);
             }
         }
     }
@@ -119,10 +119,9 @@ class RuteadorControl {
         return $this->credenciales;
     }
 
-//    public function setCredenciales() {
-//        $credenciales       = MetodosUtiles::getValorArrayLogueado('credenciales');
-//        $this->credenciales = $credenciales != '' ? $credenciales : array();
-//    }
+    public function setCredenciales($credenciales = array()) {
+        $this->credenciales = $credenciales != '' ? $credenciales : array();
+    }
     
     public function getPermisos() {
         return $_SESSION['permisos'];
@@ -154,5 +153,4 @@ class RuteadorControl {
         $this->unsetPermiso = $unsetPermiso;
     }
 }
-
 

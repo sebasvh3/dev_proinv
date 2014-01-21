@@ -34,6 +34,15 @@ $(function(){
         val=this.value;
         selectProductosByCategoria(val);
     });
+    console.debug("inpu "+$('#inputExistencia').length);
+    if($('#inputExistencia').length>0){
+        console.debug("si inputExistencia sss");
+        $("#select_id_producto").change(function(){
+            console.debug("por la funcion select");
+            idpro=this.value;
+            existenciaByProducto(idpro);
+        });
+    }
     
     
 });
@@ -262,6 +271,23 @@ function ProductosSegunCategoria(datos){
     });
     $("#select_id_producto").empty();
     $("#select_id_producto").append(options);
+}
+
+function existenciaByProducto(idproducto){
+    $.ajax({
+            data: {"idproducto":idproducto},//"idproducto="+idproducto,
+            type: "POST",
+            dataType: "json",
+            url: "app.php/Producto/findExistenciaByProducto",
+            success: function(datos){
+                $('#inputExistencia').val(datos);
+                console.debug("Existencia :");
+                console.dir(datos);
+            },
+            error: function(){
+                alert("Error en consulta ajax");
+            }
+        });
 }
 
 

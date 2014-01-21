@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Si no se especifica usuario, se asume que es de acceso para todos.
+-->
+
+<rutas>
+    <ruta ruta="/">
+        <usuario usuario="administrador"/>
+        <rutas>
+            <ruta ruta="popo">
+                <usuario usuario="administrador"/>
+                <rutas>
+                    <ruta ruta="/papa">
+                        <usuario usuario="usuario"/>
+                    </ruta>
+                </rutas>
+            </ruta>
+        </rutas>
+    </ruta>
+</rutas>
