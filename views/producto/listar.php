@@ -25,6 +25,7 @@
             <th>Ean 13</th>
             <th>Descripción Producto</th>
             <th>Cantidad(gr)</th>
+            <th>Existencia</th>
             <th>Categoria</th>
             <th>Acciones</th>
         </tr>
@@ -36,6 +37,7 @@
             <td class='td_codigo'><?php echo $producto->getCodigo() ?></td>
             <td class='td_descripcion'><?php echo $producto->getDescripcion() ?></td>
             <td class='td_cantidad_gr'><?php echo $producto->getCantidad_gr() ?></td>
+            <td class='td_existencias'><?php echo $producto->getExistencia() ?></td>
             <td class='td_categoria'><?php echo $producto->getCategoriaDescripcion() ?></td>
             <td class='text-center'>
                 <span onclick="editEntity(<?php echo $producto->getId()?>,'Producto')" class="accion editar"  data-original-title="Editar el proyecto">

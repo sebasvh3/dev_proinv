@@ -6,9 +6,12 @@ require_once rutaFacades.'CategoriaFacade.php';
 class ProductoFacade extends AbstractFacade{
     
     public $id;
+    public $idcategoria;
     public static $editarProducto = "editarProducto";
     public static $sinCategoria = "sinCategoria";
     public static $ActualizarProductoTable = "ActualizarProductoTable";
+    public static $ProductoByCategoria = "ProductoByCategoria";
+    public static $consultarExistencia = "consultarExistencia";
     
     public function ProductoFacade(){
         $this->idcolum='id';
@@ -35,6 +38,8 @@ class ProductoFacade extends AbstractFacade{
         $querys['sinCategoria'] = "UPDATE " . $this->schema . "." . $this->entidad . " SET id_categoria=null WHERE id=".$this->id;
         $querys['ActualizarProductoTable'] = "SELECT p.id, p.descripcion, p.codigo, p.cantidad_gr, c.descripcion as categoria "
                                             ."FROM producto p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.id=".$this->id;
+        $querys['ProductoByCategoria'] = "SELECT p.id, p.descripcion  FROM " . $this->schema . "." . $this->entidad . " p where p.id_categoria=".$this->idcategoria;
+        $querys['consultarExistencia'] = "SELECT p.existencia  FROM " . $this->schema . "." . $this->entidad . " p where p.id=".$this->id;
         return $querys[$nameQuery];
     }
     
@@ -54,6 +59,18 @@ class ProductoFacade extends AbstractFacade{
         $this->id=$id;
         $productoResponse = $this->runNamedQuery(ProductoFacade::$ActualizarProductoTable);
         return $productoResponse;
+    }
+    
+    public function findProductoByCategoria($idcategoria){
+        $this->idcategoria = $idcategoria;
+        $productoResponse = $this->runNamedQuery(ProductoFacade::$ProductoByCategoria);
+        return $productoResponse;
+    }
+    
+    public function consultarExistencia($id){
+        $this->id=$id;
+        $response = $this->runNamedQuery(ProductoFacade::$consultarExistencia);
+        return $response[0]['existencia'];
     }
     
 }

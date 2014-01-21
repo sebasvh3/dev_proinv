@@ -22,7 +22,7 @@ class ProductoControl extends AbstractControl {
            // }
         }
 //        echo "<pre>";
-//        var_dump($this->listaEntidades);
+//        $this->verObj($this->listaEntidades);
         return $this->listaEntidades;
     }
 
@@ -144,6 +144,14 @@ class ProductoControl extends AbstractControl {
         $resultado=$this->facade->queryEditarProducto($id);
         echo json_encode($resultado);
     }
+    
+    public function findProductoByCategoria(){
+        $this->layout=false;
+        $idcategoria = $_POST['idcategoria'];
+        $productos = $this->facade->findProductoByCategoria($idcategoria);
+        echo json_encode($productos);
+    }
+    
     
     public function prepararNuevo() {
         $this->entidadSeleccionada = new Tipo_activo(array());

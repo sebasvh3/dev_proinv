@@ -12,6 +12,7 @@ setlocale("LC_ALL", "es_CO.UTF-8");
         <link rel="stylesheet" type="text/css" href="resources/bootstrap3/css/bootstrap.css" media="screen"/>
         <link rel="stylesheet" type="text/css" href="resources/bootstrap3/css/bootstrap-theme.css" media="screen"/>
         <link rel="stylesheet" type="text/css" href="resources/font-awesome-4.0.3/css/font-awesome.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="resources/datepicker/css/datepicker.css" />
         
         <link rel="stylesheet" type="text/css" href="resources/datatables/extras/ColReorder/media/css/ColReorder.css" media="screen"/>
         <link rel="stylesheet" type="text/css" href="resources/datatables/extras/ColVis/media/css/ColVis.css" media="screen"/>
@@ -32,22 +33,25 @@ alt="nuevo" />-->
     <body>
         <div id="contenedor">    
         <div id='header'>
-            <!--<img src='resources/images/CafeMariscal.jpg' width='100' alt='cafe Mariscal' >-->
+            <!-- <img src='resources/images/CafeMariscal.jpg' width='100' alt='cafe Mariscal' >-->
             <?php if($this->getVistaAccion()!='login'): ?>
                 <div  class="link"><a href="app.php"><i class="fa fa-minus"></i> Cerrar Sesión </a><br></div>    
             <?php  endif; ?>
         </div>
         
         <?php if($this->getVistaAccion()!='login'): ?>
-        <?php $idTab = explode("/",$this->getVistaAccion());?>
-        <input id="idtab" type="hidden" value="<?php echo $idTab[0];?>">    
+        <?php 
+            $idTab = explode("/",$this->getVistaAccion());
+            $identificadorTab = $idTab[0] == "movimiento" ? $idTab[1] : $idTab[0];
+        ?>
+        <input id="idtab" type="hidden" value="<?php echo $identificadorTab;?>">    
         <br><br>  
             <ul class="nav nav-tabs" id="navPrincipal">
                 <li id="inicio"><a href="app.php/Index/inicio">Inicio</a></li>
                 <li id="producto"><a href="app.php/Producto/listar">Productos</a></li>
                 <li id="categoria"><a href="app.php/Categoria/listar">Categorias</a></li>
-                <li id="entrada"><a href="app.php/Index/entrada">Entrada</a></li>
-                <li id="salida"><a href="app.php/Index/salida">Salida</a></li>
+                <li id="entrada"><a href="app.php/Movimiento/entrada">Entrada</a></li>
+                <li id="salida"><a href="app.php/Movimiento/salida">Salida</a></li>
                 
                 <li class="dropdown active">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">

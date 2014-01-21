@@ -3,6 +3,7 @@ CREATE TABLE producto(
     descripcion VARCHAR(256) NOT NULL,
     codigo DECIMAL(15,0) NOT NULL,
     cantidad_gr INT NOT NULL,
+    existencia DECIMAL( 12, 2 ) NULL
     estado VARCHAR(4) NOT NULL,
     id_categoria INT NULL,
     id_tercero INT NULL,
@@ -14,7 +15,7 @@ CREATE TABLE producto(
     PRIMARY KEY ( id )
 );
 
-CREATE TABLE tercero(
+CREATE TABLE categoria(
     id INT NOT NULL AUTO_INCREMENT,
     descripcion VARCHAR(128) NOT NULL,
     estado VARCHAR(4) NOT NULL,
@@ -37,6 +38,36 @@ CREATE TABLE tercero(
     
     PRIMARY KEY ( id )
 );
+
+
+
+CREATE TABLE bodega(
+    id INT NOT NULL AUTO_INCREMENT,
+    id_producto INT NOT NULL,
+    existencia DECIMAL( 12, 2 ) NOT NULL DEFAULT  '0',
+    estado VARCHAR(4) NOT NULL,
+    fecha_crea DATETIME,
+    fecha_mod  DATETIME,
+    propietario VARCHAR(22),
+    usuario   VARCHAR(22),
+    
+    PRIMARY KEY ( id )
+);
+
+ALTER TABLE `bodega` ADD INDEX ( `id_producto` )
+ALTER TABLE  `bodega` CHANGE  `existencia`  `existencia` DECIMAL( 12 ) NOT NULL DEFAULT  '0'
+
+ALTER TABLE  `bodega` 
+ADD FOREIGN KEY (  `id_producto` ) 
+REFERENCES  `dbinventario`.`producto` (`id`) 
+ON DELETE RESTRICT ON UPDATE CASCADE ;
+
+
+ALTER TABLE `producto` ADD INDEX ( `id_categoria` ) 
+
+ALTER TABLE  `bodega` CHANGE  `existencia`  `existencia` DECIMAL( 12 ) NOT NULL DEFAULT  '0'
+ALTER TABLE  `bodega` CHANGE  `existencia`  `existencia` DECIMAL( 12, 3 ) NOT NULL DEFAULT  '0'
+ALTER TABLE  `producto` ADD  `existencia` DECIMAL( 12, 2 ) NULL AFTER  `cantidad_gr`
 
 
 Insertar datos;

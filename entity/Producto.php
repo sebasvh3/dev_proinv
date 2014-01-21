@@ -31,6 +31,12 @@ Class Producto /*extends EntidadAuditoria*/ {
      * @Columna(nombre="cantidad_gr", tipo="integer", nulo=false)
      */
     public $cantidad_gr;
+    
+    /**
+     * @var decimal $existencia
+     * @Columna(nombre="existencia", tipo="decimal", nulo=true)
+     */
+    public $existencia;
 
     /**
      * @var varchar $estado
@@ -93,8 +99,8 @@ Class Producto /*extends EntidadAuditoria*/ {
         foreach ($objects as $key => $value)
             $this->$key = $value;
         
-//        if(!isset($this->id_categoria) or $this->getId_categoria()=='')
-//            $this->setId_categoria (null);
+        if(!isset($this->id_categoria) or $this->getId_categoria()=='')
+            $this->setId_categoria (null);
     }
     
     
@@ -130,6 +136,15 @@ Class Producto /*extends EntidadAuditoria*/ {
         $this->cantidad_gr = $cantidad_gr;
     }
 
+    public function getExistencia() {
+        return $this->existencia;
+    }
+
+    public function setExistencia($existencia) {
+        $this->existencia = $existencia;
+    }
+
+        
     public function getEstado() {
         return $this->estado;
     }

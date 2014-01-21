@@ -10,7 +10,11 @@ $(function(){
         "oLanguage": {
             "sUrl": "resources/datatables/dataTables.spanish.txt"
         },
-	"fnInitComplete": function() {
+//	"fnInitComplete": function() {
+//	    this.closest('div').find('select').addClass("form-control input-sm");
+//        },
+        "fnInitComplete": function() {
+	    new FixedHeader( this );
 	    this.closest('div').find('select').addClass("form-control input-sm");
         },
 	"oColVis": {
@@ -24,6 +28,13 @@ $(function(){
     $("#"+idtab).addClass("active");
     //Asignar opcion al boton guardar formulario de edicion
     $("#buttonGuardarForm").on("click",guardarFormulario);
+    
+    console.dir($("#select_id_categoria").val());
+    $("#select_id_categoria").on("change",function(){
+        val=this.value;
+        selectProductosByCategoria(val);
+    });
+    
     
 });
 
@@ -227,6 +238,32 @@ function consultar(id){
             }
         });
 }
+
+function selectProductosByCategoria(idcategoria){
+     $.ajax({
+            data: "idcategoria="+idcategoria,
+            type: "POST",
+            dataType: "json",
+            url: "app.php/Producto/findProductoByCategoria",
+            success: function(datos){
+                ProductosSegunCategoria(datos);    
+            },
+            error: function(){
+                alert("Error en consulta ajax");
+            }
+        });
+}
+
+function ProductosSegunCategoria(datos){
+    var options="";
+    if(datos.length===0)options="<option></option>";
+    $.each(datos, function(index,val){
+        options+="<option value='"+val['id']+"'>"+val['descripcion']+"</option>";
+    });
+    $("#select_id_producto").empty();
+    $("#select_id_producto").append(options);
+}
+
 
 function probarGet(){
     $.ajax({
