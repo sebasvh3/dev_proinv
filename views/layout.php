@@ -40,15 +40,18 @@ alt="nuevo" />-->
         </div>
         
         <?php if($this->getVistaAccion()!='login'): ?>
-        <?php $idTab = explode("/",$this->getVistaAccion());?>
-        <input id="idtab" type="hidden" value="<?php echo $idTab[0];?>">    
+        <?php 
+            $idTab = explode("/",$this->getVistaAccion());
+            $identificadorTab = $idTab[0] == "movimiento" ? $idTab[1] : $idTab[0];
+        ?>
+        <input id="idtab" type="hidden" value="<?php echo $identificadorTab;?>">    
         <br><br>  
             <ul class="nav nav-tabs" id="navPrincipal">
                 <li id="inicio"><a href="app.php/Index/inicio">Inicio</a></li>
                 <li id="producto"><a href="app.php/Producto/listar">Productos</a></li>
                 <li id="categoria"><a href="app.php/Categoria/listar">Categorias</a></li>
-                <li id="movimiento"><a href="app.php/Movimiento/entrada">Entrada</a></li>
-                <li id="salida"><a href="app.php/Index/salida">Salida</a></li>
+                <li id="entrada"><a href="app.php/Movimiento/entrada">Entrada</a></li>
+                <li id="salida"><a href="app.php/Movimiento/salida">Salida</a></li>
                 
                 <li class="dropdown active">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">

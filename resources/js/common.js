@@ -10,7 +10,11 @@ $(function(){
         "oLanguage": {
             "sUrl": "resources/datatables/dataTables.spanish.txt"
         },
-	"fnInitComplete": function() {
+//	"fnInitComplete": function() {
+//	    this.closest('div').find('select').addClass("form-control input-sm");
+//        },
+        "fnInitComplete": function() {
+	    new FixedHeader( this );
 	    this.closest('div').find('select').addClass("form-control input-sm");
         },
 	"oColVis": {
