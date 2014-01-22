@@ -34,6 +34,7 @@ $(function(){
         val=this.value;
         selectProductosByCategoria(val);
     });
+    
     console.debug("inpu "+$('#inputExistencia').length);
     if($('#inputExistencia').length>0){
         console.debug("si inputExistencia sss");
@@ -258,7 +259,7 @@ function selectProductosByCategoria(idcategoria){
                 ProductosSegunCategoria(datos);    
             },
             error: function(){
-                alert("Error en consulta ajax");
+                alert("Error en consulta ajax, selectProductosByCategoria");
             }
         });
 }

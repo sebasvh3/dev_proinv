@@ -5,16 +5,23 @@ Si no se especifica usuario, se asume que es de acceso para todos.
 
 <rutas>
     <ruta ruta="/">
-        <usuario usuario="administrador"/>
         <rutas>
-            <ruta ruta="popo">
+            <ruta ruta="Index">
                 <usuario usuario="administrador"/>
                 <rutas>
-                    <ruta ruta="/papa">
+                    <ruta ruta="/inicio">
+                        <usuario usuario="administrador"/>
                         <usuario usuario="usuario"/>
                     </ruta>
+                    <ruta ruta="/cerrar"></ruta>
                 </rutas>
             </ruta>
         </rutas>
     </ruta>
+
+    <ruta ruta="/Producto/listar"></ruta>
+    <ruta ruta="/Categoria/listar"></ruta>
+    <ruta ruta="/Movimiento/entrada"></ruta>
+    <ruta ruta="/Movimiento/salida"></ruta>
+    <ruta ruta="/Producto/findProductoByCategoria"></ruta>
 </rutas>

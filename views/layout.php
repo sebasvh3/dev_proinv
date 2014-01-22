@@ -35,7 +35,7 @@ alt="nuevo" />-->
         <div id='header'>
             <!-- <img src='resources/images/CafeMariscal.jpg' width='100' alt='cafe Mariscal' >-->
             <?php if($this->getVistaAccion()!='login'): ?>
-                <div  class="link"><a href="app.php"><i class="fa fa-minus"></i> Cerrar Sesión </a><br></div>    
+                <div  class="link"><a href="app.php/Index/cerrar"><i class="fa fa-minus"></i> Cerrar Sesión </a><br></div>    
             <?php  endif; ?>
         </div>
         

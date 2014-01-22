@@ -493,7 +493,7 @@ class AbstractFacade {
         if($table){
             $entityFacade = ucfirst(strtolower($table)).'Facade';
 
-            require_once $entityFacade.'.php';
+            require_once rutaFacades.$entityFacade.'.php';
             $entityFacade = new $entityFacade();
             
         } else {
@@ -729,6 +729,42 @@ class AbstractFacade {
             }
         }
     } 
+    
+    public function getFiltros($valores, $alias = array()){
+        $filtros = array();
+        
+        foreach ($valores as $key=>$value){
+            if($value != ''){
+                $value  = $this->validarSQL($value);
+                
+                $filtro  = " AND $key ";
+                
+                if(!empty($alias)){
+                    if(isset($alias[$key])){
+                        $filtro = " AND $alias[$key] ";
+                    } else {
+                        continue;
+                    }
+                }
+                
+                $filtros[] = $filtro.(is_array($value)  ? " IN ('".implode("','", $value)."')" : " = '$value'");
+            }
+        }
+        
+        return $filtros;
+    }
+    
+    public static function factoryModel(){
+        $facadesArray = array();
+        
+        foreach(func_get_args() as $className){
+            $className = ucfirst($className);
+            require_once rutaFacades."$className.php";
+            $facadesArray[] = new $className(); 
+        }
+        
+        return count($facadesArray) == 1 ? array_pop($facadesArray) : $facadesArray;
+    }
     
     public function showSql(){
         echo "<code>".$this->toShow."</code>";

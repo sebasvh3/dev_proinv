@@ -1,7 +1,8 @@
 <?php
 
 //error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
-//error_reporting(E_ERROR);
+//error_reporting(E_ERROR)
+session_start();;
 define('baseUrl', "http://$_SERVER[SERVER_NAME]".preg_replace('/index(\.php)?\/?$/i',"",$_SERVER['SCRIPT_NAME']));
 define('rutaDeLaAplicacion', __DIR__."/");
 define('rutaModel',rutaDeLaAplicacion."model/");

@@ -17,10 +17,10 @@ class RouterControl {
     private $pathControl;
     private $documento;
     
-    function RouterControl() {       
+    function RouterControl() {               
         $this->setRequest();        
         $this->ejecutarControl();
-        $this->incluirArchivos();
+        $this->incluirArchivos();        
    }
    
     function ejecutarControl(){

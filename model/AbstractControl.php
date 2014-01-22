@@ -120,8 +120,44 @@ class AbstractControl {
         $this->setVistaAccion('ver');
     }
     
+    public static function factoryModel(){
+        $facadesArray = array();
+        
+        foreach(func_get_args() as $className){
+            $className = ucfirst($className);
+            require_once rutaFacades."$className.php";
+            $facadesArray[] = new $className(); 
+        }
+        
+        return count($facadesArray) == 1 ? array_pop($facadesArray) : $facadesArray;
+    }  
     
     
+    public function getEntitiesToJson($entities, $atributos = null){        
+        return json_encode($this->getEntitiesForJson($entities, $atributos));
+    }
     
+    public function getEntitiesForJson($entities, $atributos = null){
+        $entitiesArray = array();        
+        $isArray       = is_array($entities);
+        
+        if($entities){
+            $entities = $isArray ? $entities : array($entities);
+            foreach ($entities as $entitie){
+                $entitieArray = array();
+                foreach ($atributos as $key=>$value){
+                    $atributo = is_array($value) ? $key : $value;                    
+                    $keyName  = preg_replace("/^tb/i", '', $atributo);
+                    if(property_exists($entitie, $atributo)){
+                        $metodo = 'get'.ucfirst($atributo);
+                        $entitieArray[$keyName] = is_array($value) ? $this->getEntitiesForJson($entitie->$metodo(), $value) : $entitie->$metodo();
+                    }
+                }            
+                $entitiesArray[] = $entitieArray;
+            }
+        }
+        return $isArray ? $entitiesArray : array_pop($entitiesArray);
+    }
+
 }
 

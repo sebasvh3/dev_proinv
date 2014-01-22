@@ -96,3 +96,27 @@ INSERT INTO `dbinventario`.`producto` (``descripcion`, `codigo`, `cantidad_gr`, 
 INSERT INTO `dbinventario`.`producto` (``descripcion`, `codigo`, `cantidad_gr`, `estado`, `id_categoria`, `id_tercero`, `fecha_crea`, `fecha_mod`, `propietario`, `usuario`) VALUES ( 'producto por 500 gr', '1254785678965', '500', 'ACT', NULL, NULL, '2013-13-11 00:00:00', '2013-13-10 00:00:00', 'mgutierrez', 'jvahos');
 
 
+CREATE TABLE usuario(
+    id INT NOT NULL AUTO_INCREMENT,
+    nickname VARCHAR(20) NOT NULL,
+    contrasena VARCHAR(20) NOT NULL DEFAULT  '0',
+    nombre VARCHAR(100) NOT NULL,
+    rol VARCHAR(50) NOT NULL,
+    estado VARCHAR(4) NOT NULL,
+    fecha_crea DATETIME,
+    fecha_mod  DATETIME,
+    propietario VARCHAR(22),
+    usuario   VARCHAR(22),
+    PRIMARY KEY ( id )
+);
+
+CREATE TABLE rol(
+    id INT NOT NULL AUTO_INCREMENT,
+    descripcion VARCHAR(30) NOT NULL,
+    estado VARCHAR(4) NOT NULL,
+    fecha_crea DATETIME,
+    fecha_mod  DATETIME,
+    propietario VARCHAR(22),
+    usuario   VARCHAR(22),
+    PRIMARY KEY ( id )
+);
