@@ -129,6 +129,8 @@ class AbstractControl {
             $facadesArray[] = new $className(); 
         }
         
+        echo"<pre>";var_dump($facadesArray);
+        
         return count($facadesArray) == 1 ? array_pop($facadesArray) : $facadesArray;
     }  
     

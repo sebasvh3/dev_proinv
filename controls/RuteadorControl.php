@@ -21,7 +21,12 @@ class RuteadorControl {
         if(isset($_SESSION['usuario'])){
             $this->setRequestUri();        
             list($control, $accion, $id) = $this->getParametros();
-
+            
+            //DEBUG
+//            echo"<pre>";
+//            print_r($_SESSION['usuario']);
+//            print_r($_SESSION['permisos']);
+            
             if(!isset($_SESSION['permisos'])){
                 $_SESSION['permisos'] = array();
                 $this->setCredenciales(json_decode($_SESSION['usuario']));
@@ -33,7 +38,6 @@ class RuteadorControl {
                     if(in_array($accion,get_class_methods(get_class($objetoControl)))){
                         $objetoControl->$accion($accion == 'editar' ? $id : NULL);
                         // CUANDO USE AJAX SETEAR CON FALSE
-                        echo "Falla layout";
                         $objetoControl->getVista(!isset ($objetoControl->layout) || $objetoControl->layout ? 'layout' : NULL);
                     } else {
                         echo "el metodo $accion existe en $control";
