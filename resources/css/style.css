@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23/12/2013, 02:40:20 PM
+    Author     : jvahos
+*/
+
+#contenedor{
+    width:80%;
+    margin: 0 auto;
+}
+
+.row{
+    padding:5px !important;
+}
+
+h4{
+    color: #669CB1 !important;
+}
+
+a{
+    text-decoration: none
+}
+
+table td{
+    font-size: 14px;
+}
+
+#divlogin{
+    width:30%;
+    margin: 0 auto;
+}
+
+#header{
+  width:110px;  
+  float:right;
+}
+
+.viewList .fa{
+    /*font-size: 22px;*/
+    padding: 0 0 0 0;
+    cursor: default;
+    /*color: #5cb85c;*/
+}
+
+.text-IconEditar{
+    color: #6BC76B;
+}
+
+.text-IconEditar:hover{
+    color: #0D8B0D;
+}
+
+.text-IconEliminar{
+    color: #DF8787;
+}
+.text-IconEliminar:hover{
+    color: red;
+}
+
+.mensajes .alert{
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/*.fa-pencil-square-o:hover{ 
+    color: #FF8080;
+}*/
