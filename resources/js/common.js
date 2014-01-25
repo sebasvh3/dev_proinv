@@ -24,11 +24,14 @@ $(function(){
 	},
     });
     
+    //Asignacion Eventos
+    
     var idtab = document.getElementById("idtab").value;
     $("#"+idtab).addClass("active");
     //Asignar opcion al boton guardar formulario de edicion
     $("#buttonGuardarForm").on("click",guardarFormulario);
     
+    //Seleccion de productos al cambiar categorias
     console.dir($("#select_id_categoria").val());
     $("#select_id_categoria").on("change",function(){
         val=this.value;
@@ -36,6 +39,7 @@ $(function(){
     });
     
     console.debug("inpu "+$('#inputExistencia').length);
+    //***Ventana de salidas
     if($('#inputExistencia').length>0){
         console.debug("si inputExistencia sss");
         $("#select_id_producto").change(function(){
@@ -44,6 +48,8 @@ $(function(){
             existenciaByProducto(idpro);
         });
     }
+    
+    $("#buttonGuardarSalida").on("click",guardarSalidaExistencia);
     
     
 });
@@ -266,8 +272,18 @@ function selectProductosByCategoria(idcategoria){
 
 function ProductosSegunCategoria(datos){
     var options="";
+    var first=false;
+    $('#input_salida').val('');
+    if($('#inputExistencia').length>0){
+         $('#inputExistencia').val('');   
+         first = true;
+    }
     if(datos.length===0)options="<option></option>";
     $.each(datos, function(index,val){
+        if(first){
+            existenciaByProducto(val['id']);
+            console.dir("Tiene primero");first=false;
+        }
         options+="<option value='"+val['id']+"'>"+val['descripcion']+"</option>";
     });
     $("#select_id_producto").empty();
@@ -290,20 +306,23 @@ function existenciaByProducto(idproducto){
             }
         });
 }
-
-
-function probarGet(){
-    $.ajax({
-            data: "id=233&var=sebas",
-            type: "GET",
+function guardarSalidaExistencia(){
+    var idproducto=$("#select_id_producto").val();
+    var salida=$("#input_salida").val();
+     $.ajax({
+            data: {"id_producto":idproducto,"salida":salida},//"idproducto="+idproducto,
+            type: "POST",
             dataType: "json",
-            url: "app.php/Categoria/probarGet",
+            url: "app.php/Movimiento/guardarSalidaProducto",
             success: function(datos){
-                console.debug("datos consultados del get");
+                if(datos['class']==="success") $('#inputExistencia').val(datos['response']['existencia']);
+                
+                mostrar_mensaje(datos['class'],datos['msj']);
+                console.debug("guardarSalidaExistencia :");
                 console.dir(datos);
             },
             error: function(){
-                alert("Error en consulta ajax");
+                alert("Error en consulta ajax ");
             }
         });
 }

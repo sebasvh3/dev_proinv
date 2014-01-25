@@ -34,14 +34,18 @@ class MovimientoControl extends AbstractControl {
     
     public function guardar(){
         //probar velocidad del servidor
-        var_dump($_POST);
+//        var_dump($_POST);
         $existencia=$_POST['existencia'];
         $idproducto=$_POST['id_producto'];
+        
+        if(!isset($existencia) || !isset($idproducto)){
+            
+        }
         
         $productoFacade = new ProductoFacade();
         $valorActual =  $productoFacade->consultarExistencia($idproducto);
         
-        $parametros=array("existencia"=>$existencia+$valorActual);
+        $parametros=array("existencia"=>$existencia+$valorActual); //Incrementa el valor en bodega
         $filtros = array("and id=".$idproducto);
         
         $productoFacade->updateEntities($parametros,$filtros,false);
@@ -49,6 +53,36 @@ class MovimientoControl extends AbstractControl {
         echo"el producto ".$idproducto." Se ha actualizado <br>";
         
 //        $this->setVistaAccion('movimiento/entrada');
+    }
+    
+    public function guardarSalidaProducto(){
+        $this->layout=false;
+        $salida=$_POST['salida'];
+        $idproducto=$_POST['id_producto'];
+        
+        
+        
+        $productoFacade = new ProductoFacade();
+        $valorActual =  $productoFacade->consultarExistencia($idproducto);
+        
+        if($valorActual>=$salida){
+            $newExistencia=$valorActual-$salida;
+            $parametros=array("existencia"=>$newExistencia);//Decrementa el valor en bodega
+            $filtros = array("and id=".$idproducto);
+        
+            $productoFacade->updateEntities($parametros,$filtros,false);
+            
+            $Response['class'] = "success";
+            $Response['msj'] = "Han salido de bodega $salida unidades";
+            $Response['response'] = array("existencia"=>$newExistencia);
+        }
+        else{
+            $Response['class'] = "warning";
+            $Response['msj'] = "La cantidad es mayor a las existencias en bodega";
+            $Response['response'] = null;
+        }
+        
+        echo json_encode($Response);
     }
 }
 

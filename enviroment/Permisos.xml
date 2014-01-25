@@ -18,10 +18,23 @@ Si no se especifica usuario, se asume que es de acceso para todos.
             </ruta>
         </rutas>
     </ruta>
-
+    
+    
+    <!-- Rutas Generales -->
     <ruta ruta="/Producto/listar"></ruta>
     <ruta ruta="/Categoria/listar"></ruta>
     <ruta ruta="/Movimiento/entrada"></ruta>
-    <!--<ruta ruta="/Movimiento/salida"></ruta>-->
+    <ruta ruta="/Producto/editarAjax"></ruta>
+    <ruta ruta="/Categoria/editarAjax"></ruta>
+    <ruta ruta="/Producto/guardarAjax"></ruta>
+    <ruta ruta="/Categoria/guardarAjax"></ruta>
+    <ruta ruta="/Producto/inactivarRegistro"></ruta>
+    <ruta ruta="/Producto/consultar"></ruta>
+    <ruta ruta="/Producto/findProductoByCategoria"></ruta>
+    <ruta ruta="/Producto/findExistenciaByProducto"></ruta>
+    <ruta ruta="/Categoria/inactivarRegistro"></ruta>
+    <ruta ruta="/Movimiento/guardar"></ruta>
+    <ruta ruta="/Movimiento/salida"></ruta>
+    <ruta ruta="/Movimiento/guardarSalidaProducto"></ruta>
     <ruta ruta="/Producto/findProductoByCategoria"></ruta>
 </rutas>

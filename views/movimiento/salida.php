@@ -1,6 +1,6 @@
 <h4>Salida de Productos</h4>
 
-<form role="form" method="post" action="app.php/Movimiento/guardar">
+<form role="form" method="post" action="">
     <div class="row">
      <div class="form-group">   
        <div class="col-md-1"><label for="exampleInputEmail1">Fecha:</label></div>
@@ -13,7 +13,7 @@
            </div>
        </div>
        <div class="col-md-1 col-md-offset-1"><label >Existencia:</label></div>
-       <div class="col-md-1"><input type="text" class="form-control" id="inputExistencia" readonly="readonly"></div>
+       <div class="col-md-2"><input type="text" class="form-control text-center" id="inputExistencia" readonly="readonly"></div>
      </div>
    </div>    
     <div class="row">
@@ -37,11 +37,11 @@
     <div class="row">
         <div class="form-group">
               <div class="col-md-1"><label >Cantidad:</label></div>
-              <div class="col-md-2"><input type="text" class="form-control" id="input_existencia" name="existencia"></div>    
+              <div class="col-md-2"><input type="text" class="form-control" id="input_salida" name="existencia"></div>    
         </div>
     </div>
    <div class="row">   
-      <div class="col-md-2 col-md-offset-8"><button type="submit" class="btn btn-default btn-info btn-sm">Guardar</button></div>
+      <div class="col-md-2 col-md-offset-8"><button type="button" class="btn btn-default btn-info btn-sm" id="buttonGuardarSalida">Guardar</button></div>
    </div>
 </form>
 <pre>
