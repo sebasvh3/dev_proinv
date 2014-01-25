@@ -22,6 +22,6 @@ Si no se especifica usuario, se asume que es de acceso para todos.
     <ruta ruta="/Producto/listar"></ruta>
     <ruta ruta="/Categoria/listar"></ruta>
     <ruta ruta="/Movimiento/entrada"></ruta>
-    <ruta ruta="/Movimiento/salida"></ruta>
+    <!--<ruta ruta="/Movimiento/salida"></ruta>-->
     <ruta ruta="/Producto/findProductoByCategoria"></ruta>
 </rutas>

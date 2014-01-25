@@ -1,8 +1,8 @@
 <?php
-
 //error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 //error_reporting(E_ERROR)
-session_start();;
+//ob_start();
+session_start();
 define('baseUrl', "http://$_SERVER[SERVER_NAME]".preg_replace('/index(\.php)?\/?$/i',"",$_SERVER['SCRIPT_NAME']));
 define('rutaDeLaAplicacion', __DIR__."/");
 define('rutaModel',rutaDeLaAplicacion."model/");
@@ -16,7 +16,6 @@ define('rutaEnviroment',rutaDeLaAplicacion."enviroment/");
 //require_once "MetodosUtiles.php";
 //require_once "Autenticacion.php";
 require_once rutaEnviroment."Ambiente.php";
-require_once rutaVistas.'header.php';
 require_once rutaControles.'RuteadorControl.php';
 
 new RuteadorControl(); 

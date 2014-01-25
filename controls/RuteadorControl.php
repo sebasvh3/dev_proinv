@@ -31,9 +31,9 @@ class RuteadorControl {
             if(in_array($this->getRequestUri(), $this->getPermisos()) && $control.$accion != "indexiniciar"){                
                 if($objetoControl = $this->getControl($control)){
                     if(in_array($accion,get_class_methods(get_class($objetoControl)))){
-                        $objetoControl->$accion($accion == 'editar' ? $id : NULL);
+//                        $objetoControl->$accion($accion == 'editar' ? $id : NULL);
+                        $objetoControl->$accion();
                         // CUANDO USE AJAX SETEAR CON FALSE
-                        echo "Falla layout";
                         $objetoControl->getVista(!isset ($objetoControl->layout) || $objetoControl->layout ? 'layout' : NULL);
                     } else {
                         echo "el metodo $accion existe en $control";
@@ -42,9 +42,12 @@ class RuteadorControl {
                     echo "$control no encontrado";
                 }
             } else {
-                echo "Falla layout index<br>";
-                header("Location : app.php/Index/inicio");
+                header("location : http://$_SERVER[SERVER_NAME]app.php/Index/inicio");
+//                echo "<script type='text/javascript'>window.location.href='app.php/Index/inicio'</script>";
+//                exit;
                 $this->getControl('index')->inicio()->getVista('layout');
+//                $this->getControl('index')->inicio();
+//                exit;
                 // COMENTADO POR QUE ESTA INACTIVO EL HEADER
                 
             } 
