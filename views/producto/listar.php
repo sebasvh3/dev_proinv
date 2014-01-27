@@ -24,7 +24,7 @@
             <th>Código</th>
             <th>Ean 13</th>
             <th>Descripción Producto</th>
-            <th>Cantidad(gr)</th>
+            <!--<th>Cantidad(gr)</th>-->
             <th>Existencia</th>
             <th>Categoria</th>
             <th>Acciones</th>
@@ -36,7 +36,7 @@
             <td class='td_id text-center'><?php echo $producto->getId() ?></td>
             <td class='td_codigo'><?php echo $producto->getCodigo() ?></td>
             <td class='td_descripcion'><?php echo $producto->getDescripcion() ?></td>
-            <td class='td_cantidad_gr'><?php echo $producto->getCantidad_gr() ?></td>
+            <!--<td class='td_cantidad_gr'><?php echo $producto->getCantidad_gr() ?></td>-->
             <td class='td_existencias'><?php echo $producto->getExistencia() ?></td>
             <td class='td_categoria'><?php echo $producto->getCategoriaDescripcion() ?></td>
             <td class='text-center'>
