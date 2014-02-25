@@ -6,7 +6,7 @@
        <div class="col-md-1"><label for="exampleInputEmail1">Fecha:</label></div>
        <div class="col-md-2">
            <div class="date input-group input-append">
-               <input type="text" class="form-control" value="" >
+               <input type="text" class="form-control" value="" id="fecha" readonly="">
                <span class="input-group-addon add-on">
                    <i class="fa fa-calendar"></i>
                </span>

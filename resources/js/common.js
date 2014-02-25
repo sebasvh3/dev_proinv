@@ -5,24 +5,39 @@
  */
 $(function(){
     //Active the dataTable
+//    $('#listaProductos').dataTable({
+////	"sDom": 'C<"clear">R<"top">tr<"bottom"lp><"clear">',
+//        "oLanguage": {
+//            "sUrl": "resources/datatables/dataTables.spanish.txt"
+//        },
+////	"fnInitComplete": function() {
+////	    this.closest('div').find('select').addClass("form-control input-sm");
+////        },
+//        "fnInitComplete": function() {
+//	    new FixedHeader( this );
+//	    this.closest('div').find('select').addClass("form-control input-sm");
+//        },
+//	"oColVis": {
+//	    "activate": "mouseover",
+//            "buttonText": "Mostrar/Ocultar Columnas",
+//	    "aiExclude": [ 0 ]
+//	},
+//    });
+    
     $('#listaProductos').dataTable({
-//	"sDom": 'C<"clear">R<"top">tr<"bottom"lp><"clear">',
+	"sDom": 'f<"clear">R<"top">tr<"bottom"lp><"clear">',
         "oLanguage": {
             "sUrl": "resources/datatables/dataTables.spanish.txt"
         },
-//	"fnInitComplete": function() {
-//	    this.closest('div').find('select').addClass("form-control input-sm");
-//        },
-        "fnInitComplete": function() {
-	    new FixedHeader( this );
+	"fnInitComplete": function() {
 	    this.closest('div').find('select').addClass("form-control input-sm");
-        },
-	"oColVis": {
-	    "activate": "mouseover",
-            "buttonText": "Mostrar/Ocultar Columnas",
-	    "aiExclude": [ 0 ]
-	},
+            //Se formatea los estilos del input de busqueda para que adopte los estilos de bootstrap
+	    this.closest('div').find("label").find('input').addClass("form-control input-sm").attr("placeholder","Buscar...").wrap("<div class='row' id='busqueda'></div>");
+            var divBusqueda= $("#busqueda").clone(true);//true para clonars el elemento con eventos
+            $(this).closest('div').find("label").eq(0).empty().append(divBusqueda);
+        }
     });
+    
     
     //Asignacion Eventos
     
@@ -51,6 +66,14 @@ $(function(){
     
     $("#buttonGuardarSalida").on("click",guardarSalidaExistencia);
     
+    
+    //Active DatePicket()
+    $('.date').datepicker({
+        format: "yyyy-mm-dd",
+        language: "es",
+        autoclose: true,
+        keyboardNavigation: true
+    });
     
 });
 

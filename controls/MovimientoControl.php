@@ -84,5 +84,9 @@ class MovimientoControl extends AbstractControl {
         
         echo json_encode($Response);
     }
+    
+    public function detalle($id){
+        echo "Pagina con detalle $id";
+    }
 }
 

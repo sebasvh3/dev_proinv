@@ -61,6 +61,14 @@ table td{
     color: red;
 }
 
+.text-IconMovimiento{
+    color: #91ACF1
+}
+
+.text-IconMovimiento:hover{
+    color: #385BB8;
+}
+
 .mensajes .alert{
     padding-top: 8px;
     padding-bottom: 8px;

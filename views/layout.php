@@ -58,7 +58,7 @@ alt="nuevo" />-->
                         Acciones <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="app.php/Usuario/nuevo">Usuario</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
                         <li role="presentation" class="divider"></li>
@@ -104,6 +104,9 @@ alt="nuevo" />-->
         <script type="text/javascript" src="resources/datatables/extras/ColReorder/media/js/ColReorder.js"></script>
         <script type="text/javascript" src="resources/datatables/extras/ColVis/media/js/ColVis.js"></script>
         <script type="text/javascript" src="resources/datatables/extras/FixedHeader/js/FixedHeader.js"></script>
+        
+        <script type="text/javascript" src="resources/datepicker/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="resources/datepicker/js/locales/bootstrap-datepicker.es.js"></script>
         
         
         <script type="text/javascript" src="resources/js/common.js"></script>

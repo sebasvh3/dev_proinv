@@ -28,11 +28,18 @@ class RuteadorControl {
                 $this->setPermisos(simplexml_load_file('enviroment/Permisos.xml'));
             }
 //            var_dump();
+            echo $this->getRequestUri();
+            var_dump($this->getPermisos());
             if(in_array($this->getRequestUri(), $this->getPermisos()) && $control.$accion != "indexiniciar"){                
                 if($objetoControl = $this->getControl($control)){
                     if(in_array($accion,get_class_methods(get_class($objetoControl)))){
 //                        $objetoControl->$accion($accion == 'editar' ? $id : NULL);
-                        $objetoControl->$accion();
+                        if($id>0){
+                            $objetoControl->$accion();
+                        }
+                        else{
+                            $objetoControl->$accion($id);
+                        }
                         // CUANDO USE AJAX SETEAR CON FALSE
                         $objetoControl->getVista(!isset ($objetoControl->layout) || $objetoControl->layout ? 'layout' : NULL);
                     } else {

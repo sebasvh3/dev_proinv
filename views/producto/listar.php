@@ -43,6 +43,9 @@
                 <span onclick="editEntity(<?php echo $producto->getId()?>,'Producto')" class="accion editar"  data-original-title="Editar el proyecto">
                     <i class="fa fa-pencil-square-o fa-2x fa-fw text-IconEditar"></i>
                 </span>
+                <span onclick="editEntity(<?php echo $producto->getId()?>,'Producto')" class="accion editar"  data-original-title="Editar el proyecto">
+                    <i class="fa fa-calendar fa-2x fa-fw text-IconMovimiento"></i>
+                </span>
                 <span onclick="eliminarEntity(<?php echo $producto->getId()?>,'Producto')" class="accion editar"  data-original-title="Editar el proyecto">
                     <i class="fa fa fa-trash-o fa-2x fa-fw text-IconEliminar"></i>
                 </span>
