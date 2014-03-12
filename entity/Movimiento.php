@@ -4,8 +4,6 @@
 //Esto ahora lo pillo en mi pc
 
 
-//Pablo si pillo lo cuca!!!
-
 
 
 Class Movimiento /*extends EntidadAuditoria*/ {
@@ -19,10 +17,10 @@ Class Movimiento /*extends EntidadAuditoria*/ {
     private $id;
 
     /**
-     * @var varchar $descripcion
-     * @Columna(nombre="descripcion", tipo="varchar", nulo=false)
+     * @var varchar $detalle
+     * @Columna(nombre="detalle", tipo="varchar", nulo=true)
      */
-    public $descripcion;
+    public $detalle;
 
     /**
      * @var varchar $estado

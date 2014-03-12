@@ -27,9 +27,12 @@ class RuteadorControl {
                 $this->setCredenciales(json_decode($_SESSION['usuario']));
                 $this->setPermisos(simplexml_load_file('enviroment/Permisos.xml'));
             }
+            
 //            var_dump();
-            echo $this->getRequestUri();
-            var_dump($this->getPermisos());
+//            echo $this->getRequestUri();
+//            var_dump($this->getPermisos());
+            
+            
             if(in_array($this->getRequestUri(), $this->getPermisos()) && $control.$accion != "indexiniciar"){                
                 if($objetoControl = $this->getControl($control)){
                     if(in_array($accion,get_class_methods(get_class($objetoControl)))){
