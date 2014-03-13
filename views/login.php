@@ -2,12 +2,21 @@
 </br></br>    
 <form class="form-signin" role="form" action="app.php/Index/inicio" method="post">
         <h2 class="form-signin-heading">Iniciar Sesion</h2>
-        <input name="nickname" type="text" class="form-control" placeholder="Usuario" required autofocus>
-        <input name="contrasena" type="password" class="form-control" placeholder="Contraseña" required>
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Recordar
-        </label>
-        <button class="btn btn-primary btn-block" type="submit">Iniciar</button>
+        
+        <div class="row show-grid">
+            <input name="nickname" type="text" class="form-control" placeholder="Usuario" required autofocus>
+        </div>        
+        <div class="row show-grid">
+            <input name="contrasena" type="password" class="form-control" placeholder="Contraseña" required>
+        </div>        
+        <div class="row show-grid">
+            <label class="checkbox">
+              <input type="checkbox" value="remember-me"> Recordar
+            </label>
+        </div>        
+        <div class="row show-grid">
+            <button class="btn btn-primary btn-block" type="submit">Iniciar</button>
+        </div>        
 </form>
 </div>
 <br><br><br>
