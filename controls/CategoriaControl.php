@@ -2,7 +2,7 @@
 require_once rutaModel.'AbstractControl.php';
 require_once rutaFacades.'CategoriaFacade.php';
 require_once rutaEntidades.'Categoria.php';
-
+//Change commit
 class CategoriaControl extends AbstractControl {
     
     function CategoriaControl() {
