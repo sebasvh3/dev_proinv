@@ -4,6 +4,9 @@
 //ob_start();
 session_start();
 define('baseUrl', "http://$_SERVER[SERVER_NAME]".preg_replace('/index(\.php)?\/?$/i',"",$_SERVER['SCRIPT_NAME']));
+
+
+
 define('rutaDeLaAplicacion', __DIR__."/");
 define('rutaModel',rutaDeLaAplicacion."model/");
 define('rutaControles',rutaDeLaAplicacion."controls/");
