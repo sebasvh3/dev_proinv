@@ -65,7 +65,7 @@ class MovimientoControl extends AbstractControl {
         $productoFacade = new ProductoFacade();
         $valorActual =  $productoFacade->consultarExistencia($idproducto);
         
-        if($valorActual>=$salida){
+        if($valorActual>=$salida and $salida>0){
             $newExistencia=$valorActual-$salida;
             $parametros=array("existencia"=>$newExistencia);//Decrementa el valor en bodega
             $filtros = array("and id=".$idproducto);

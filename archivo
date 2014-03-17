@@ -1,3 +1,15 @@
-First Commit to the repository
+class to improve the style in datatables
 
--- Edit from github
+$('#idTable').dataTable( {
+	"sDom": 'f<"clear">R<"top">tr<"bottom"lp><"clear">',
+        "oLanguage": {
+            "sUrl": "bundles/frontend/dataTables.spanish.txt"
+        },
+	"fnInitComplete": function() {
+	    this.closest('div').find('select').addClass("form-control input-sm");
+            //Se formatea los estilos del input de busqueda para que adopte los estilos de bootstrap
+	    this.closest('div').find('input').addClass("form-control input-sm").attr("placeholder","Buscar...").wrap("<div class='row' id='busqueda'><div class='col-lg-10 col-lg-offset-2' ></div></div>");
+            var divBusqueda= $("#busqueda").clone(true);
+            $(this).closest('div').find("label").eq(0).empty().append(divBusqueda);
+        }
+    });
