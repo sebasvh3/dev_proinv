@@ -7,11 +7,8 @@ define('baseUrl', "http://$_SERVER[SERVER_NAME]".preg_replace('/index(\.php)?\/?
 
 
 define('rutaDeLaAplicacion', __DIR__."/");
-
 define('rutaModel',rutaDeLaAplicacion."model/");
-
 define('rutaControles',rutaDeLaAplicacion."controls/");
-
 define('rutaVistas',rutaDeLaAplicacion."views/");
 define('rutaEntidades',rutaDeLaAplicacion."entity/");
 define('rutaFacades',rutaDeLaAplicacion."facade/");
