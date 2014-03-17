@@ -1,4 +1,4 @@
-<?php $this->verObj($this->categorias)?>
+<?php // $this->verObj($this->categorias)?>
 
 <h4>Nuevo Producto</h4><br>
 
