@@ -24,6 +24,9 @@
             <!--<th>Código</th>-->
             <!--<th>Ean 13</th>-->
             <th>Descripción Producto</th>
+            <th>Bodega1</th>
+            <th>Bodega2</th>
+            <!--<th></th>-->
             <!--<th>Cantidad(gr)</th>-->
             <th>Existencia</th>
             <th>Categoria</th>
@@ -34,17 +37,19 @@
         <?php foreach($this->getListaEntidades() as $producto):?>
         <tr id='Producto_<?php echo $producto->getId()?>'>
             <!--<td class='td_id text-center'><?php echo $producto->getId() ?></td>-->
-            <!--<td class='td_codigo'><?php echo $producto->getCodigo() ?></td>-->
+            <!--<td class='td_codigo'><?php // echo $producto->getCodigo() ?></td>-->
             <td class='td_descripcion'><?php echo $producto->getDescripcion() ?></td>
-            <!--<td class='td_cantidad_gr'><?php echo $producto->getCantidad_gr() ?></td>-->
+            <td class='td_cantidad_gr'><?php echo $producto->getCantidad_gr() ?></td>
+            <!--<td class='td_existencias'></td>-->
+            <td class='td_existencias'></td>
             <td class='td_existencias'><?php echo $producto->getExistencia() ?></td>
             <td class='td_categoria'><?php echo $producto->getCategoriaDescripcion() ?></td>
             <td class='text-center'>
                 <span onclick="editEntity(<?php echo $producto->getId()?>,'Producto')" class="accion editar"  data-original-title="Editar el proyecto">
                     <i class="fa fa-pencil-square-o fa-2x fa-fw text-IconEditar"></i>
                 </span>
-                <span onclick="editEntity(<?php echo $producto->getId()?>,'Producto')" class="accion editar"  data-original-title="Editar el proyecto">
-                    <i class="fa fa-calendar fa-2x fa-fw text-IconMovimiento"></i>
+                <span  class="accion editar"  data-original-title="Editar el proyecto">
+                    <a href="app.php/Movimiento/productomov1"><i class="fa fa-calendar fa-2x fa-fw text-IconMovimiento"></i></a>
                 </span>
                 <span onclick="eliminarEntity(<?php echo $producto->getId()?>,'Producto')" class="accion editar"  data-original-title="Editar el proyecto">
                     <i class="fa fa fa-trash-o fa-2x fa-fw text-IconEliminar"></i>

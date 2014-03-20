@@ -22,6 +22,10 @@ class MovimientoControl extends AbstractControl {
         $this->setCategorias();
         $this->setVistaAccion('movimiento/salida');
     }
+    public function productomov1(){
+        $this->setCategorias();
+        $this->setVistaAccion('movimiento/productomov1');
+    }
     
     public function setCategorias(){
         $categoriaFacade = new CategoriaFacade();
