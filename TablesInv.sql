@@ -120,3 +120,29 @@ CREATE TABLE rol(
     usuario   VARCHAR(22),
     PRIMARY KEY ( id )
 );
+
+
+CREATE TABLE transaccion(
+    id INT NOT NULL AUTO_INCREMENT,
+    descripcion VARCHAR(30) NOT NULL,
+    estado VARCHAR(4) NOT NULL,
+    fecha_crea DATETIME,
+    fecha_mod  DATETIME,
+    propietario VARCHAR(22),
+    usuario   VARCHAR(22),
+    PRIMARY KEY ( id )
+);
+
+CREATE TABLE movimiento(
+    id INT NOT NULL AUTO_INCREMENT,
+    id_producto INT ,
+    id_transaccion INT ,
+    documento VARCHAR(32) NOT NULL,
+    
+    estado VARCHAR(4) NOT NULL,
+    fecha_crea DATETIME,
+    fecha_mod  DATETIME,
+    propietario VARCHAR(22),
+    usuario   VARCHAR(22),
+    PRIMARY KEY ( id )
+);
