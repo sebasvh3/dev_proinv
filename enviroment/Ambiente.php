@@ -14,5 +14,16 @@ class Ambiente{
     public static $DB = 'dbinventario';
     public static $USER = 'root';
     public static $PASS = 'sql123';
+    
+    //*** Transacciones
+    public static $Entrada = 1;
+    public static $Salida =  2;
+    public static $Averia =  3;
+    public static $Devolucion = 4;
+    
+    //*** Bodegas
+    public static $BodegaPrincipal = 1;
+    public static $BodegaTercerizado = 1;
+    
    
 }

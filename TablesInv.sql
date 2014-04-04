@@ -43,14 +43,13 @@ CREATE TABLE tercero(
 
 CREATE TABLE bodega(
     id INT NOT NULL AUTO_INCREMENT,
-    id_producto INT NOT NULL,
+    descripcion VARCHAR(64) NOT NULL,
     existencia DECIMAL( 12, 2 ) NOT NULL DEFAULT  '0',
     estado VARCHAR(4) NOT NULL,
     fecha_crea DATETIME,
     fecha_mod  DATETIME,
     propietario VARCHAR(22),
     usuario   VARCHAR(22),
-    
     PRIMARY KEY ( id )
 );
 
@@ -132,13 +131,16 @@ CREATE TABLE transaccion(
     usuario   VARCHAR(22),
     PRIMARY KEY ( id )
 );
+INSERT INTO `dbinventario`.`transaccion` (`id`, `descripcion`, `estado`, `fecha_crea`, `fecha_mod`, `propietario`, `usuario`) VALUES (NULL, 'Devolucion', 'ACT', '2014-04-03 00:00:00', '2014-04-03 00:00:00', 'Generico_Admin', 'Generico_Admin');
+
 
 CREATE TABLE movimiento(
     id INT NOT NULL AUTO_INCREMENT,
-    id_producto INT ,
+    id_producto INT NOT NULL,
     id_transaccion INT ,
-    documento VARCHAR(32) NOT NULL,
-    
+    documento VARCHAR(32),
+    cant_registro DECIMAL( 12, 2 ),
+    fecha_registro DATETIME,
     estado VARCHAR(4) NOT NULL,
     fecha_crea DATETIME,
     fecha_mod  DATETIME,
@@ -146,3 +148,39 @@ CREATE TABLE movimiento(
     usuario   VARCHAR(22),
     PRIMARY KEY ( id )
 );
+ALTER TABLE `movimiento` ADD INDEX ( `id_producto` ); 
+ALTER TABLE `movimiento` ADD INDEX ( `id_transaccion` );
+
+ALTER TABLE  `movimiento` 
+ADD FOREIGN KEY (  `id_producto` ) 
+REFERENCES  `dbinventario`.`producto` (`id`) 
+ON DELETE RESTRICT ON UPDATE CASCADE ; 
+
+ALTER TABLE  `movimiento` 
+ADD FOREIGN KEY (  `id_transaccion` ) 
+REFERENCES  `dbinventario`.`transaccion` (`id`) 
+ON DELETE RESTRICT ON UPDATE CASCADE ; 
+
+
+CREATE TABLE producto_bodega(
+    id INT NOT NULL AUTO_INCREMENT,
+    id_producto INT NOT NULL,
+    id_bodega INT ,
+    existencia DECIMAL( 12, 2 ) NULL,
+    averias DECIMAL ( 12, 2 ),
+    devs DECIMAL( 12, 2 ) NULL,
+    estado VARCHAR(4) NOT NULL,
+    fecha_crea DATETIME,
+    fecha_mod  DATETIME,
+    propietario VARCHAR(22),
+    usuario   VARCHAR(22),
+    PRIMARY KEY ( id )
+);
+ALTER TABLE  `producto_bodega` 
+ADD FOREIGN KEY (  `id_producto` ) 
+REFERENCES  `dbinventario`.`producto` (`id`) 
+ON DELETE RESTRICT ON UPDATE CASCADE ; 
+ALTER TABLE  `producto_bodega` 
+ADD FOREIGN KEY (  `id_bodega` ) 
+REFERENCES  `dbinventario`.`bodega` (`id`) 
+ON DELETE RESTRICT ON UPDATE CASCADE ; 
