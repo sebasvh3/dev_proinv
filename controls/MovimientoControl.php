@@ -3,11 +3,13 @@ require_once rutaModel.'AbstractControl.php';
 require_once rutaFacades.'MovimientoFacade.php';
 require_once rutaFacades.'CategoriaFacade.php';
 require_once rutaFacades.'ProductoFacade.php';
+require_once rutaFacades.'BodegaFacade.php';
 //require_once rutaEntidades.'Categoria.php';
 
 class MovimientoControl extends AbstractControl {
     
     public $categorias;
+    public $bodegas; 
     
     function MovimientoControl() {
         $this->facade = new MovimientoFacade();
@@ -15,6 +17,7 @@ class MovimientoControl extends AbstractControl {
     
     public function entrada(){
         $this->setCategorias();
+        $this->setBodegas();
         $this->setVistaAccion('movimiento/entrada');
     }
     
@@ -22,6 +25,7 @@ class MovimientoControl extends AbstractControl {
         $this->setCategorias();
         $this->setVistaAccion('movimiento/salida');
     }
+    
     public function productomov1(){
         $this->setCategorias();
         $this->setVistaAccion('movimiento/productomov1');
@@ -35,6 +39,16 @@ class MovimientoControl extends AbstractControl {
     public function getCategorias(){
         return $this->categorias;
     }
+    
+    public function setBodegas(){
+        $bodegaFacade = new BodegaFacade();
+        $this->bodegas = $bodegaFacade->getBodegasActivas();
+    }
+    
+    public function getBodegas(){
+        return $this->bodegas;
+    }
+    
     
     public function guardar(){
         //probar velocidad del servidor

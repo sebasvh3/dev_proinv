@@ -19,7 +19,6 @@ setlocale("LC_ALL", "es_CO.UTF-8");
         <link rel="stylesheet" type="text/css" href="resources/datatables/media/css/dataTables.bootstrap.css" media="screen"/>
         
         <link rel="stylesheet" type="text/css" href="resources/css/style.css" media="screen"/>
-        
          <!--        caja de mensaje-->
         <title>Inventario</title>
     </head>
@@ -31,6 +30,8 @@ Height = "22"
 alt="nuevo" />-->
     
     <body>
+        
+        
         <div id="contenedor">    
         <div id='header'>
              <!--<img src='resources/images/CafeMariscal.jpg' width='100' alt='cafe Mariscal' >-->
@@ -50,10 +51,23 @@ alt="nuevo" />-->
                 <li id="inicio"><a href="app.php/Index/inicio">Inicio</a></li>
                 <li id="producto"><a href="app.php/Producto/listar">Productos</a></li>
                 <li id="categoria"><a href="app.php/Categoria/listar">Categorias</a></li>
-                <li id="entrada"><a href="app.php/Movimiento/entrada">Entrada</a></li>
-                <li id="salida"><a href="app.php/Movimiento/salida">Salida</a></li>
                 
-                <li class="dropdown active">
+                
+                <li class="dropdown ">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Transacciones <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li id="entrada"><a href="app.php/Movimiento/entrada">Entrada</a></li>
+                        <li id="salida"><a href="app.php/Movimiento/salida">Salida</a></li>
+                        <li id="averia"><a href="app.php/Movimiento/averia">Averia</a></li>
+                        <li id="devolucion"><a href="app.php/Movimiento/devolucion">Devolucion</a></li>
+                 
+                    </ul>
+                </li>
+                
+                
+                <li class="dropdown ">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         Acciones <span class="caret"></span>
                     </a>
@@ -92,6 +106,10 @@ alt="nuevo" />-->
 	</div>     
               
         <?php $this->getVista();?>
+        <br><br>
+                
+        <pre><?php var_dump($this->rutasJs);?></pre>
+        <?php // var_dump($this);?>      
 
         
         </div><!--cierre del div id=contenedor-->
@@ -110,6 +128,7 @@ alt="nuevo" />-->
         
         
         <script type="text/javascript" src="resources/js/common.js"></script>
+        <?php echo $this->getRutasJs() ?>
         
         <div id="footer">    
         </div>

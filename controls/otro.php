@@ -10,15 +10,15 @@
  *
  * @author crivasi
  */
-class RuteadorControl {    
+class OtroControl {    
     public $vistaAccion;
     public $credenciales;
     public $requestUri;
     public $unsetPermiso;
   
-    function RuteadorControl(){
-        session_start();
-        
+    function OtroControl(){
+//        session_start();
+        echo "Hola";die;
         $this->setRequestUri();        
         
         list($control, $accion) = $this->getParametros();
@@ -32,6 +32,7 @@ class RuteadorControl {
 
 //        if(in_array($this->getRequestUri(), $this->getPermisos())){
             if($objetoControl = $this->getControl($control)){
+                echo"Si";
                 $control      = ($control != "index") ? $control."control" : $control."control";
 
                 if(in_array($accion,get_class_methods($control))){
@@ -64,6 +65,7 @@ class RuteadorControl {
 
     public function getControl($control){
         $control = ($control != "index" && $control != "login" ) ? "Tb".$control."Control" : ucfirst($control)."Control";
+        var_dump($control);die;
         $archivoControl = rutaControles.$control.".php";
         if(is_file($archivoControl)){
             require_once $archivoControl;

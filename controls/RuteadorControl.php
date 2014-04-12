@@ -38,10 +38,10 @@ class RuteadorControl {
                     if(in_array($accion,get_class_methods(get_class($objetoControl)))){
 //                        $objetoControl->$accion($accion == 'editar' ? $id : NULL);
                         if($id>0){
-                            $objetoControl->$accion();
+                            $objetoControl->$accion($id);
                         }
                         else{
-                            $objetoControl->$accion($id);
+                            $objetoControl->$accion();
                         }
                         // CUANDO USE AJAX SETEAR CON FALSE
                         $objetoControl->getVista(!isset ($objetoControl->layout) || $objetoControl->layout ? 'layout' : NULL);

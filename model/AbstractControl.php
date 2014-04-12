@@ -22,6 +22,10 @@ class AbstractControl {
     public $facade;
     public $vista;
     
+    //** Permite Adjuntar en el layout archivos js y css propios de la vista
+    public $rutasJs=array();
+    public $rutasCss=array();
+    
     
     function AbstractControl(){
         
@@ -32,7 +36,7 @@ class AbstractControl {
     }
     
     public function getVista($accion = null){
-        
+        var_dump($accion);
         $accion = $accion ? $accion : $this->getVistaAccion();
         
         $archivoVista = rutaVistas.$accion.".php"; 
@@ -158,6 +162,31 @@ class AbstractControl {
         }
         return $isArray ? $entitiesArray : array_pop($entitiesArray);
     }
+    
+    public function addRutaJs($ruta){
+        $this->rutasJs[]=rutaJs.$ruta;
+    }
+    public function addRutaCss($ruta){
+        $this->rutasCss[]=rutaCss.$ruta;
+    }
 
+    public function getRutasJs(){
+        $sRutasJs="";
+        foreach($this->rutasJs as $ruta){
+            $sRutasJs.="<script type='text/javascript' src='$ruta'></script> \n\t";
+        }
+        return $sRutasJs;
+    }
+    
+    //** TODO: Las rutas js funcion bn, debido que los <script> estan al final del loyout
+    //** Por lo tanto ya se ha llamado la vistaAccion. En los <link> estan al principio 
+    //** no se muestran porque aun no se ha llamado vistaAccion
+    public function getRutasCss(){
+        $sRutasCss="";
+        foreach($this->rutasCss as $ruta){
+            $sRutasCss.="<link rel='stylesheet' type='text/css' href='$ruta' media='screen'/>";
+        }
+        return $sRutasCss;
+    }
 }
 

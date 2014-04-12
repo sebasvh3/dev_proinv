@@ -1,8 +1,18 @@
-<h4>Entrada de Productos</h4>
+<?php
+    //** Se adiciona js solo para la vista entrada
+    $this->addRutaJs("movimiento/entradas.js"); 
+//    $this->addRutaJs("entradas.js"); 
+?>
 
+
+<h4>Entrada de Productos</h4>
+<pre>
+<?php var_dump($this->getBodegas());    ?>
+
+</pre>
 <form role="form" method="post" action="app.php/Movimiento/guardar">
+ <div class="form-group">   
     <div class="row">
-     <div class="form-group">   
        <div class="col-md-1"><label for="exampleInputEmail1">Fecha:</label></div>
        <div class="col-md-2">
            <div class="date input-group input-append">
@@ -12,10 +22,16 @@
                </span>
            </div>
        </div>
-     </div>
+       <div class="col-md-1 col-md-offset-1"><label for="exampleInputEmail1">Bodega:</label></div>
+       <div class="col-md-3">
+           <select class="form-control" id="select_id_bodega">
+               <?php foreach ($this->getBodegas() as $bodega):  ?>
+                   <option value='<?php echo $bodega['id'] ?>'><?php echo $bodega['descripcion'] ?></option>
+               <?php endforeach;?>
+           </select>
+       </div>
    </div>    
     <div class="row">
-     <div class="form-group">
        <div class="col-md-1"><label for="exampleInputEmail1">Categoria:</label></div>
        <div class="col-md-3">
            <select class="form-control" id="select_id_categoria">
@@ -43,6 +59,6 @@
    </div>
 </form>
 <pre>
-    <?php var_dump($this->getCategorias());?>
+    <?php // var_dump($this->getCategorias());?>
 </pre>
-
+<pre><?php // var_dump($this->rutasJs);?></pre>

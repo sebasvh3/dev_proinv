@@ -5,7 +5,7 @@
 session_start();
 define('baseUrl', "http://$_SERVER[SERVER_NAME]".preg_replace('/index(\.php)?\/?$/i',"",$_SERVER['SCRIPT_NAME']));
 
-
+//** Absolute
 define('rutaDeLaAplicacion', __DIR__."/");
 define('rutaModel',rutaDeLaAplicacion."model/");
 define('rutaControles',rutaDeLaAplicacion."controls/");
@@ -13,7 +13,9 @@ define('rutaVistas',rutaDeLaAplicacion."views/");
 define('rutaEntidades',rutaDeLaAplicacion."entity/");
 define('rutaFacades',rutaDeLaAplicacion."facade/");
 define('rutaEnviroment',rutaDeLaAplicacion."enviroment/");
-		
+//** Relative
+define('rutaJs',"resources/js/");
+define('rutaCss',"resources/css/");
 //echo baseUrl;
 //require_once "MetodosUtiles.php";
 //require_once "Autenticacion.php";

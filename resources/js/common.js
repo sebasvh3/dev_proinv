@@ -348,4 +348,22 @@ function guardarSalidaExistencia(){
                 alert("Error en consulta ajax ");
             }
         });
+        
+}
+
+function getResponse(method, url, data){
+	$.ajax({
+	    type: method,
+	    url: urlbase+url,
+	    dataType: 'json',
+	    cache : false,
+	    async: false,
+	    data: data
+	}).done(function( msg ) {
+	    ret = msg;
+	}).error(function(jqXHR, text){
+            console.debug("Revisar Error en: "+url);
+	    ret = false;
+	});
+	return ret;
 }
