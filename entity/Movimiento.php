@@ -1,11 +1,5 @@
 <?php
 
-//require_once 'EntidadAuditoria.php';
-//Esto ahora lo pillo en mi pc
-
-
-
-
 Class Movimiento /*extends EntidadAuditoria*/ {
 
     /**
@@ -127,4 +121,3 @@ Class Movimiento /*extends EntidadAuditoria*/ {
 
 }
 
-?>

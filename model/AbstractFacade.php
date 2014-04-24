@@ -704,7 +704,8 @@ class AbstractFacade {
     }
       
     public function newEntityInstance($fieldsValues = array(), $alias = ''){
-        $className =  ucfirst(strtolower($this->entidad));
+        //$className =  ucfirst(strtolower($this->entidad));
+        $className =  ucfirst($this->entidad);
         require_once rutaEntidades.$className.'.php';
         $objectInstance = new $className(array());
         

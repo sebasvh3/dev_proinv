@@ -184,3 +184,6 @@ ALTER TABLE  `producto_bodega`
 ADD FOREIGN KEY (  `id_bodega` ) 
 REFERENCES  `dbinventario`.`bodega` (`id`) 
 ON DELETE RESTRICT ON UPDATE CASCADE ; 
+
+-- Producto Bodega Insert
+INSERT INTO `dbinventario`.`producto_bodega` (`id`, `id_producto`, `id_bodega`, `existencia`, `averias`, `devs`, `estado`, `fecha_crea`, `fecha_mod`, `propietario`, `usuario`) VALUES (NULL, '29', '1', '14', '12', '10', 'ACT', '2014-04-22 00:00:00', '2014-04-22 00:00:00', 'Generico_Admin', 'Generico_Admin');

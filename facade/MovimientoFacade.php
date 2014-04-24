@@ -13,7 +13,7 @@ class MovimientoFacade extends AbstractFacade{
         $this->idcolum='id';
         $this->motor=2;
         $this->schema=  Ambiente::$DB;
-        $this->entidad='bodega';
+        $this->entidad='movimiento';
     }
     
 }

@@ -27,18 +27,6 @@ class ProductoControl extends AbstractControl {
     }
 
     public function listar() {
-//        $params = $_POST;
-//////***A�adir Filtros
-////        if (isset($_GET['aucodestad'])) {
-//////$params['mocodmotiv'] = Ambiente::$motivoGuardada;
-////            $params['aucodestad'] = 'A';
-////        }
-//////***Consultar
-////        $this->getListaEntidades($params);
-////        include_once '../view/tipo_activocr.php';
-//        $this->getListaEntidades($params);
-//        echo "Si señor esta listando";
-//        
         $this->getListaEntidades();
         $this->setVistaAccion('producto/listar');
     }

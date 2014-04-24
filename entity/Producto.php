@@ -100,7 +100,7 @@ Class Producto /*extends EntidadAuditoria*/ {
             $this->$key = $value;
         
         if(!isset($this->id_categoria) or $this->getId_categoria()=='')
-            $this->setId_categoria (null);
+            $this->setId_categoria(null);
     }
     
     
@@ -218,8 +218,6 @@ Class Producto /*extends EntidadAuditoria*/ {
         else
             return "";
     }
-
-
     
 }
 

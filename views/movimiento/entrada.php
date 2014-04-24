@@ -1,22 +1,19 @@
 <?php
     //** Se adiciona js solo para la vista entrada
-    $this->addRutaJs("movimiento/entradas.js"); 
-//    $this->addRutaJs("entradas.js"); 
+    $this->addRutaJs("movimiento/entrada.js"); 
 ?>
-
 
 <h4>Entrada de Productos</h4>
 <pre>
-<?php var_dump($this->getBodegas());    ?>
-
+<?php // var_dump($this->getBodegas());    ?>
 </pre>
-<form role="form" method="post" action="app.php/Movimiento/guardar">
+<form role="form" method="post" action="app.php/Movimiento/guardarEntradaAx">
  <div class="form-group">   
     <div class="row">
        <div class="col-md-1"><label for="exampleInputEmail1">Fecha:</label></div>
        <div class="col-md-2">
            <div class="date input-group input-append">
-               <input type="text" class="form-control" value="" id="fecha" readonly="">
+               <input type="text" class="form-control" value="" id="fecha" readonly="" name="fecha_transaccion">
                <span class="input-group-addon add-on">
                    <i class="fa fa-calendar"></i>
                </span>
@@ -24,7 +21,7 @@
        </div>
        <div class="col-md-1 col-md-offset-1"><label for="exampleInputEmail1">Bodega:</label></div>
        <div class="col-md-3">
-           <select class="form-control" id="select_id_bodega">
+           <select class="form-control" id="select_id_bodega" name="id_bodega">
                <?php foreach ($this->getBodegas() as $bodega):  ?>
                    <option value='<?php echo $bodega['id'] ?>'><?php echo $bodega['descripcion'] ?></option>
                <?php endforeach;?>
@@ -58,7 +55,4 @@
       <div class="col-md-2 col-md-offset-8"><button type="submit" class="btn btn-default btn-info btn-sm">Guardar</button></div>
    </div>
 </form>
-<pre>
-    <?php // var_dump($this->getCategorias());?>
-</pre>
-<pre><?php // var_dump($this->rutasJs);?></pre>
+

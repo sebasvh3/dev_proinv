@@ -36,7 +36,6 @@ class AbstractControl {
     }
     
     public function getVista($accion = null){
-        var_dump($accion);
         $accion = $accion ? $accion : $this->getVistaAccion();
         
         $archivoVista = rutaVistas.$accion.".php"; 
