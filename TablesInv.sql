@@ -161,6 +161,9 @@ ADD FOREIGN KEY (  `id_transaccion` )
 REFERENCES  `dbinventario`.`transaccion` (`id`) 
 ON DELETE RESTRICT ON UPDATE CASCADE ; 
 
+ALTER TABLE  `movimiento` CHANGE  `fecha_registro`  `fecha_trans` DATETIME NULL DEFAULT NULL
+ALTER TABLE  `movimiento` CHANGE  `cant_registro`  `cant_trans` DECIMAL( 12, 2 ) NULL DEFAULT NULL
+
 
 CREATE TABLE producto_bodega(
     id INT NOT NULL AUTO_INCREMENT,

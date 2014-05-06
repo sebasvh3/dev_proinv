@@ -6,6 +6,7 @@ require_once rutaFacades.'ProductoFacade.php';
 require_once rutaFacades.'BodegaFacade.php';
 require_once rutaFacades.'ProductoBodegaFacade.php';
 require_once rutaEntidades.'Producto_bodega.php';
+require_once rutaEntidades.'Movimiento.php';
 //require_once rutaEntidades.'Categoria.php';
 
 class MovimientoControl extends AbstractControl {
@@ -69,7 +70,7 @@ class MovimientoControl extends AbstractControl {
         $filtros = array("and id=".$idproducto);
         
         $productoFacade->updateEntities($parametros,$filtros,false);
-        var_dump($parametros['existencia']);
+        print_r($parametros['existencia']);
         echo"el producto ".$idproducto." Se ha actualizado <br>";
         
 //        $this->setVistaAccion('movimiento/entrada');
@@ -80,17 +81,18 @@ class MovimientoControl extends AbstractControl {
     public function guardarEntradaAx(){
         $idTransaccionEntrada = Ambiente::$Entrada;
         $values=$_POST;
-        $fechaTransaccion = $values['fecha_transaccion'];
-        $idBodega = $values['id_bodega'];
-        $idproducto = $values['id_producto'];
-        $existencia = $values['existencia'];
+        //$fechaTransaccion = $values['fecha_transaccion'];
         
-        //**Guardar nueva instancia de Producto_bodega
+        
+        //** Guardar los datos de la entrada en la bodega
         $productoBodegaFacade = new ProductoBodegaFacade();
+        $productoBodegaFacade->guardarProductoBodega($values);
         
-        $productoBodega = $productoBodegaFacade->getProductoBodega($values); 
+        //** SE registra el movimiento realizado
+        $movimiento = new Movimiento($values);
+   
         echo "<pre>";
-        var_dump($productoBodega);
+        print_r($movimiento);
         echo "</pre>";
         $this->setVistaAccion('movimiento/entrada');
         //**Verificar si exista ya una bodega_producto, si no la hay se crea

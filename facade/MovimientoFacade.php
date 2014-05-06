@@ -16,4 +16,13 @@ class MovimientoFacade extends AbstractFacade{
         $this->entidad='movimiento';
     }
     
+     public function getNamedQuery($nameQuery) {
+        //$querys['allBodegasAct'] = "SELECT t.id, t.descripcion FROM " . $this->schema . "." . $this->entidad . " t where t.estado='ACT'";
+        //$querys['otra'] = "SELECT * FROM " . $this->schema . "." . $this->entidad ;
+        
+        //return $querys[$nameQuery];
+    }
+    
+    
+    
 }

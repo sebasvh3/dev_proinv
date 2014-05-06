@@ -10,37 +10,62 @@ Class Movimiento /*extends EntidadAuditoria*/ {
      */
     private $id;
 
-    /**
+    /*
      * @var varchar $detalle
      * @Columna(nombre="detalle", tipo="varchar", nulo=true)
      */
-    public $detalle;
+    public $id_producto;
 
-    /**
+    /*
+     * @var varchar $estado
+     * @Columna(nombre="estado", tipo="varchar", nulo=false)
+     */
+    public $id_transaccion;
+    
+    /*
+     * @var varchar $documento
+     * @Columna(nombre="documento", tipo="varchar", nulo=false)
+     */
+    public $documento;
+    
+    
+    /*
+     * @var varchar $estado
+     * @Columna(nombre="estado", tipo="varchar", nulo=false)
+     */
+    public $cant_trans;
+    
+    /*
+     * @var varchar $estado
+     * @Columna(nombre="estado", tipo="varchar", nulo=false)
+     */
+    public $fecha_trans;
+    
+    /*
      * @var varchar $estado
      * @Columna(nombre="estado", tipo="varchar", nulo=false)
      */
     public $estado;
 
-    /**
+    /*
      * @var datetime $fecha_crea
      * @Columna(nombre="fecha_crea", tipo="datetime", nulo=true)
      */
     public $fecha_crea;
 
-    /**
+    /*
      * @var datetime $fecha_mod
      * @Columna(nombre="fecha_mod", tipo="datetime", nulo=true)
      */
     public $fecha_mod;
 
-    /**
+    /*
      * @var varchar $propietario
      * @Columna(nombre="propietario", tipo="varchar", nulo=true)
      */
     public $propietario;
     
-    /**
+    /*
      * @var varchar $usuario
      * @Columna(nombre="usuario", tipo="varchar", nulo=true)
      */
@@ -51,12 +76,14 @@ Class Movimiento /*extends EntidadAuditoria*/ {
     }
 
     public function mergeDatos($fieldsValues) {
-        $keySet = array_keys($fieldsValues);
+         $keySet = array_keys($fieldsValues);
+        $myAttributes = get_object_vars($this);
         
-//        var_dump($fieldsValues);
         $objects = array();
         foreach ($keySet as $key) {
-            $objects[strtolower($key)] = $fieldsValues[$key];
+            if(array_key_exists(strtolower($key), $myAttributes)){
+                $objects[strtolower($key)] = $fieldsValues[$key];
+            }
         }
         foreach ($objects as $key => $value)
             $this->$key = $value;

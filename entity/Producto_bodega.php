@@ -199,6 +199,10 @@ Class Producto_bodega {
         $this->categorias = $categorias;
     }
 
+    
+    public function registrarEntrada($cantidad){
+        $this->existencia+=$cantidad;
+    }
 
     
 }

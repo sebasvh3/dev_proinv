@@ -36,27 +36,27 @@ class ProductoBodegaFacade extends AbstractFacade{
      * Se busca, si existe ya un registro con el producto y bodega, si no lo hay
      * se crea el registro y se retorna la instancia 
      */
-    public function getProductoBodega($values){
+    public function guardarProductoBodega($values){
         $idproducto = $values['id_producto'];
-        $idbodega = $values['id_bodega'];
-        
+        $idbodega   = $values['id_bodega'];
+        $existencia = $values['cant_trans'];    
+                
         $entidades = $this->_getProductoBodega($idproducto, $idbodega);
+        //** Producto existente
         if(count($entidades)>0){
             $productoBodegaEdit = $entidades[0];
-            $productoBodegaEdit->updateDatos($values);
-            //** Con segundo parametro = false, se indica que la auditoria solo es para
-            //** los datos de las acutualizaciones y no completa en la creacion
+            $productoBodegaEdit->registrarEntrada($existencia);
             $this->doEdit($productoBodegaEdit);
-            $this->showSql();
-            return array("nuevo"=>false,"productoBodega"=>$productoBodegaEdit);
         }
+        //** Producto Nuevo
         else{
             $productoBodega =  new Producto_bodega($values);
+            $productoBodega->setExistencia($existencia);
             $this->doEdit($productoBodega);
-            $this->showSql();
-            $productoBodegaCreado = $this->_getProductoBodega($idproducto, $idbodega);
-            return array("nuevo"=>true,"productoBodega"=>$productoBodegaCreado[0]);
+            //$this->showSql();
+            //$productoBodegaCreado = $this->_getProductoBodega($idproducto, $idbodega);
         }
+        $this->showSql();
     }
     
     public function otra(){
