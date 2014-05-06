@@ -136,7 +136,7 @@ class AbstractFacade {
     public function crearAuditoria($objectInstance, $existe = false){
         $now = new DateTime();
         
-        if($existe){
+        if(!$existe){
             $objectInstance->setPropietario("PropietarioGenerico");
             $objectInstance->setFecha_crea($now->format('Y-m-d H:i:s'));
         }    
@@ -169,7 +169,7 @@ class AbstractFacade {
 
             if($crearAuditoria){
                 $auditoria = $this->newEntityInstance();
-                $auditoria = $this->crearAuditoria($auditoria,true);
+                $auditoria = $this->crearAuditoria($auditoria,false);
             }
 
             $statement = $this->buildInsertArray($objectsInstance, $auditoria);

@@ -83,6 +83,10 @@ Class Producto_bodega {
         $this->mergeDatos($fieldsValues);
         $this->setEstado("ACT");
     }
+    
+    function updateDatos($fieldsValues){
+        $this->mergeDatos($fieldsValues);
+    }
 
     public function mergeDatos($fieldsValues) {
         $keySet = array_keys($fieldsValues);
