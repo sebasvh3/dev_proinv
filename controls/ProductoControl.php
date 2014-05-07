@@ -136,8 +136,11 @@ class ProductoControl extends AbstractControl {
     public function findProductoByCategoria(){
         $this->layout=false;
         $idcategoria = $_POST['idcategoria'];
-        $productos = $this->facade->findProductoByCategoria($idcategoria);
-        echo json_encode($productos);
+        if(isset($idcategoria) and $idcategoria!=''){
+            $productos = $this->facade->findProductoByCategoria($idcategoria);
+            echo json_encode($productos);
+        }
+        else echo json_encode(array("null"));
     }
     
     public function findExistenciaByProducto(){

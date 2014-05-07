@@ -88,7 +88,7 @@ class AbstractFacade {
 
         foreach($objectsToUpdate as $objectToUpdate){                
             $objectToUpdate = $this->crearAuditoria($objectToUpdate, true);
-
+            echo "-->Update<br>";
             $this->update($objectToUpdate);
             
             $objectEdited[] = $objectToUpdate;
@@ -184,7 +184,7 @@ class AbstractFacade {
         $entity = $objectInstance;
         
         $statement = $this->sqlBuild($entity, 'UPDATE');
-
+        var_dump($this->entidad);
         $result = $this->sentenciaSimple($statement, $this->entidad);
 
         $this->setMessage($result, "almacenado");

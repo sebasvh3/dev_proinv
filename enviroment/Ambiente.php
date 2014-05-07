@@ -15,6 +15,10 @@ class Ambiente{
     public static $USER = 'root';
     public static $PASS = 'sql123';
     
+    //*** Estados
+    public static $EstadoActivo = 'ACT';
+    public static $EstadoInactivo = 'DESC';
+    
     //*** Transacciones
     public static $Entrada = 1;
     public static $Salida =  2;

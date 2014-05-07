@@ -56,7 +56,7 @@ class ProductoBodegaFacade extends AbstractFacade{
             //$this->showSql();
             //$productoBodegaCreado = $this->_getProductoBodega($idproducto, $idbodega);
         }
-        $this->showSql();
+//        $this->showSql();
     }
     
     public function otra(){

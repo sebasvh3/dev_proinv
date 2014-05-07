@@ -19,7 +19,6 @@ class MysqlModel {
 
     public function MysqlModel($config) {                
         $this->server    = $config['SERVER'];
-//        $this->server    = '127.0.0.1';
         $this->baseDatos = $config['DATABASE'];
         $this->usuario   = $config['USER'];
         $this->password  = $config['PASSWORD'];
@@ -49,25 +48,43 @@ class MysqlModel {
 
     
     function sentenciaSimple($sqlStatement, $toLock = false){
+        
         if($toLock){
             mysql_query("LOCK TABLES $toLock WRITE",$this->getConexion());
             $resultado = mysql_query($sqlStatement, $this->getConexion());
             $this->setLastId();
+            //** Show Error
+            if(!$resultado){
+                echo "<code>".mysql_errno($this->getConexion()).": ".mysql_error($this->getConexion())."</code><br>";
+            }
             mysql_query("UNLOCK TABLES",$this->getConexion());
         } else {
             $resultado = mysql_query($sqlStatement, $this->getConexion());
+            //** Show Error
+            if(!$resultado){
+                echo "<code>".mysql_errno($this->getConexion()).": ".mysql_error($this->getConexion())."</code><br>";
+            }
         }
         return $resultado;
     }
 
     function querySimpleObject($sqlStatement){
         $resultado = mysql_query($sqlStatement, $this->getConexion());
+        //** Show Error
+        if(!$resultado){
+            echo "<code>".mysql_errno($this->getConexion()).": ".mysql_error($this->getConexion())."</code><br>";
+        }
         return $resultado;
     }
 
     function executeQueryObject($sqlStatement){
         $lista = array();
         $resultado = mysql_query($sqlStatement, $this->getConexion());
+        //echo $sqlStatement;
+        if(!$resultado){
+            echo "<code>".mysql_errno($this->getConexion()).": ".mysql_error($this->getConexion())."</code><br>";
+                 //. "<pre>$sqlStatement</pre>";
+        }
         if(!is_bool($resultado))    
             while($entidad = mysql_fetch_object($resultado)){
                 $lista[] = $this->decodeHtml($entidad);

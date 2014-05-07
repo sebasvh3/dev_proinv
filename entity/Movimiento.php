@@ -93,57 +93,91 @@ Class Movimiento /*extends EntidadAuditoria*/ {
         return $this->id;
     }
 
-    public function setId($id) {
-        $this->id = $id;
+    public function getId_producto() {
+        return $this->id_producto;
     }
 
-    public function getDescripcion() {
-        return $this->descripcion;
+    public function getId_transaccion() {
+        return $this->id_transaccion;
     }
 
-    public function setDescripcion($descripcion) {
-        $this->descripcion = $descripcion;
+    public function getDocumento() {
+        return $this->documento;
+    }
+
+    public function getCant_trans() {
+        return $this->cant_trans;
+    }
+
+    public function getFecha_trans() {
+        return $this->fecha_trans;
     }
 
     public function getEstado() {
         return $this->estado;
     }
 
-    public function setEstado($estado) {
-        $this->estado = $estado;
-    }
-
     public function getFecha_crea() {
         return $this->fecha_crea;
-    }
-
-    public function setFecha_crea($fecha_crea) {
-        $this->fecha_crea = $fecha_crea;
     }
 
     public function getFecha_mod() {
         return $this->fecha_mod;
     }
 
-    public function setFecha_mod($fecha_mod) {
-        $this->fecha_mod = $fecha_mod;
-    }
-
     public function getPropietario() {
         return $this->propietario;
-    }
-
-    public function setPropietario($propietario) {
-        $this->propietario = $propietario;
     }
 
     public function getUsuario() {
         return $this->usuario;
     }
 
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function setId_producto($id_producto) {
+        $this->id_producto = $id_producto;
+    }
+
+    public function setId_transaccion($id_transaccion) {
+        $this->id_transaccion = $id_transaccion;
+    }
+
+    public function setDocumento($documento) {
+        $this->documento = $documento;
+    }
+
+    public function setCant_trans($cant_trans) {
+        $this->cant_trans = $cant_trans;
+    }
+
+    public function setFecha_trans($fecha_trans) {
+        $this->fecha_trans = $fecha_trans;
+    }
+
+    public function setEstado($estado) {
+        $this->estado = $estado;
+    }
+
+    public function setFecha_crea($fecha_crea) {
+        $this->fecha_crea = $fecha_crea;
+    }
+
+    public function setFecha_mod($fecha_mod) {
+        $this->fecha_mod = $fecha_mod;
+    }
+
+    public function setPropietario($propietario) {
+        $this->propietario = $propietario;
+    }
+
     public function setUsuario($usuario) {
         $this->usuario = $usuario;
     }
+
+
 
 
 }
