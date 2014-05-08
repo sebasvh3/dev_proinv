@@ -14,7 +14,7 @@ Class Movimiento /*extends EntidadAuditoria*/ {
      * @var varchar $detalle
      * @Columna(nombre="detalle", tipo="varchar", nulo=true)
      */
-    public $id_producto;
+    public $id_prodbodega;
 
     /*
      * @var varchar $estado
@@ -93,8 +93,8 @@ Class Movimiento /*extends EntidadAuditoria*/ {
         return $this->id;
     }
 
-    public function getId_producto() {
-        return $this->id_producto;
+    public function getId_prodbodega() {
+        return $this->id_prodbodega;
     }
 
     public function getId_transaccion() {
@@ -137,8 +137,8 @@ Class Movimiento /*extends EntidadAuditoria*/ {
         $this->id = $id;
     }
 
-    public function setId_producto($id_producto) {
-        $this->id_producto = $id_producto;
+    public function setId_prodbodega($id_prodbodega) {
+        $this->id_prodbodega = $id_prodbodega;
     }
 
     public function setId_transaccion($id_transaccion) {

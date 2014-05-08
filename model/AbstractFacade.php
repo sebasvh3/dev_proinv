@@ -88,7 +88,6 @@ class AbstractFacade {
 
         foreach($objectsToUpdate as $objectToUpdate){                
             $objectToUpdate = $this->crearAuditoria($objectToUpdate, true);
-            echo "-->Update<br>";
             $this->update($objectToUpdate);
             
             $objectEdited[] = $objectToUpdate;

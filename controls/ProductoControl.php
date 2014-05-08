@@ -140,7 +140,7 @@ class ProductoControl extends AbstractControl {
             $productos = $this->facade->findProductoByCategoria($idcategoria);
             echo json_encode($productos);
         }
-        else echo json_encode(array("null"));
+        else echo json_encode(array());
     }
     
     public function findExistenciaByProducto(){

@@ -86,10 +86,11 @@ class MovimientoControl extends AbstractControl {
         
         //** Guardar los datos de la entrada en la bodega
         $productoBodegaFacade = new ProductoBodegaFacade();
-//        $productoBodegaFacade->guardarProductoBodega($values);
+        $idProdBodega=$productoBodegaFacade->guardarProductoBodega($values);
         
         //** SE registra el movimiento realizado
         $movimiento = new Movimiento($values);
+        $movimiento->setId_prodbodega($idProdBodega);
         $movimiento->setId_transaccion($idTransaccionEntrada);
         $movimiento->setEstado(Ambiente::$EstadoActivo);
         $this->facade->doEdit($movimiento);
