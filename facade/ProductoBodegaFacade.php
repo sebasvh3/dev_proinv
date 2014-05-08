@@ -7,6 +7,7 @@ class ProductoBodegaFacade extends AbstractFacade{
     
     public $id;
     public static $allBodegasAct = "allBodegasAct";
+    public static $findByIdproducto = "findByIdproducto";
     
     public function ProductoBodegaFacade(){
         $this->idcolum='id';
@@ -17,6 +18,7 @@ class ProductoBodegaFacade extends AbstractFacade{
     
     public function getNamedQuery($nameQuery) {
         $querys['allBodegasAct'] = "SELECT t.id, t.descripcion FROM " . $this->schema . "." . $this->entidad . " t where t.estado='ACT'";
+        $querys['findByIdproducto'] = "SELECT t.* FROM " . $this->schema . "." . $this->entidad . " t where 1=1 ";
         $querys['otra'] = "SELECT * FROM " . $this->schema . "." . $this->entidad ;
         
         return $querys[$nameQuery];
@@ -66,5 +68,19 @@ class ProductoBodegaFacade extends AbstractFacade{
         $this->showSql();
         echo"***";
         var_dump($query);
+    }
+    
+    public function findByIdproducto($idproducto){
+        $filtros = array("and id_producto='$idproducto'","and estado='ACT'","ORDER BY t.id_bodega ASC");
+        
+        $entidades = $this->runNamedQuery(ProductoBodegaFacade::$findByIdproducto,$filtros);
+        $productoBodegas = array();
+        foreach ($entidades as $valoresEntidad) {
+            $idbogega = $valoresEntidad['id_bodega'];
+            $productoBodegas[$idbogega] = new Producto_bodega($valoresEntidad);
+        }
+        //$entidades=$this->findEntitiesDos(array(),$filtros);
+        
+        return $productoBodegas;
     }
 }

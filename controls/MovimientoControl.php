@@ -5,6 +5,7 @@ require_once rutaFacades.'CategoriaFacade.php';
 require_once rutaFacades.'ProductoFacade.php';
 require_once rutaFacades.'BodegaFacade.php';
 require_once rutaFacades.'ProductoBodegaFacade.php';
+require_once rutaEntidades.'Producto.php';
 require_once rutaEntidades.'Producto_bodega.php';
 require_once rutaEntidades.'Movimiento.php';
 //require_once rutaEntidades.'Categoria.php';
@@ -12,7 +13,9 @@ require_once rutaEntidades.'Movimiento.php';
 class MovimientoControl extends AbstractControl {
     
     public $categorias;
-    public $bodegas; 
+    public $bodegas;
+    public $producto;
+    //public $id;
     
     function MovimientoControl() {
         $this->facade = new MovimientoFacade();
@@ -131,6 +134,18 @@ class MovimientoControl extends AbstractControl {
         }
         
         echo json_encode($Response);
+    }
+    
+    public function producto($id){
+        $productoFacade = new ProductoFacade();
+        $this->producto = $productoFacade->findProductoById($id);
+        $this->setVistaAccion('movimiento/productomov1');
+    }
+    
+    public function BPrincipal(){
+        $this->layout =false;
+//        echo json_encode(array("YES"));
+        echo json_encode($_GET);
     }
     
     public function detalle($id){

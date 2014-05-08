@@ -27,7 +27,7 @@ class Ambiente{
     
     //*** Bodegas
     public static $BodegaPrincipal = 1;
-    public static $BodegaTercerizado = 1;
+    public static $BodegaTercerizado = 2;
     
    
 }

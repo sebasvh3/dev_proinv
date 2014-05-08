@@ -2,6 +2,7 @@
 
 //require_once 'EntidadAuditoria.php';
 require_once rutaFacades.'CategoriaFacade.php';
+require_once rutaFacades.'ProductoBodegaFacade.php';
 
 
 Class Producto /*extends EntidadAuditoria*/ {
@@ -81,6 +82,8 @@ Class Producto /*extends EntidadAuditoria*/ {
     public $usuario;
     
     private $categorias;
+    
+    private $productoBodegaCollection;
     
     
     function Producto($fieldsValues) {
@@ -218,6 +221,26 @@ Class Producto /*extends EntidadAuditoria*/ {
         else
             return "";
     }
+    
+//    if ($this->planPagosCreditoCollection == null && $this->getId()) {
+//            $plan_pagoFacade = new Plan_pagos_creditoFacade();
+//            $filtros['idcredito'] = $this->getId();
+//            $this->planPagosCreditoCollection = $plan_pagoFacade->buscarPorIdCredito($filtros);
+//        }
+    
+    public function getProductoBodegaCollection() {
+        if($this->productoBodegaCollection == null && $this->getId()){
+            $productoBodegaFacade = new ProductoBodegaFacade();
+            $this->productoBodegaCollection = $productoBodegaFacade->findByIdproducto($this->getId());
+        }
+        return $this->productoBodegaCollection;
+    }
+
+//    public function setProductoBodegaCollection($productoBodegaCollection) {
+//        $this->productoBodegaCollection = $productoBodegaCollection;
+//    }
+
+
     
 }
 

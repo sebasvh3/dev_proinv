@@ -19,21 +19,26 @@ class RuteadorControl {
   
     function RuteadorControl(){                
         if(isset($_SESSION['usuario'])){
-            $this->setRequestUri();        
+            $this->setRequestUri();
             list($control, $accion, $id) = $this->getParametros();
-
+            
             if(!isset($_SESSION['permisos'])){
                 $_SESSION['permisos'] = array();
                 $this->setCredenciales(json_decode($_SESSION['usuario']));
                 $this->setPermisos(simplexml_load_file('enviroment/Permisos.xml'));
             }
+//            var_dump($this->getRequestUri());
+//            echo "-----";
+//            var_dump($this->getRequestUriNoId());
+//            echo "-----";
+//            var_dump($_SESSION);
             
 //            var_dump();
 //            echo $this->getRequestUri();
 //            var_dump($this->getPermisos());
             
             
-            if(in_array($this->getRequestUri(), $this->getPermisos()) && $control.$accion != "indexiniciar"){                
+            if(in_array($this->getRequestUriNoId(), $this->getPermisos()) && $control.$accion != "indexiniciar"){                
                 if($objetoControl = $this->getControl($control)){
                     if(in_array($accion,get_class_methods(get_class($objetoControl)))){
 //                        $objetoControl->$accion($accion == 'editar' ? $id : NULL);
@@ -144,9 +149,16 @@ class RuteadorControl {
 
     public function setRequestUri() {
         $requestUri = str_replace(array('/app.php','/'), array("","\/"), $_SERVER["SCRIPT_NAME"]);
-        
         $requestUri = preg_replace("/$requestUri\/app(\.php)?\/?/" , "", $_SERVER['REQUEST_URI']);
         $requestUri = preg_replace("/(\/id\/\w*$|\/$|\/\?.+$)/", '', $requestUri);
+        $requestUri = preg_replace("/(\?.*$)/", '', $requestUri);//Peticion GET
         $this->requestUri = '/'.$requestUri;
+    }
+    
+    public function getRequestUriNoId(){
+        $requestUri = $this->getRequestUri();
+        $url = preg_replace("/(\/\d+)?/","",$requestUri);
+        $url = preg_replace("/(\?.*)?/","",$url);
+        return $url;
     }
 }

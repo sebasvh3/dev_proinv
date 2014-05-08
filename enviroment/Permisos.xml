@@ -23,6 +23,7 @@ Si no se especifica usuario, se asume que es de acceso para todos.
     <!-- Rutas Generales -->
     <ruta ruta="/Producto/listar"></ruta>
     <ruta ruta="/Producto/nuevo"></ruta>
+    <ruta ruta="/Producto/guardar"></ruta>
     <ruta ruta="/Categoria/listar"></ruta>
     <ruta ruta="/Movimiento/entrada"></ruta>
     <ruta ruta="/Producto/editarAjax"></ruta>
@@ -41,6 +42,7 @@ Si no se especifica usuario, se asume que es de acceso para todos.
     <ruta ruta="/Usuario/nuevo"></ruta>
     <ruta ruta="/Categoria/nuevo"></ruta>
     <ruta ruta="/Movimiento/detalle"></ruta>
-    <ruta ruta="/Movimiento/productomov1"></ruta>
+    <ruta ruta="/Movimiento/producto"></ruta>
     <ruta ruta="/Movimiento/guardarEntradaAx"></ruta>
+    <ruta ruta="/Movimiento/BPrincipal"></ruta>
 </rutas>

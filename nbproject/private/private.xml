@@ -21,6 +21,16 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/jvahos/NetBeansProjects/inventario/model/MysqlModel.php</file>
+            <file>file:/home/jvahos/NetBeansProjects/inventario/resources/js/common.js</file>
+            <file>file:/home/jvahos/NetBeansProjects/inventario/entity/Movimiento.php</file>
+            <file>file:/home/jvahos/NetBeansProjects/inventario/controls/ProductoControl.php</file>
+            <file>file:/home/jvahos/NetBeansProjects/inventario/facade/ProductoBodegaFacade.php</file>
+            <file>file:/home/jvahos/NetBeansProjects/inventario/controls/MovimientoControl.php</file>
+            <file>file:/home/jvahos/NetBeansProjects/inventario/facade/MovimientoFacade.php</file>
+            <file>file:/home/jvahos/NetBeansProjects/inventario/model/AbstractFacade.php</file>
+            <file>file:/home/jvahos/NetBeansProjects/inventario/enviroment/Ambiente.php</file>
+        </group>
     </open-files>
 </project-private>

@@ -1,8 +1,5 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+urlbase = "app.php/";
+
 $(function(){
     //Active the dataTable
 //    $('#listaProductos').dataTable({
@@ -350,6 +347,20 @@ function guardarSalidaExistencia(){
         });
         
 }
+
+function log(data) {
+    if (window.console)
+	console.log(data);
+} 
+
+function opt2url(opt){
+	var url = "";
+	if(opt) $.each(opt,function(key,value){
+	    var dup = key + "=" + value + "&";
+	    url += dup;
+	});
+	return url;
+    }
 
 function getResponse(method, url, data){
 	$.ajax({
