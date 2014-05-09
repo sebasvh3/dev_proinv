@@ -5,8 +5,10 @@ $(function(){
 //    $("#btn_buscar_cuentas").on("click",function(){
 //        tabla_cuentas.fnReloadAjax();
 //    });
-
-//    tabla_movimientos = getDtable();
+    prodBodPrincipal   = parseInt($("#input_principal").val());
+    prodBodTercerizado = parseInt($("#input_tercerizado").val());
+    if(prodBodPrincipal)   getDataTable(prodBodPrincipal  ,$("#tablaMovBod1"));
+    if(prodBodTercerizado) getDataTable(prodBodTercerizado,$("#tablaMovBod2"));
 });
 
 function test(){
@@ -22,14 +24,14 @@ function test(){
 }
 
 
-function getDtableB1(producto){
-    var oTable = $("#tablaMovBod1").dataTable({
+function getDataTable(prodBodega,$Table){
+    var oTable = $Table.dataTable({
 	//"sDom": 'f<"clear">R<"top"l>tr<"bottom"ip><"clear">',
         "sDom": 'f<"clear">R<"top">tr<"bottom"lp><"clear">',
         "oLanguage": {
             "sUrl": "resources/datatables/dataTables.spanish.txt"
         },
-        "iDisplayLength":30,
+        "iDisplayLength":10,
         "aLengthMenu": [[10, 30, 50, 100, -1], [10, 30, 50, 100,"Todos"]],
         "aoColumns": [
                     { "mData": "fecha"},
@@ -48,17 +50,17 @@ function getDtableB1(producto){
         "bServerSide": true,
         //"sAjaxSource": urlbase+"mantenimientos/getCuentasPucAx",
         "aoColumnDefs":[
-//            {
-//               "mRender": function ( data, type, row ) {
-//                    
-//                    return data;
-//                },
-//               "aTargets": [ 1 ]
-//            },
+            {
+               "mRender": function ( data, type, row ) {
+                    
+                    return data.substring(0,10);
+                },
+               "aTargets": [ 0 ]
+            },
          ],
         "fnServerData": function(sSource, aoData, fnCallback){
-	    var opt = $('form.cuentasPuc-filtro').serializeObject();
-	    opt.table = true;
+	    var opt = {};
+	    //opt.table = true;
 	    
             var obj = {};
 	    $.each(aoData,function(index, value){
@@ -70,14 +72,15 @@ function getDtableB1(producto){
 	    opt.dir = obj.sSortDir_0;//Des or Asc
 	    opt.col = obj.iSortCol_0;//Num col para ordenar
 	    opt.bodega = 1;
-	    opt.producto = producto;
+	    opt.prodBodega = prodBodega;
             //console.debug("Obj: ")
-            //log(opt);
+            log(opt);
             
-            var movimientos = getResponse("get",urlbase+"Movimiento/BPrincipal?"+opt2url(opt),{});
+            var movimientos = getResponse("get","Movimiento/BPrincipal",opt);
+            
             log(movimientos);
             
-	    fnCallback(cuentasPuc);
+	    fnCallback(movimientos);
 	},
 	"fnInitComplete": function() {
 	    this.closest('div').find('select').addClass("form-control input-sm");

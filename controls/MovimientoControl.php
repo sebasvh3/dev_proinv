@@ -137,6 +137,7 @@ class MovimientoControl extends AbstractControl {
     }
     
     public function producto($id){
+        //$this->query = $this->BPrincipal();
         $productoFacade = new ProductoFacade();
         $this->producto = $productoFacade->findProductoById($id);
         $this->setVistaAccion('movimiento/productomov1');
@@ -144,13 +145,10 @@ class MovimientoControl extends AbstractControl {
     
     public function BPrincipal(){
         $options = $_GET;
-        
-        
-        
-        $response = $this->facade->findMovimientoByProducto($option);
-        
-//        echo json_encode(array("YES"));
-        echo json_encode($_GET);
+        $this->layout=false;
+        $response = $this->facade->findMovimientoByProducto($options);
+        $output['aaData'] = $response;
+        echo json_encode($output);
     }
     
     public function detalle($id){

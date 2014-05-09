@@ -78,7 +78,9 @@ class ProductoFacade extends AbstractFacade{
     public function findProductoById($id){
         $filtros = array("and id =$id","and estado='ACT'");
         $entidades=$this->findEntitiesDos(array(),$filtros);
-        return $entidades[0];
+        if(count($entidades))
+            return $entidades[0];
+        return array();
     }
     
 }

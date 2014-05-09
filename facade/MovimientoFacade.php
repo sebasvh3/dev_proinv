@@ -16,7 +16,7 @@ class MovimientoFacade extends AbstractFacade{
     }
     
      public function getNamedQuery($nameQuery) {
-        $querys['allBodegasAct'] = "SELECT t.id, t.descripcion FROM $this->schema.$this->entidad "
+        $querys['getMovimiento'] = "SELECT t.id, t.descripcion FROM $this->schema.$this->entidad "
                                  . " where t.estado='ACT'";
         
         
@@ -28,8 +28,22 @@ class MovimientoFacade extends AbstractFacade{
         $limit = $options['limit'];
         $dir = $options['dir'];
         $col = $options['col'];
-        $producto = $options['producto'];
-        $bodega = $options['bodega'];
+        $productoBodega = $options['prodBodega'];
+        //$bodega = $options['bodega'];
+
+        $aColumns = array("m.fecha_trans","m.documento","t.descripcion","m.cant_trans");
+        
+        $query = "SELECT m.fecha_trans as fecha,m.documento,t.descripcion as transaccion,m.cant_trans as cantidad,m.usuario "
+                . "FROM movimiento m "
+                . "INNER JOIN producto_bodega pd ON m.id_prodbodega = pd.id "
+                . "INNER JOIN transaccion t ON m.id_transaccion = t.id "
+                . "";
+        $order = "ORDER BY {$aColumns[$col]} $dir ";
+        $limitqr = "LIMIT $offset,$limit ";
+        
+        $result = $this->executeQuery($query.$order.$limitqr);
+        return $result;
+        //echo $result;
         
     }
     

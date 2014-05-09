@@ -80,22 +80,22 @@ setlocale("LC_ALL", "es_CO.UTF-8");
          <div class="row mensajes">
 	  <div class="alert alert-success alert-dismissable col-md-8 col-md-offset-2 mensaje-success" style="display: none;">
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	    <span class="mensaje-body">hola que tal</span>
+	    <span class="mensaje-body">msj</span>
 	  </div>
 
 	  <div class="alert alert-info alert-dismissable col-md-8 col-md-offset-2 mensaje-info" style="display: none;">
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	    <span class="mensaje-body">hola que tal</span>
+	    <span class="mensaje-body">msj</span>
 	  </div>
 
 	  <div class="alert alert-warning alert-dismissable col-md-8 col-md-offset-2 mensaje-warning" style="display: none;">
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	    <span class="mensaje-body">hola que tal</span>
+	    <span class="mensaje-body">msj</span>
 	  </div>
 
 	  <div class="alert alert-danger alert-dismissable col-md-8 col-md-offset-2 mensaje-danger" style="display: none;">
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	    <span class="mensaje-body">hola que tal</span>
+	    <span class="mensaje-body">msj</span>
 	  </div>
 	</div>     
               

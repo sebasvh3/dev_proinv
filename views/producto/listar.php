@@ -50,7 +50,7 @@
                 </span>
                 <span  class="accion editar"  data-original-title="Editar el proyecto">
                     <!--<a href="app.php/Movimiento/productomov1"><i class="fa fa-calendar fa-2x fa-fw text-IconMovimiento"></i></a>-->
-                    <a href="app.php/Movimiento/producto/29"><i class="fa fa-calendar fa-2x fa-fw text-IconMovimiento"></i></a>
+                    <a href="app.php/Movimiento/producto/<?php echo $producto->getId() ?>"><i class="fa fa-calendar fa-2x fa-fw text-IconMovimiento"></i></a>
                 </span>
                 <span onclick="eliminarEntity(<?php echo $producto->getId()?>,'Producto')" class="accion editar"  data-original-title="Editar el proyecto">
                     <i class="fa fa fa-trash-o fa-2x fa-fw text-IconEliminar"></i>
