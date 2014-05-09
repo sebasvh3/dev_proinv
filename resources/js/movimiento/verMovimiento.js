@@ -22,7 +22,7 @@ function test(){
 }
 
 
-function getDtable(){
+function getDtableB1(producto){
     var oTable = $("#tablaMovBod1").dataTable({
 	//"sDom": 'f<"clear">R<"top"l>tr<"bottom"ip><"clear">',
         "sDom": 'f<"clear">R<"top">tr<"bottom"lp><"clear">',
@@ -69,10 +69,12 @@ function getDtable(){
 	    opt.limit = obj.iDisplayLength;//Longitud de los registros
 	    opt.dir = obj.sSortDir_0;//Des or Asc
 	    opt.col = obj.iSortCol_0;//Num col para ordenar
+	    opt.bodega = 1;
+	    opt.producto = producto;
             //console.debug("Obj: ")
             //log(opt);
             
-            var movimientos = getResponse("post",urlbase+"Movimiento/BPrincipal",opt);
+            var movimientos = getResponse("get",urlbase+"Movimiento/BPrincipal?"+opt2url(opt),{});
             log(movimientos);
             
 	    fnCallback(cuentasPuc);

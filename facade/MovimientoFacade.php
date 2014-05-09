@@ -5,9 +5,8 @@ require_once rutaModel.'AbstractFacade.php';
 class MovimientoFacade extends AbstractFacade{
     
     public $id;
-    public static $editarCategoria = "editarCategoria";
-    public static $allCategoriasAct = "allCategoriasAct";
-    public static $descripcionCategoria = "descripcionCategoria";
+    
+    public static $getMovimiento;
     
     public function MovimientoFacade(){
         $this->idcolum='id';
@@ -17,10 +16,21 @@ class MovimientoFacade extends AbstractFacade{
     }
     
      public function getNamedQuery($nameQuery) {
-        //$querys['allBodegasAct'] = "SELECT t.id, t.descripcion FROM " . $this->schema . "." . $this->entidad . " t where t.estado='ACT'";
-        //$querys['otra'] = "SELECT * FROM " . $this->schema . "." . $this->entidad ;
+        $querys['allBodegasAct'] = "SELECT t.id, t.descripcion FROM $this->schema.$this->entidad "
+                                 . " where t.estado='ACT'";
+        
         
         //return $querys[$nameQuery];
+    }
+    
+    public function findMovimientoByProducto($options){
+        $offset = $options['offset'];
+        $limit = $options['limit'];
+        $dir = $options['dir'];
+        $col = $options['col'];
+        $producto = $options['producto'];
+        $bodega = $options['bodega'];
+        
     }
     
     

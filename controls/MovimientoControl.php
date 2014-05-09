@@ -143,7 +143,12 @@ class MovimientoControl extends AbstractControl {
     }
     
     public function BPrincipal(){
-        $this->layout =false;
+        $options = $_GET;
+        
+        
+        
+        $response = $this->facade->findMovimientoByProducto($option);
+        
 //        echo json_encode(array("YES"));
         echo json_encode($_GET);
     }

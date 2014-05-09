@@ -360,7 +360,7 @@ function opt2url(opt){
 	    url += dup;
 	});
 	return url;
-    }
+}
 
 function getResponse(method, url, data){
 	$.ajax({

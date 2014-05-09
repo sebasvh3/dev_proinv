@@ -23,12 +23,6 @@ setlocale("LC_ALL", "es_CO.UTF-8");
         <title>Inventario</title>
     </head>
 
-<!--    src="../recursos/imagenes/nuevo.png"
-Class = "nuevo"
- Width = "22"
-Height = "22"
-alt="nuevo" />-->
-    
     <body>
         
         
@@ -106,12 +100,8 @@ alt="nuevo" />-->
 	</div>     
               
         <?php $this->getVista();?>
-        <br><br>
-                
-        <pre><?php var_dump($this->rutasJs);?></pre>
-        <?php // var_dump($this);?>      
+        <br>
 
-        
         </div><!--cierre del div id=contenedor-->
         <!--Inicio de los archivos js-->
         <script type="text/javascript" src="resources/js/jquery-1.10.2.js"></script>
