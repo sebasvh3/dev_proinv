@@ -148,6 +148,7 @@ class MovimientoControl extends AbstractControl {
         $this->layout=false;
         $response = $this->facade->findMovimientoByProducto($options);
         $output['aaData'] = $response;
+        //$output['iTotalRecords'] = 5;
         echo json_encode($output);
     }
     

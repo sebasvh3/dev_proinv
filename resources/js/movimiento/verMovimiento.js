@@ -5,8 +5,8 @@ $(function(){
 //    $("#btn_buscar_cuentas").on("click",function(){
 //        tabla_cuentas.fnReloadAjax();
 //    });
-    prodBodPrincipal   = parseInt($("#input_principal").val());
-    prodBodTercerizado = parseInt($("#input_tercerizado").val());
+    var prodBodPrincipal   = parseInt($("#input_principal").val());
+    var prodBodTercerizado = parseInt($("#input_tercerizado").val());
     if(prodBodPrincipal)   getDataTable(prodBodPrincipal  ,$("#tablaMovBod1"));
     if(prodBodTercerizado) getDataTable(prodBodTercerizado,$("#tablaMovBod2"));
 });

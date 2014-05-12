@@ -4,7 +4,7 @@
         <!--Numero Averias:-->
     </div>
     <div class="col-lg-1 ">
-        <input type="text" class="form-control input-sm" disabled value="12">
+        <input type="text" class="form-control input-sm" disabled value="<?php echo number_format($aProdBodegas[$bodegaPrincipal]->getAverias(),0,".","") ?>">
     </div>
 </div>
 <div class="row show-grid">
@@ -13,7 +13,7 @@
         <!--Numero Devoluciones:-->
     </div>
     <div class="col-lg-1 ">
-        <input type="text" class="form-control input-sm" disabled value="100">
+        <input type="text" class="form-control input-sm" disabled value="<?php echo number_format($aProdBodegas[$bodegaPrincipal]->getDevs(),0,".","") ?>">
     </div>
 </div>
 <div class="row show-grid">
@@ -22,7 +22,7 @@
         <!--Productos en Bodega:-->
     </div>
     <div class="col-lg-1 ">
-        <input type="text" class="form-control input-sm" disabled value="300">
+        <input type="text" class="form-control input-sm" disabled value="<?php echo number_format($aProdBodegas[$bodegaPrincipal]->getExistencia(),0,".","") ?>">
     </div>
 </div><br><br>
 
