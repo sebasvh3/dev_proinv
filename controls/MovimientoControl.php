@@ -96,7 +96,7 @@ class MovimientoControl extends AbstractControl {
         $movimiento->setId_prodbodega($idProdBodega);
         $movimiento->setId_transaccion($idTransaccionEntrada);
         $movimiento->setEstado(Ambiente::$EstadoActivo);
-        $this->facade->doEdit($movimiento);
+        //$this->facade->doEdit($movimiento);
         //$this->facade->showSql();
         
         echo "<pre>";

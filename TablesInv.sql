@@ -165,13 +165,16 @@ ALTER TABLE  `movimiento` CHANGE  `fecha_registro`  `fecha_trans` DATETIME NULL 
 ALTER TABLE  `movimiento` CHANGE  `cant_registro`  `cant_trans` DECIMAL( 12, 2 ) NULL DEFAULT NULL
 
 
+
+
+
 CREATE TABLE producto_bodega(
     id INT NOT NULL AUTO_INCREMENT,
     id_producto INT NOT NULL,
     id_bodega INT ,
-    existencia DECIMAL( 12, 2 ) NULL,
-    averias DECIMAL ( 12, 2 ),
-    devs DECIMAL( 12, 2 ) NULL,
+    existencia DECIMAL( 12, 2 ) NULL DEFAULT  '0',
+    averias DECIMAL ( 12, 2 ) NULL DEFAULT  '0',
+    devs DECIMAL( 12, 2 ) NULL DEFAULT  '0',
     estado VARCHAR(4) NOT NULL,
     fecha_crea DATETIME,
     fecha_mod  DATETIME,
@@ -187,6 +190,10 @@ ALTER TABLE  `producto_bodega`
 ADD FOREIGN KEY (  `id_bodega` ) 
 REFERENCES  `dbinventario`.`bodega` (`id`) 
 ON DELETE RESTRICT ON UPDATE CASCADE ; 
+
+ALTER TABLE  `producto_bodega` CHANGE  `existencia`  `existencia` DECIMAL( 12, 2 ) NULL DEFAULT  '0'
+ALTER TABLE  `producto_bodega` CHANGE  `averias`  `averias` DECIMAL( 12, 2 ) NULL DEFAULT  '0'
+ALTER TABLE  `producto_bodega` CHANGE  `devs`  `averias` DECIMAL( 12, 2 ) NULL DEFAULT  '0'
 
 -- Producto Bodega Insert
 INSERT INTO `dbinventario`.`producto_bodega` (`id`, `id_producto`, `id_bodega`, `existencia`, `averias`, `devs`, `estado`, `fecha_crea`, `fecha_mod`, `propietario`, `usuario`) VALUES (NULL, '29', '1', '14', '12', '10', 'ACT', '2014-04-22 00:00:00', '2014-04-22 00:00:00', 'Generico_Admin', 'Generico_Admin');
