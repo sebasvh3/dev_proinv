@@ -1,19 +1,18 @@
 <?php
-    //** Se adiciona js solo para la vista entrada
-    $this->addRutaJs("movimiento/entrada.js"); 
+    $this->addRutaJs("movimiento/transacciones.js"); 
 ?>
 
 <h4>Entrada de Productos</h4>
 <pre>
 <?php // var_dump($this->getBodegas());    ?>
 </pre>
-<form role="form" method="post" action="app.php/Movimiento/guardarEntradaAx">
+<form role="form" method="post" id="form-entrada" >
  <div class="form-group">   
     <div class="row">
        <div class="col-md-1"><label for="exampleInputEmail1">Fecha:</label></div>
        <div class="col-md-2">
            <div class="date input-group input-append">
-               <input type="text" class="form-control" value="" id="fecha" readonly="" name="fecha_trans">
+               <input type="text" class="form-control input-sm" value="" id="fecha" readonly="" name="fecha_trans">
                <span class="input-group-addon add-on">
                    <i class="fa fa-calendar"></i>
                </span>
@@ -21,7 +20,7 @@
        </div>
        <div class="col-md-1 col-md-offset-1"><label for="exampleInputEmail1">Bodega:</label></div>
        <div class="col-md-3">
-           <select class="form-control" id="select_id_bodega" name="id_bodega">
+           <select class="form-control input-sm" id="select_id_bodega" name="id_bodega">
                <?php foreach ($this->getBodegas() as $bodega):  ?>
                    <option value='<?php echo $bodega['id'] ?>'><?php echo $bodega['descripcion'] ?></option>
                <?php endforeach;?>
@@ -31,7 +30,7 @@
     <div class="row">
        <div class="col-md-1"><label for="exampleInputEmail1">Categoria:</label></div>
        <div class="col-md-3">
-           <select class="form-control" id="select_id_categoria">
+           <select class="form-control input-sm" id="select_id_categoria">
                <option ></option>
                <?php foreach ($this->getCategorias() as $categoria):  ?>
                    <option value='<?php echo $categoria['id'] ?>'><?php echo $categoria['descripcion'] ?></option>
@@ -40,7 +39,8 @@
        </div>
        <div class="col-md-1"><label >Producto</label></div>
        <div class="col-md-4">
-           <select class="form-control" id="select_id_producto" name="id_producto">
+           <select class="form-control input-sm" id="select_id_producto" name="id_producto">
+               <option></option>
            </select>
        </div>
      </div>
@@ -48,13 +48,13 @@
     <div class="row">
         <div class="form-group">
               <div class="col-md-1"><label >Cantidad:</label></div>
-              <div class="col-md-2"><input type="text" class="form-control" id="input_existencia" name="cant_trans"></div>    
+              <div class="col-md-2"><input type="text" class="form-control input-sm" id="input_existencia" name="cant_trans"></div>    
               <div class="col-md-1 col-md-offset-1"><label >Documento:</label></div>
-              <div class="col-md-2"><input type="text" class="form-control" id="input_documento" name="documento"></div>    
+              <div class="col-md-2"><input type="text" class="form-control input-sm" id="input_documento" name="documento"></div>    
         </div>
     </div>
-   <div class="row">   
-      <div class="col-md-2 col-md-offset-8"><button type="submit" class="btn btn-default btn-info btn-sm">Guardar</button></div>
-   </div>
 </form>
+<div class="row">   
+  <div class="col-md-2 col-md-offset-8"><button  class="btn btn-default btn-info btn-sm" id="button_guardar_entrada">Guardar</button></div>
+</div>
 

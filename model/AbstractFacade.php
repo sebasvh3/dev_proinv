@@ -183,7 +183,6 @@ class AbstractFacade {
         $entity = $objectInstance;
         
         $statement = $this->sqlBuild($entity, 'UPDATE');
-        var_dump($this->entidad);
         $result = $this->sentenciaSimple($statement, $this->entidad);
 
         $this->setMessage($result, "almacenado");

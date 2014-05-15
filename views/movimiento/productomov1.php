@@ -1,16 +1,17 @@
-<?php $this->addRutaJs("movimiento/verMovimiento.js");  ?>
-<pre>
-    <?php
+<!--<pre>-->
+<?php
+    //**Adcion Script js
+    $this->addRutaJs("movimiento/verMovimiento.js");
+    //**
     $bodegaPrincipal = Ambiente::$BodegaPrincipal;
     $bodegaTercerizado = Ambiente::$BodegaTercerizado;
     $aProdBodegas = $this->producto->getProductoBodegaCollection();
-    
+
     $idProdBodp = array_key_exists($bodegaPrincipal  , $aProdBodegas) ? $aProdBodegas[$bodegaPrincipal]->getId()   : 0;
     $idProdBodt = array_key_exists($bodegaTercerizado, $aProdBodegas) ? $aProdBodegas[$bodegaTercerizado]->getId() : 0;
-    
-    print_r($this->producto);
-    ?>
-</pre>
+    //print_r($this->producto);
+?>
+<!--</pre>-->
 <div id="" style="width: 95%; margin:auto">
     <h3>Movimiento</h3>
     <div class="panel panel-default">

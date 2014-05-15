@@ -100,6 +100,10 @@ Class Producto_bodega {
         }
         foreach ($objects as $key => $value)
             $this->$key = $value;
+        
+        if($this->existencia == null) $this->existencia = 0;
+        if($this->averias == null) $this->averias = 0;
+        if($this->devs == null) $this->devs = 0;
     }
     
     
@@ -202,6 +206,14 @@ Class Producto_bodega {
     
     public function registrarEntrada($cantidad){
         $this->existencia+=$cantidad;
+    }
+    
+    public function registrarDevolucion($cantidad){
+        $this->devs+=$cantidad;
+    }
+    
+    public function registrarAveria($cantidad){
+        $this->averias+=$cantidad;
     }
 
     

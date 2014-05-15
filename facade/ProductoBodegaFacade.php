@@ -58,7 +58,6 @@ class ProductoBodegaFacade extends AbstractFacade{
             $productoBodega->setExistencia($existencia);
             $this->doEdit($productoBodega);
             $entidad=$this->_getProductoBodega($idproducto, $idbodega);
-            $this->showSql();
             return $entidad[0]->getId();
         }
     }

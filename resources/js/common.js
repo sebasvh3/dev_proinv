@@ -77,6 +77,7 @@ $(function(){
 function mostrar_mensaje(tipo, mensaje){
     var t = '.alert-'+tipo+':first';
     var alert = $(t).clone();
+    alert.addClass("msj-visto");
     alert.find('.mensaje-body').html(mensaje);
     alert.show();
     $('.mensajes').append(alert);
