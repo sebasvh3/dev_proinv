@@ -15,12 +15,9 @@ class MovimientoFacade extends AbstractFacade{
         $this->entidad='movimiento';
     }
     
-     public function getNamedQuery($nameQuery) {
+    public function getNamedQuery($nameQuery) {
         $querys['getMovimiento'] = "SELECT t.id, t.descripcion FROM $this->schema.$this->entidad "
                                  . " where t.estado='ACT'";
-        
-        
-        //return $querys[$nameQuery];
     }
     
     public function findMovimientoByProducto($options){
@@ -43,7 +40,4 @@ class MovimientoFacade extends AbstractFacade{
         $result = $this->executeQuery($query.$order.$limitqr);
         return $result;
     }
-    
-    
-    
 }

@@ -40,7 +40,7 @@
        <div class="col-md-1"><label >Producto</label></div>
        <div class="col-md-4">
            <select class="form-control input-sm" id="select_id_producto" name="id_producto">
-               <option></option>
+               <!--<option></option>-->
            </select>
        </div>
      </div>
@@ -55,6 +55,6 @@
     </div>
 </form>
 <div class="row">   
-  <div class="col-md-2 col-md-offset-8"><button  class="btn btn-default btn-info btn-sm" id="button_guardar_entrada">Guardar</button></div>
+  <div class="col-md-2 col-md-offset-8"><button  class="btn btn-default btn-info btn-sm" id="button_guardar_salida">Guardar</button></div>
 </div>
 

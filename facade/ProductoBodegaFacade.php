@@ -39,7 +39,7 @@ class ProductoBodegaFacade extends AbstractFacade{
      * se crea el registro y se retorna el id del producto_bodega para marcarlo en 
      * el movimiento 
      */
-    public function guardarProductoBodega($values){
+    public function guardarEntradaProductoBodega($values){
         $idproducto = $values['id_producto'];
         $idbodega   = $values['id_bodega'];
         $existencia = $values['cant_trans'];    
@@ -62,13 +62,50 @@ class ProductoBodegaFacade extends AbstractFacade{
         }
     }
     
-    public function otra(){
-        $query=$this->runNamedQuery("otra",array(" where id_producto='29'"));
-        $this->showSql();
-        echo"***";
-        var_dump($query);
+    /*
+     * Se valida que la cantidad a sacar de la bodega sea menor o igual a las existencias
+     * almacenadas en la bodega.
+     */
+    public function guardarSalidaProductoBodega($values){
+        $idproducto = $values['id_producto'];
+        $idbodega   = $values['id_bodega'];
+        $cantidadSalida = $values['cant_trans'];
+        
+        $entidades = $this->_getProductoBodega($idproducto, $idbodega);
+        $respuesta = array();
+        //** Producto existente
+        if(count($entidades)>0){
+            $productoBodega = $entidades[0];
+            $existencia = $productoBodega->getExistencia();
+            
+            //** Validacion de la existencia
+            if($existencia<$cantidadSalida){
+                $respuesta['stored'] = false;
+                $respuesta['msjs'] = array('class'=>'warning','La cantidad a sacar es mayor a las existencias en bodega.');
+                return $respuesta;
+            }
+            if($cantidadSalida<0){
+                $respuesta['stored'] = false;
+                $respuesta['msjs'] = array('class'=>'warning','La cantidad no puede ser un valor negativo.');
+                return $respuesta;
+            }
+            
+            $productoBodega->registrarSalida($cantidadSalida);
+            $this->doEdit($productoBodega);
+            $respuesta['stored'] = true;
+            $respuesta['idProdBodega'] = $productoBodega->getId();
+            $respuesta['existencia']= $productoBodega->getExistencia();
+            return $respuesta;
+        }
+        //** ProductoBodega No encontrado
+        else{
+            $respuesta['stored'] = false;
+            $respuesta['msjs'] = array('class'=>'warning','Primero debe registrar este producto en la bodega.');
+            return $respuesta;
+        }
     }
     
+    //** Necesaria para visualizar todo el movimiento por bodegas de un producto determinado.
     public function findByIdproducto($idproducto){
         $filtros = array("and id_producto='$idproducto'","and estado='ACT'","ORDER BY t.id_bodega ASC");
         
@@ -81,5 +118,17 @@ class ProductoBodegaFacade extends AbstractFacade{
         //$entidades=$this->findEntitiesDos(array(),$filtros);
         
         return $productoBodegas;
+    }
+    
+    //** En la vista de salidas es necesario saber cuanto hay en bodega, para poder
+    //** tener una referencia de cuanto se debe sacar de la bodega
+    public function findExistencia($values){
+        $idproducto = array_key_exists('id_producto', $values) ? $values['id_producto']:0;
+        $idbodega   = array_key_exists('id_bodega', $values) ? $values['id_bodega']:0;
+        $aProductoBodegas = $this->_getProductoBodega($idproducto, $idbodega);
+        
+        if(count($aProductoBodegas)>0)
+            return number_format($aProductoBodegas[0]->getExistencia(),0,".","");
+        else return "";
     }
 }

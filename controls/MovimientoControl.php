@@ -15,7 +15,6 @@ class MovimientoControl extends AbstractControl {
     public $categorias;
     public $bodegas;
     public $producto;
-    //public $id;
     
     function MovimientoControl() {
         $this->facade = new MovimientoFacade();
@@ -29,6 +28,7 @@ class MovimientoControl extends AbstractControl {
     
     public function salida(){
         $this->setCategorias();
+        $this->setBodegas();
         $this->setVistaAccion('movimiento/salida');
     }
     
@@ -86,7 +86,7 @@ class MovimientoControl extends AbstractControl {
         $values=$_POST;
         //$fechaTransaccion = $values['fecha_transaccion'];
         
-        $response=$this->validarEntradaAx($values);
+        $response=$this->validarCampos($values);
         if($response){
             $response['stored']=false;
             echo json_encode($response);
@@ -95,30 +95,61 @@ class MovimientoControl extends AbstractControl {
         
         //** Guardar los datos de la entrada en la bodega
         $productoBodegaFacade = new ProductoBodegaFacade();
-        $idProdBodega=$productoBodegaFacade->guardarProductoBodega($values);
+        $idProdBodega=$productoBodegaFacade->guardarEntradaProductoBodega($values);
         
-        //** SE registra el movimiento realizado
+        //** Se registra el movimiento realizado
         $movimiento = new Movimiento($values);
         $movimiento->setId_prodbodega($idProdBodega);
         $movimiento->setId_transaccion($idTransaccionEntrada);
         $movimiento->setEstado(Ambiente::$EstadoActivo);
         $this->facade->doEdit($movimiento);
-        //$this->facade->showSql();
         
         $response['stored']=true;
         $response['msjs'][] = array('class'=>'success','msj'=>'La transacción se ha guardado exitosamente.');
         echo json_encode($response);
-        //$this->setVistaAccion('movimiento/entrada');
-        //**Verificar si exista ya una bodega_producto, si no la hay se crea
     }
     
-    public function validarEntradaAx($values){
-        $fecha = $values['fecha_trans'];
-        $idProducto = $values['id_producto'];
-        $cantidad = $values['cant_trans'];
+    public function guardarSalidaAx(){
+        $this->layout=false;
+        $idTransaccionSalida = Ambiente::$Salida;
+        $values=$_POST;
+        
+        $response=$this->validarCampos($values);
+        if($response){
+            $response['stored']=false;
+            echo json_encode($response);
+            return;
+        }
+        
+        //** Se verifica si sacar lo solicitado de la bodega
+        $productoBodegaFacade = new ProductoBodegaFacade();
+        $aRespuesta=$productoBodegaFacade->guardarSalidaProductoBodega($values);
+        if(!$aRespuesta['stored']){
+            echo json_encode($aRespuesta);
+            return;
+        }
+        $idProdBodega = $aRespuesta['idProdBodega'];
+        
+        //** Se registra el movimiento realizado
+        $movimiento = new Movimiento($values);
+        $movimiento->setId_prodbodega($idProdBodega);
+        $movimiento->setId_transaccion($idTransaccionSalida);
+        $movimiento->setEstado(Ambiente::$EstadoActivo);
+        $this->facade->doEdit($movimiento);
+        
+        $response['stored']=true;
+        $response['existencia']=$aRespuesta['existencia'];
+        $response['msjs'][] = array('class'=>'success','msj'=>'La transacción se ha guardado exitosamente.');
+        echo json_encode($response);
+    }
+    
+    public function validarCampos($values){
+        $fecha      = array_key_exists('fecha_trans',$values) ? $values['fecha_trans']:null;
+        $idProducto = array_key_exists('id_producto',$values) ? $values['id_producto']:null;
+        $cantidad   = array_key_exists('cant_trans' ,$values) ? $values['cant_trans']:null;
         $response=array();
         if(!isset($fecha) || $fecha==null){
-        $response['msjs'][] = array('class'=>'danger','msj'=>'El campo fecha no puede estar vacio.');
+            $response['msjs'][] = array('class'=>'danger','msj'=>'El campo fecha no puede estar vacio.');
         }
         if(!isset($idProducto) || $idProducto==null){
             $response['msjs'][] = array('class'=>'danger','msj'=>'Debe haber un producto seleccionado.');
@@ -131,36 +162,6 @@ class MovimientoControl extends AbstractControl {
                 $response['msjs'][] = array('class'=>'warning','msj'=>'La cantidad debe ser un valor numérico válido.');
         } 
         return $response;
-    }
-    
-    public function guardarSalidaProducto(){
-        $this->layout=false;
-        $salida=$_POST['salida'];
-        $idproducto=$_POST['id_producto'];
-        
-        
-        
-        $productoFacade = new ProductoFacade();
-        $valorActual =  $productoFacade->consultarExistencia($idproducto);
-        
-        if($valorActual>=$salida and $salida>0){
-            $newExistencia=$valorActual-$salida;
-            $parametros=array("existencia"=>$newExistencia);//Decrementa el valor en bodega
-            $filtros = array("and id=".$idproducto);
-        
-            $productoFacade->updateEntities($parametros,$filtros,false);
-            
-            $Response['class'] = "success";
-            $Response['msj'] = "Han salido de bodega $salida unidades";
-            $Response['response'] = array("existencia"=>$newExistencia);
-        }
-        else{
-            $Response['class'] = "warning";
-            $Response['msj'] = "La cantidad es mayor a las existencias en bodega";
-            $Response['response'] = null;
-        }
-        
-        echo json_encode($Response);
     }
     
     public function producto($id){

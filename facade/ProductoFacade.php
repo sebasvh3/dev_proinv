@@ -26,7 +26,6 @@ class ProductoFacade extends AbstractFacade{
              $this->runNamedQuery(ProductoFacade::$sinCategoria);
              unset($parametros['id_categoria']);
         }
-//        var_dump($parametros);
         $filtros = array("and id=".$parametros['id']);
         $this->updateEntities($parametros,$filtros,true);
         return true;
@@ -67,11 +66,12 @@ class ProductoFacade extends AbstractFacade{
         return $productoResponse;
     }
     
+    //** Metodo reemplazado en productoBodegaFacade
     public function consultarExistencia($id){
         $this->id=$id;
         $response = $this->runNamedQuery(ProductoFacade::$consultarExistencia);
         if(isset($response[0]['existencia']) && $response[0]['existencia']!='')
-            return $response[0]['existencia'];
+            return number_format($response[0]['existencia'],0,".","");
         else return 0;
     }
     

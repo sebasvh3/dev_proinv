@@ -208,6 +208,10 @@ Class Producto_bodega {
         $this->existencia+=$cantidad;
     }
     
+    public function registrarSalida($cantidad){
+        $this->existencia-=$cantidad;
+    }
+    
     public function registrarDevolucion($cantidad){
         $this->devs+=$cantidad;
     }
