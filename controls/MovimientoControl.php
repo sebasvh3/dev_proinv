@@ -15,27 +15,56 @@ class MovimientoControl extends AbstractControl {
     public $categorias;
     public $bodegas;
     public $producto;
+    public $tipoTransaccion;
     
     function MovimientoControl() {
         $this->facade = new MovimientoFacade();
     }
     
+    
+    //** Vistas principales del movimiento
     public function entrada(){
+        $this->setTipoTransaccion(Ambiente::$Entrada);
         $this->setCategorias();
         $this->setBodegas();
         $this->setVistaAccion('movimiento/entrada');
     }
     
     public function salida(){
+        $this->setTipoTransaccion(Ambiente::$Salida);
         $this->setCategorias();
         $this->setBodegas();
         $this->setVistaAccion('movimiento/salida');
     }
     
-    public function productomov1(){
+    public function entradaAveria(){
+        $this->setTipoTransaccion(Ambiente::$EntradaAveria);
         $this->setCategorias();
-        $this->setVistaAccion('movimiento/productomov1');
+        $this->setBodegas();
+        $this->setVistaAccion('movimiento/entradaAveria');
     }
+    
+    public function salidaAveria(){
+        $this->setTipoTransaccion(Ambiente::$SalidaAveria);
+        $this->setCategorias();
+        $this->setBodegas();
+        $this->setVistaAccion('movimiento/salidaAveria');
+    }
+    
+    public function entradaDevolucion(){
+        $this->setTipoTransaccion(Ambiente::$EntradaDevolucion);
+        $this->setCategorias();
+        $this->setBodegas();
+        $this->setVistaAccion('movimiento/entradaDevolucion');
+    }
+    
+    public function salidaDevolucion(){
+        $this->setTipoTransaccion(Ambiente::$SalidaDevolucion);
+        $this->setCategorias();
+        $this->setBodegas();
+        $this->setVistaAccion('movimiento/salidaDevolucion');
+    }
+    //***
     
     public function setCategorias(){
         $categoriaFacade = new CategoriaFacade();
@@ -55,36 +84,19 @@ class MovimientoControl extends AbstractControl {
         return $this->bodegas;
     }
     
-    
-    public function guardar(){
-        //probar velocidad del servidor
-//        var_dump($_POST);
-        $existencia=$_POST['existencia'];
-        $idproducto=$_POST['id_producto'];
-        
-        if(!isset($existencia) || !isset($idproducto)){
-            
-        }
-        
-        $productoFacade = new ProductoFacade();
-        $valorActual =  $productoFacade->consultarExistencia($idproducto);
-        
-        $parametros=array("existencia"=>$existencia+$valorActual); //Incrementa el valor en bodega
-        $filtros = array("and id=".$idproducto);
-        
-        $productoFacade->updateEntities($parametros,$filtros,false);
-        print_r($parametros['existencia']);
-        echo"el producto ".$idproducto." Se ha actualizado <br>";
-        
-//        $this->setVistaAccion('movimiento/entrada');
+    public function getTipoTransaccion() {
+        return $this->tipoTransaccion;
     }
+
+    public function setTipoTransaccion($tipoTransaccion) {
+        $this->tipoTransaccion = $tipoTransaccion;
+    }
+
     
-    
+    //** Recibe las transacciones 2,4,6
     public function guardarEntradaAx(){
         $this->layout=false;
-        $idTransaccionEntrada = Ambiente::$Entrada;
         $values=$_POST;
-        //$fechaTransaccion = $values['fecha_transaccion'];
         
         $response=$this->validarCampos($values);
         if($response){
@@ -100,8 +112,6 @@ class MovimientoControl extends AbstractControl {
         //** Se registra el movimiento realizado
         $movimiento = new Movimiento($values);
         $movimiento->setId_prodbodega($idProdBodega);
-        $movimiento->setId_transaccion($idTransaccionEntrada);
-        $movimiento->setEstado(Ambiente::$EstadoActivo);
         $this->facade->doEdit($movimiento);
         
         $response['stored']=true;
@@ -109,9 +119,10 @@ class MovimientoControl extends AbstractControl {
         echo json_encode($response);
     }
     
+    //** Recibe las transacciones 1,3,5
     public function guardarSalidaAx(){
         $this->layout=false;
-        $idTransaccionSalida = Ambiente::$Salida;
+        //$idTransaccionSalida = Ambiente::$Salida;
         $values=$_POST;
         
         $response=$this->validarCampos($values);
@@ -133,8 +144,6 @@ class MovimientoControl extends AbstractControl {
         //** Se registra el movimiento realizado
         $movimiento = new Movimiento($values);
         $movimiento->setId_prodbodega($idProdBodega);
-        $movimiento->setId_transaccion($idTransaccionSalida);
-        $movimiento->setEstado(Ambiente::$EstadoActivo);
         $this->facade->doEdit($movimiento);
         
         $response['stored']=true;
@@ -168,10 +177,10 @@ class MovimientoControl extends AbstractControl {
         //$this->query = $this->BPrincipal();
         $productoFacade = new ProductoFacade();
         $this->producto = $productoFacade->findProductoById($id);
-        $this->setVistaAccion('movimiento/productomov1');
+        $this->setVistaAccion('movimiento/verMovimiento');
     }
     
-    public function BPrincipal(){
+    public function movimiento(){
         $options = $_GET;
         $this->layout=false;
         $response = $this->facade->findMovimientoByProducto($options);
@@ -180,8 +189,5 @@ class MovimientoControl extends AbstractControl {
         echo json_encode($output);
     }
     
-    public function detalle($id){
-        echo "Pagina con detalle $id";
-    }
 }
 

@@ -212,13 +212,21 @@ Class Producto_bodega {
         $this->existencia-=$cantidad;
     }
     
-    public function registrarDevolucion($cantidad){
-        $this->devs+=$cantidad;
-    }
-    
-    public function registrarAveria($cantidad){
+    public function registrarEntradaAveria($cantidad){
         $this->averias+=$cantidad;
     }
+    
+    public function registrarSalidaAveria($cantidad){
+        $this->averias-=$cantidad;
+    }
+    
+    public function registrarEntradaDevolucion($cantidad){
+        $this->devs+=$cantidad;
+    }
+    public function registrarSalidaDevolucion($cantidad){
+        $this->devs-=$cantidad;
+    }
+    
 
     
 }

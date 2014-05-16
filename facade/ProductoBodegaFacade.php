@@ -8,6 +8,7 @@ class ProductoBodegaFacade extends AbstractFacade{
     public $id;
     public static $allBodegasAct = "allBodegasAct";
     public static $findByIdproducto = "findByIdproducto";
+    public static $findExistenciaByBodega = "findExistenciaByBodega";
     
     public function ProductoBodegaFacade(){
         $this->idcolum='id';
@@ -19,6 +20,7 @@ class ProductoBodegaFacade extends AbstractFacade{
     public function getNamedQuery($nameQuery) {
         $querys['allBodegasAct'] = "SELECT t.id, t.descripcion FROM " . $this->schema . "." . $this->entidad . " t where t.estado='ACT'";
         $querys['findByIdproducto'] = "SELECT t.* FROM " . $this->schema . "." . $this->entidad . " t where 1=1 ";
+        $querys['findByIdproducto'] = "SELECT t.existencia FROM " . $this->schema . "." . $this->entidad . " t where 1=1 ";
         $querys['otra'] = "SELECT * FROM " . $this->schema . "." . $this->entidad ;
         
         return $querys[$nameQuery];
@@ -34,28 +36,41 @@ class ProductoBodegaFacade extends AbstractFacade{
         return $entidades;
     }
     
+    public function getExistenciaByBodega($idBodega){
+        $filtros = array("and id_procu");
+    }
+    
     /*
      * Se busca, si existe ya un registro con el producto y bodega, si no lo hay
      * se crea el registro y se retorna el id del producto_bodega para marcarlo en 
      * el movimiento 
      */
     public function guardarEntradaProductoBodega($values){
-        $idproducto = $values['id_producto'];
-        $idbodega   = $values['id_bodega'];
-        $existencia = $values['cant_trans'];    
-                
+        $idproducto     = $values['id_producto'];
+        $idbodega       = $values['id_bodega'];
+        $existencia     = $values['cant_trans'];
+        $idTransaccion  = $values['id_transaccion'];
+        
+        $acciones = array(
+            Ambiente::$Entrada => "registrarEntrada",
+            Ambiente::$EntradaAveria => "registrarEntradaAveria",
+            Ambiente::$EntradaDevolucion => "registrarEntradaDevolucion",
+        );
+        
+        $accionTransaccion = $acciones[$idTransaccion];
+        
         $entidades = $this->_getProductoBodega($idproducto, $idbodega);
         //** Producto existente
         if(count($entidades)>0){
             $productoBodegaEdit = $entidades[0];
-            $productoBodegaEdit->registrarEntrada($existencia);
+            $productoBodegaEdit->$accionTransaccion($existencia);
             $this->doEdit($productoBodegaEdit);
             return $productoBodegaEdit->getId();
         }
         //** ProductoBodega Nuevo
         else{
             $productoBodega =  new Producto_bodega($values);
-            $productoBodega->setExistencia($existencia);
+            $productoBodega->$accionTransaccion($existencia);
             $this->doEdit($productoBodega);
             $entidad=$this->_getProductoBodega($idproducto, $idbodega);
             return $entidad[0]->getId();
@@ -70,18 +85,27 @@ class ProductoBodegaFacade extends AbstractFacade{
         $idproducto = $values['id_producto'];
         $idbodega   = $values['id_bodega'];
         $cantidadSalida = $values['cant_trans'];
+        $idTransaccion  = $values['id_transaccion'];
+        //**
+        $accionesTransaccion = array(
+            Ambiente::$Salida => array("registrar"=>"registrarSalida","get"=>"getExistencia","msj"=>"existencias"),
+            Ambiente::$SalidaAveria => array("registrar"=>"registrarSalidaAveria","get"=>"getAverias","msj"=>"averias"),
+            Ambiente::$SalidaDevolucion => array("registrar"=>"registrarSalidaDevolucion","get"=>"getDevs","msj"=>"devoluciones"),
+        );
+        //**
+        $transaccion = $accionesTransaccion[$idTransaccion];
         
         $entidades = $this->_getProductoBodega($idproducto, $idbodega);
         $respuesta = array();
         //** Producto existente
         if(count($entidades)>0){
             $productoBodega = $entidades[0];
-            $existencia = $productoBodega->getExistencia();
+            $cantidadEnBodega = $productoBodega->$transaccion['get']();
             
             //** Validacion de la existencia
-            if($existencia<$cantidadSalida){
+            if($cantidadEnBodega<$cantidadSalida){
                 $respuesta['stored'] = false;
-                $respuesta['msjs'][] = array('class'=>'warning','msj'=>'La cantidad a sacar es mayor a las existencias en bodega.');
+                $respuesta['msjs'][] = array('class'=>'warning','msj'=>"La cantidad a sacar es mayor a las {$transaccion['msj']} en bodega.");
                 return $respuesta;
             }
             if($cantidadSalida<0){
@@ -90,7 +114,7 @@ class ProductoBodegaFacade extends AbstractFacade{
                 return $respuesta;
             }
             
-            $productoBodega->registrarSalida($cantidadSalida);
+            $productoBodega->$transaccion['registrar']($cantidadSalida);
             $this->doEdit($productoBodega);
             $respuesta['stored'] = true;
             $respuesta['idProdBodega'] = $productoBodega->getId();
@@ -112,23 +136,34 @@ class ProductoBodegaFacade extends AbstractFacade{
         $entidades = $this->runNamedQuery(ProductoBodegaFacade::$findByIdproducto,$filtros);
         $productoBodegas = array();
         foreach ($entidades as $valoresEntidad) {
-            $idbogega = $valoresEntidad['id_bodega'];
-            $productoBodegas[$idbogega] = new Producto_bodega($valoresEntidad);
+            $idbodega = $valoresEntidad['id_bodega'];
+            $productoBodegas[$idbodega] = new Producto_bodega($valoresEntidad);
         }
         //$entidades=$this->findEntitiesDos(array(),$filtros);
         
         return $productoBodegas;
     }
     
-    //** En la vista de salidas es necesario saber cuanto hay en bodega, para poder
-    //** tener una referencia de cuanto se debe sacar de la bodega
+    //** En la vista de salidas es necesario saber cuanto hay en bodega, ya sea (Existencia, Averias o Devoluciones)
+    //** para poder tener una referencia de cuanto se debe sacar de la bodega
     public function findExistencia($values){
         $idproducto = array_key_exists('id_producto', $values) ? $values['id_producto']:0;
         $idbodega   = array_key_exists('id_bodega', $values) ? $values['id_bodega']:0;
         $aProductoBodegas = $this->_getProductoBodega($idproducto, $idbodega);
+        $idTransaccion  = $values['id_transaccion'];
         
-        if(count($aProductoBodegas)>0)
-            return number_format($aProductoBodegas[0]->getExistencia(),0,".","");
+        $accionesGet = array(
+            Ambiente::$Salida => "getExistencia",
+            Ambiente::$SalidaAveria => "getAverias",
+            Ambiente::$SalidaDevolucion => "getDevs",
+        );
+        
+        $get = $accionesGet[$idTransaccion];
+        
+        if(count($aProductoBodegas)>0){
+            $productoBodega = $aProductoBodegas[0];
+            return number_format($productoBodega->$get(),0,".","");
+        }
         else return "";
     }
 }

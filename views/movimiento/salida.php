@@ -3,6 +3,7 @@
 ?>
 <h4>Salida de Productos</h4>
 <form role="form" id="form-salida">
+    <input type="hidden" name="id_transaccion" id="input_id_transaccion" value="<?php echo $this->getTipoTransaccion() ?>">
     <div class="row">
      <div class="form-group">   
        <div class="col-md-1"><label for="Fecha">Fecha:</label></div>

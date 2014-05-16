@@ -54,8 +54,10 @@ setlocale("LC_ALL", "es_CO.UTF-8");
                     <ul class="dropdown-menu">
                         <li id="entrada"><a href="app.php/Movimiento/entrada">Entrada</a></li>
                         <li id="salida"><a href="app.php/Movimiento/salida">Salida</a></li>
-                        <li id="averia"><a href="app.php/Movimiento/averia">Averia</a></li>
-                        <li id="devolucion"><a href="app.php/Movimiento/devolucion">Devolucion</a></li>
+                        <li id="inAveria"><a href="app.php/Movimiento/entradaAveria">Entrada Averia</a></li>
+                        <li id="OutAveria"><a href="app.php/Movimiento/salidaAveria">Salida Averias</a></li>
+                        <li id="inDevolucion"><a href="app.php/Movimiento/entradaDevolucion">Entrada Devoluciones</a></li>
+                        <li id="outDevolucion"><a href="app.php/Movimiento/salidaDevolucion">Salida Devoluciones</a></li>
                  
                     </ul>
                 </li>

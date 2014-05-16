@@ -48,8 +48,9 @@ function ProductosSegunCategoria(datos){
 
 function existenciaByProducto(){
     var obj = {};
-    obj.id_producto = $("#select_id_producto").val();
-    obj.id_bodega   = $("#select_id_bodega").val();
+    obj.id_producto    = $("#select_id_producto").val();
+    obj.id_bodega      = $("#select_id_bodega").val();
+    obj.id_transaccion = $("#input_id_transaccion").val();
     
     log("product y bodega");
     log(obj);

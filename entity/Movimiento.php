@@ -73,6 +73,7 @@ Class Movimiento /*extends EntidadAuditoria*/ {
     
     function Movimiento($fieldsValues) {
         $this->mergeDatos($fieldsValues);
+        $this->estado =  Ambiente::$EstadoActivo;
     }
 
     public function mergeDatos($fieldsValues) {

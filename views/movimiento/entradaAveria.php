@@ -2,9 +2,9 @@
     $this->addRutaJs("movimiento/transacciones.js"); 
 ?>
 
-<h4>Entrada de Productos</h4>
+<h4>Entrada de Averias</h4>
 <form role="form" method="post" id="form-entrada" >
-    <input type="hidden" name="id_transaccion" value="<?php echo $this->getTipoTransaccion() ?>">   
+    <input type="hidden" name="id_transaccion" value="<?php echo $this->getTipoTransaccion() ?>">  
  <div class="form-group">   
     <div class="row">
        <div class="col-md-1"><label for="exampleInputEmail1">Fecha:</label></div>

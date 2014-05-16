@@ -22,8 +22,10 @@ class Ambiente{
     //*** Transacciones
     public static $Entrada = 1;
     public static $Salida =  2;
-    public static $Averia =  3;
-    public static $Devolucion = 4;
+    public static $EntradaAveria =  3;
+    public static $SalidaAveria =  4;
+    public static $EntradaDevolucion = 5;
+    public static $SalidaDevolucion = 6;
     
     //*** Bodegas
     public static $BodegaPrincipal = 1;

@@ -88,13 +88,12 @@ Class Producto /*extends EntidadAuditoria*/ {
     
     function Producto($fieldsValues) {
         $this->mergeDatos($fieldsValues);
-//        $this->setCategorias();
+        //$this->setCategorias();
     }
 
     public function mergeDatos($fieldsValues) {
         $keySet = array_keys($fieldsValues);
         
-//        var_dump($fieldsValues);
         $objects = array();
         foreach ($keySet as $key) {
             $objects[strtolower($key)] = $fieldsValues[$key];
@@ -222,12 +221,6 @@ Class Producto /*extends EntidadAuditoria*/ {
             return "";
     }
     
-//    if ($this->planPagosCreditoCollection == null && $this->getId()) {
-//            $plan_pagoFacade = new Plan_pagos_creditoFacade();
-//            $filtros['idcredito'] = $this->getId();
-//            $this->planPagosCreditoCollection = $plan_pagoFacade->buscarPorIdCredito($filtros);
-//        }
-    
     public function getProductoBodegaCollection() {
         if($this->productoBodegaCollection == null && $this->getId()){
             $productoBodegaFacade = new ProductoBodegaFacade();
@@ -235,12 +228,18 @@ Class Producto /*extends EntidadAuditoria*/ {
         }
         return $this->productoBodegaCollection;
     }
-
-//    public function setProductoBodegaCollection($productoBodegaCollection) {
-//        $this->productoBodegaCollection = $productoBodegaCollection;
-//    }
-
-
     
+    public function getExistenciaEnBodega($idBodega){
+        if($this->getId()){
+            $productoBodegaFacade = new ProductoBodegaFacade();
+            $cantidad = $productoBodegaFacade->getExistenciaByBodega($idBodega);
+            return $cantidad;
+        }
+        else return "";
+    }
+    
+    public function getExistenciaBtercerizado(){
+        
+    }
 }
 

@@ -76,7 +76,7 @@ function getDataTable(prodBodega,$Table){
             //console.debug("Obj: ")
             log(opt);
             
-            var movimientos = getResponse("get","Movimiento/BPrincipal",opt);
+            var movimientos = getResponse("get","Movimiento/movimiento",opt);
             
             log(movimientos);
             
