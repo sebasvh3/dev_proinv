@@ -27,7 +27,7 @@ function test(){
 function getDataTable(prodBodega,$Table){
     var oTable = $Table.dataTable({
 	//"sDom": 'f<"clear">R<"top"l>tr<"bottom"ip><"clear">',
-        "sDom": 'f<"clear">R<"top">tr<"bottom"lp><"clear">',
+        "sDom": '<"clear">R<"top">tr<"bottom"lp><"clear">',
         "oLanguage": {
             "sUrl": "resources/datatables/dataTables.spanish.txt"
         },
@@ -85,9 +85,9 @@ function getDataTable(prodBodega,$Table){
 	"fnInitComplete": function() {
 	    this.closest('div').find('select').addClass("form-control input-sm");
             //Se formatea los estilos del input de busqueda para que adopte los estilos de bootstrap
-	    this.closest('div').find("label").find('input').addClass("form-control input-sm").attr("placeholder","Buscar...").wrap("<div class='row' id='busqueda'></div>");
-            var divBusqueda= $("#busqueda").clone(true);//true para clonars el elemento con eventos
-            $(this).closest('div').find("label").eq(0).empty().append(divBusqueda);
+//	    this.closest('div').find("label").find('input').addClass("form-control input-sm").attr("placeholder","Buscar...").wrap("<div class='row' id='busqueda'></div>");
+//            var divBusqueda= $("#busqueda").clone(true);//true para clonars el elemento con eventos
+//            $(this).closest('div').find("label").eq(0).empty().append(divBusqueda);
         },
 //        "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
 //                            nRow.className = "trDetalle_"+aData.id;

@@ -38,6 +38,12 @@ class MovimientoFacade extends AbstractFacade{
         $limitqr = "LIMIT $offset,$limit ";
         
         $result = $this->executeQuery($query.$order.$limitqr);
+        
+        //** Se formatea el campo cant_trans
+        foreach ($result as &$fila) {
+            $fila['cantidad']=  number_format($fila['cantidad'],0,".","");
+        }
+        //**
         return $result;
     }
 }

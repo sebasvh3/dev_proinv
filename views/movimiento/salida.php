@@ -53,10 +53,8 @@
         </div>
     </div>
    <div class="row">   
-      <div class="col-md-2 col-md-offset-8"><button type="button" class="btn btn-default btn-info btn-sm" id="buttonGuardarSalida">Guardar</button></div>
+      <div class="col-md-2 col-md-offset-8"><button type="button" class="btn btn-default btn-info btn-sm" id="button_guardar_salida">Guardar</button></div>
    </div>
 </form>
-<pre>
-    <?php var_dump($this->getCategorias());?>
-</pre>
+
 

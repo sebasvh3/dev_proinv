@@ -3,9 +3,6 @@
 ?>
 
 <h4>Entrada de Productos</h4>
-<pre>
-<?php // var_dump($this->getBodegas());    ?>
-</pre>
 <form role="form" method="post" id="form-entrada" >
  <div class="form-group">   
     <div class="row">
@@ -55,6 +52,6 @@
     </div>
 </form>
 <div class="row">   
-  <div class="col-md-2 col-md-offset-8"><button  class="btn btn-default btn-info btn-sm" id="button_guardar_salida">Guardar</button></div>
+  <div class="col-md-2 col-md-offset-8"><button  class="btn btn-default btn-info btn-sm" id="button_guardar_entrada">Guardar</button></div>
 </div>
 

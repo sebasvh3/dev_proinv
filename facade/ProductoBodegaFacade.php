@@ -81,12 +81,12 @@ class ProductoBodegaFacade extends AbstractFacade{
             //** Validacion de la existencia
             if($existencia<$cantidadSalida){
                 $respuesta['stored'] = false;
-                $respuesta['msjs'] = array('class'=>'warning','La cantidad a sacar es mayor a las existencias en bodega.');
+                $respuesta['msjs'][] = array('class'=>'warning','msj'=>'La cantidad a sacar es mayor a las existencias en bodega.');
                 return $respuesta;
             }
             if($cantidadSalida<0){
                 $respuesta['stored'] = false;
-                $respuesta['msjs'] = array('class'=>'warning','La cantidad no puede ser un valor negativo.');
+                $respuesta['msjs'][] = array('class'=>'warning','msj'=>'La cantidad no puede ser un valor negativo.');
                 return $respuesta;
             }
             
@@ -100,7 +100,7 @@ class ProductoBodegaFacade extends AbstractFacade{
         //** ProductoBodega No encontrado
         else{
             $respuesta['stored'] = false;
-            $respuesta['msjs'] = array('class'=>'warning','Primero debe registrar este producto en la bodega.');
+            $respuesta['msjs'][] = array('class'=>'warning','msj'=>'Primero debe registrar este producto en la bodega.');
             return $respuesta;
         }
     }
