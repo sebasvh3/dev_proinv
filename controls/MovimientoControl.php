@@ -64,6 +64,13 @@ class MovimientoControl extends AbstractControl {
         $this->setBodegas();
         $this->setVistaAccion('movimiento/salidaDevolucion');
     }
+    
+    public function producto($id){
+        //$this->query = $this->BPrincipal();
+        $productoFacade = new ProductoFacade();
+        $this->producto = $productoFacade->findProductoById($id);
+        $this->setVistaAccion('movimiento/verMovimiento');
+    }
     //***
     
     public function setCategorias(){
@@ -173,12 +180,7 @@ class MovimientoControl extends AbstractControl {
         return $response;
     }
     
-    public function producto($id){
-        //$this->query = $this->BPrincipal();
-        $productoFacade = new ProductoFacade();
-        $this->producto = $productoFacade->findProductoById($id);
-        $this->setVistaAccion('movimiento/verMovimiento');
-    }
+    
     
     public function movimiento(){
         $options = $_GET;

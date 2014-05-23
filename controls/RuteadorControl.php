@@ -31,8 +31,9 @@ class RuteadorControl {
 //            echo "-----";
 //            var_dump($this->getRequestUriNoId());
 //            echo "-----";
-//            var_dump($_SESSION);
-            
+            echo"<pre>hola Sesion:<br>";
+            var_dump($_SESSION);
+            echo "</pre>";
 //            var_dump();
 //            echo $this->getRequestUri();
 //            var_dump($this->getPermisos());
@@ -108,6 +109,8 @@ class RuteadorControl {
     }
     
     public function setPermisos($xml, $base = ''){
+        echo "<pre>"; print_r($xml);
+        
         foreach ($xml->ruta as $ruta){
             if(count((array) $ruta->usuario) == 0){
                 $_SESSION['permisos'][] = $base.$ruta['ruta'];

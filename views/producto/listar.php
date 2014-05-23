@@ -25,10 +25,10 @@
         <tr id='Producto_<?php echo $producto->getId()?>'>
             <!--<td class='td_id text-center'><?php echo $producto->getId() ?></td>-->
             <!--<td class='td_codigo'><?php // echo $producto->getCodigo() ?></td>-->
-            <td class='td_descripcion'><?php echo $producto->getDescripcion() ?></td>
-            <td class='td_cantidad_gr'><?php echo $producto->getCantidad_gr() ?></td>
+            <td class=''><?php echo $producto->getDescripcion() ?></td>
+            <td class=''><?php echo $producto->getExistenciaEnBodega(Ambiente::$BodegaPrincipal) ?></td>
             <!--<td class='td_existencias'></td>-->
-            <td class='td_existencias'></td>
+            <td class=''><?php echo $producto->getExistenciaEnBodega(Ambiente::$BodegaTercerizado) ?></td>
             <!--<td class='td_existencias'><?php // echo $producto->getExistencia() ?></td>-->
             <td class='td_categoria'><?php echo $producto->getCategoriaDescripcion() ?></td>
             <td class='text-center'>

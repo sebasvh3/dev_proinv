@@ -20,7 +20,7 @@ class ProductoBodegaFacade extends AbstractFacade{
     public function getNamedQuery($nameQuery) {
         $querys['allBodegasAct'] = "SELECT t.id, t.descripcion FROM " . $this->schema . "." . $this->entidad . " t where t.estado='ACT'";
         $querys['findByIdproducto'] = "SELECT t.* FROM " . $this->schema . "." . $this->entidad . " t where 1=1 ";
-        $querys['findByIdproducto'] = "SELECT t.existencia FROM " . $this->schema . "." . $this->entidad . " t where 1=1 ";
+        $querys['findExistenciaByBodega'] = "SELECT t.existencia FROM " . $this->schema . "." . $this->entidad . " t where 1=1 ";
         $querys['otra'] = "SELECT * FROM " . $this->schema . "." . $this->entidad ;
         
         return $querys[$nameQuery];
@@ -36,8 +36,13 @@ class ProductoBodegaFacade extends AbstractFacade{
         return $entidades;
     }
     
-    public function getExistenciaByBodega($idBodega){
-        $filtros = array("and id_procu");
+    public function getExistenciaByBodega($idProducto,$idBodega){
+        $filtros = array("and id_producto = $idProducto and id_bodega=$idBodega");
+        $result = $this->runNamedQuery(ProductoBodegaFacade::$findExistenciaByBodega,$filtros);
+        if(count($result)){
+            return number_format($result[0]['existencia'],0,".","");
+        }
+        else return "";
     }
     
     /*

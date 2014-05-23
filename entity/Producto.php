@@ -232,7 +232,7 @@ Class Producto /*extends EntidadAuditoria*/ {
     public function getExistenciaEnBodega($idBodega){
         if($this->getId()){
             $productoBodegaFacade = new ProductoBodegaFacade();
-            $cantidad = $productoBodegaFacade->getExistenciaByBodega($idBodega);
+            $cantidad = $productoBodegaFacade->getExistenciaByBodega($this->getId(),$idBodega);
             return $cantidad;
         }
         else return "";
