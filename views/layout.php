@@ -52,7 +52,9 @@ setlocale("LC_ALL", "es_CO.UTF-8");
                         Transacciones <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li id="entrada"><a href="app.php/Movimiento/entrada">Entrada</a></li>
+                        <?php if(1==2): ?>
+                            <li id="entrada"><a href="app.php/Movimiento/entrada">Entrada</a></li>
+                        <?php endif; ?>
                         <li id="salida"><a href="app.php/Movimiento/salida">Salida</a></li>
                         <li id="inAveria"><a href="app.php/Movimiento/entradaAveria">Entrada Averia</a></li>
                         <li id="OutAveria"><a href="app.php/Movimiento/salidaAveria">Salida Averias</a></li>

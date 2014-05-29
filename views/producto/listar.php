@@ -1,8 +1,7 @@
 <?php // $this->verObj($this); ?>
 <div class="link"><a href="app.php/Producto/nuevo"><i class="fa fa-plus"></i> Nuevo Producto </a><br></div>
-<br>
 <div id="viewProducts" class="viewList">
-<table id="listaProductos" class="table table-bordered">
+<table id="listaProductos" class="table table-bordered tablaCondensada">
     <thead>
         <tr>
             <!--<th>Código</th>-->

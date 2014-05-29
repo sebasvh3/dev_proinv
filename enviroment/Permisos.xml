@@ -22,7 +22,10 @@ Si no se especifica usuario, se asume que es de acceso para todos.
     
     <!-- Rutas Generales -->
     <ruta ruta="/Usuario/nuevo"></ruta>
-    <ruta ruta="/Producto/listar"></ruta>
+    <ruta ruta="/Producto/listar">
+        <usuario usuario="usuario"/>
+        <!--<usuario usuario="administrador"/>-->
+    </ruta>
     <ruta ruta="/Producto/nuevo"></ruta>
     <ruta ruta="/Producto/guardar"></ruta>
     <ruta ruta="/Producto/consultar"></ruta>
@@ -36,6 +39,7 @@ Si no se especifica usuario, se asume que es de acceso para todos.
     <ruta ruta="/Categoria/guardarAjax"></ruta>
     <ruta ruta="/Categoria/inactivarRegistro"></ruta>
     <ruta ruta="/Categoria/nuevo"></ruta>
+    <ruta ruta="/Categoria/guardar"></ruta>
     <ruta ruta="/Movimiento/salida"></ruta>
     <ruta ruta="/Movimiento/guardar"></ruta>
     <ruta ruta="/Movimiento/entrada"></ruta>

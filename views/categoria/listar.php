@@ -2,7 +2,7 @@
 <br>
 
 <div id="viewCategoria" class="viewList">
-<table id="listaProductos" class="table table-bordered">
+<table id="listaProductos" class="table table-bordered tablaCondensada">
     <thead>
         <tr>
             <th>Código</th>

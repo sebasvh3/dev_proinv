@@ -32,18 +32,13 @@ class ProductoControl extends AbstractControl {
         $this->setVistaAccion('producto/nuevo');
     }
     
+    //** TODO: Validaciones
     public function guardar() {
         $entidad = new Producto($_POST);
         
         $entidad->setEstado('ACT');
-
-        if ($this->facade->doEdit($entidad)) {
-        } else {
-        }
-        //***cargue la entidad seleccionada
-        $this->entidadSeleccionada = $entidad;
-        $this->facade->showSql();
-        $this->facade->showMensajeInfo();
+        $this->facade->doEdit($entidad);
+        $this->listar();
     }
 
     

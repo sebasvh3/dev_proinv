@@ -1,68 +1,45 @@
 <?php
 require_once rutaModel.'AbstractControl.php';
-require_once rutaFacades.'CategoriaFacade.php';
+//require_once rutaFacades.'CategoriaFacade.php';
 require_once rutaEntidades.'Categoria.php';
-//Change commit
+
 class CategoriaControl extends AbstractControl {
     
     function CategoriaControl() {
-        $this->facade = new CategoriaFacade();
+        $this->facade = $this->factoryModel('CategoriaFacade');
+        
     }
 
     public function getListaEntidades($params=array()) {
         if ($this->listaEntidades == null) {
-      //      if (isset($params['filtrar'])) {
-//                $this->setListaEntidades($this->facade->findEntitiesDos('', $params));
                 $filtros = array("and estado='ACT'");
                 $this->setListaEntidades($this->facade->findEntitiesDos(array(),$filtros));
-                $this->facade->showSql();
-           // }
+                //$this->facade->showSql();
         }
-//        echo "<pre>";
-//        var_dump($this->listaEntidades);
         return $this->listaEntidades;
     }
 
     public function listar() {
         $this->setVistaAccion('categoria/listar');
-//        $this->getListaEntidades();
     }
 
     public function nuevo() {
         $this->setVistaAccion('categoria/nuevo');
-//        $this->prepararNuevo();
-//        require_once '../view/tipo_activotr.php';
     }
     
 
     
 
     public function guardar() {
-        $entidad = new Categoria($_POST);
+        $categoria = new Categoria($_POST);
+        $categoria->setEstado('ACT');
+        $this->facade->doEdit($categoria);
         
-        $entidad->setEstado('ACT');
-//***
-//        if ($entidad->getId() == null || trim($entidad->getId()) == '') {
-//            $entidad->setMocodmotiv('01');
-//            $entidad->setAucodestad('A');
-//        }
-//***
-        if ($this->facade->doEdit($entidad)) {
-//            echo "si... guardo";
-//            $this->mensaje = Ambiente::$mensajeGuardarCorrecto;
-            //***cargue la entidad que se acaba de crear
-    //            if($entidad->getId() == null){
-    //                $entidad = $this->facade->buscarUltimoCreadoPorElUspropieta($entidad->getUspropieta());
-    //            }
-        } else {
-//            echo "No... guardo";
-//            $this->mensaje = Ambiente::$mensajeGuardarIncorrecto;
-        }
+        $this->listar();
         //***cargue la entidad seleccionada
-        $this->entidadSeleccionada = $entidad;
-        $this->facade->showSql();
-        $this->facade->showMensajeInfo();
-        
+//        $this->entidadSeleccionada = $categoria;
+//        $this->facade->showSql();
+//        $this->facade->showMensajeInfo();
     }
     
     public function editar($id){
