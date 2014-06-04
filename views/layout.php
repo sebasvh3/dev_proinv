@@ -28,7 +28,7 @@ setlocale("LC_ALL", "es_CO.UTF-8");
         
         <div id="contenedor">    
         <div id='header'>
-             <!--<img src='resources/images/CafeMariscal.jpg' width='100' alt='cafe Mariscal' >-->
+             <img src='resources/images/CafeMariscal.jpg' width='100' alt='cafe Mariscal' >
             <?php if($this->getVistaAccion()!='login'): ?>
                 <div  class="link"><a href="app.php/Index/cerrar"><i class="fa fa-minus"></i> Cerrar Sesión </a><br></div>    
             <?php  endif; ?>
@@ -52,9 +52,7 @@ setlocale("LC_ALL", "es_CO.UTF-8");
                         Transacciones <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <?php if(1==2): ?>
-                            <li id="entrada"><a href="app.php/Movimiento/entrada">Entrada</a></li>
-                        <?php endif; ?>
+                        <li id="entrada"><a href="app.php/Movimiento/entrada">Entrada</a></li>
                         <li id="salida"><a href="app.php/Movimiento/salida">Salida</a></li>
                         <li id="inAveria"><a href="app.php/Movimiento/entradaAveria">Entrada Averia</a></li>
                         <li id="OutAveria"><a href="app.php/Movimiento/salidaAveria">Salida Averias</a></li>
@@ -71,10 +69,10 @@ setlocale("LC_ALL", "es_CO.UTF-8");
                     </a>
                     <ul class="dropdown-menu">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="app.php/Usuario/nuevo">Usuario</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+<!--                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
                         <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>-->
                     </ul>
                 </li>
             </ul>
