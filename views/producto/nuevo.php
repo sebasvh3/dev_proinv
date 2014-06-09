@@ -7,8 +7,16 @@
      <div class="form-group">   
        <div class="col-md-1"><label for="exampleInputEmail1">Descripción:</label></div>
        <div class="col-md-4"><input type="text" class="form-control" id="inputDescripcion" name="descripcion"></div>
-       <div class="col-md-1"><label for="exampleInputEmail1">Cantidad (gr):</label></div>
-       <div class="col-md-1"><input type="text" class="form-control" id="inputCantidad" name="cantidad_gr"></div>
+       <div class="col-md-1"><label for="exampleInputEmail1">Tercero:</label></div>
+       <!--<div class="col-md-1"><input type="text" class="form-control" id="inputCantidad" name="id_tercero"></div>-->
+       <div class="col-md-2">
+           <select  class="form-control"  name="id_tercero" >
+               <option ></option>
+               <?php foreach ($this->terceros as $tercero):  ?>
+                   <option value='<?php echo $tercero['id'] ?>'><?php echo $tercero['descripcion'] ?></option>
+               <?php endforeach;?>
+           </select>
+       </div>
      </div>
    </div>    
     <div class="row">
@@ -30,6 +38,9 @@
       <div class="col-md-2 col-md-offset-8"><button type="submit" class="btn btn-default btn-info btn-sm">Guardar</button></div>
    </div>
 </form>
+<pre>
+    <?php print_r($this->terceros)?>
+</pre>
 
 
 

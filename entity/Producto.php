@@ -2,6 +2,7 @@
 
 //require_once 'EntidadAuditoria.php';
 require_once rutaFacades.'CategoriaFacade.php';
+require_once rutaFacades.'TerceroFacade.php';
 require_once rutaFacades.'ProductoBodegaFacade.php';
 
 
@@ -93,16 +94,21 @@ Class Producto /*extends EntidadAuditoria*/ {
 
     public function mergeDatos($fieldsValues) {
         $keySet = array_keys($fieldsValues);
+        $myAttributes = get_object_vars($this);
         
         $objects = array();
         foreach ($keySet as $key) {
-            $objects[strtolower($key)] = $fieldsValues[$key];
+            if(array_key_exists(strtolower($key), $myAttributes)){
+                $objects[strtolower($key)] = $fieldsValues[$key];
+            }
         }
         foreach ($objects as $key => $value)
             $this->$key = $value;
         
-        if(!isset($this->id_categoria) or $this->getId_categoria()=='')
-            $this->setId_categoria(null);
+        
+        if(!isset($this->id_categoria) or $this->getId_categoria()=='') $this->setId_categoria(null);
+        if(!isset($this->id_tercero) or $this->getId_categoria()=='') $this->setId_tercero(null);
+        if(!isset($this->estado)) $this->setEstado ('ACT');
     }
     
     
@@ -217,6 +223,14 @@ Class Producto /*extends EntidadAuditoria*/ {
         $categoriaFacade= new CategoriaFacade();
         if(isset($this->id_categoria) && $this->getId_categoria()!='')
             return $categoriaFacade->getDescripcionCategoria($this->getId_categoria());
+        else
+            return "";
+    }
+    
+    public function getTerceroDescripcion(){
+        $terceroFacade= new TerceroFacade();
+        if(isset($this->id_tercero) && $this->getId_tercero()!='')
+            return $terceroFacade->getDescripcionTercero($this->getId_tercero());
         else
             return "";
     }

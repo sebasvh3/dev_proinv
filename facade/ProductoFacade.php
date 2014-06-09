@@ -33,7 +33,7 @@ class ProductoFacade extends AbstractFacade{
     
     
     public function getNamedQuery($nameQuery) {
-        $querys['editarProducto'] = "SELECT t.id, t.descripcion, t.codigo, t.cantidad_gr, t.id_categoria  FROM " . $this->schema . "." . $this->entidad . " t where t.id=".$this->id;
+        $querys['editarProducto'] = "SELECT t.id, t.descripcion, t.codigo, t.cantidad_gr, t.id_categoria, t.id_tercero FROM $this->schema.$this->entidad t ";
         $querys['sinCategoria'] = "UPDATE " . $this->schema . "." . $this->entidad . " SET id_categoria=null WHERE id=".$this->id;
         $querys['ActualizarProductoTable'] = "SELECT p.id, p.descripcion, p.codigo, p.cantidad_gr, c.descripcion as categoria "
                                             ."FROM producto p LEFT JOIN categoria c ON p.id_categoria = c.id WHERE p.id=".$this->id;
@@ -42,32 +42,27 @@ class ProductoFacade extends AbstractFacade{
         return $querys[$nameQuery];
     }
     
-    public function queryEditarProducto($id){
-        $this->id=$id;
-        $productoEditable = $this->runNamedQuery(ProductoFacade::$editarProducto);
-        
-        $categoriaFacade= new CategoriaFacade();
-        $categorias = $categoriaFacade->getCategoriasActivas();
-        
-        $productoEditable[]=$categorias;
-        
-        return $productoEditable;
+    public function queryEditarProducto($id) {
+        //$this->id=$id;
+        $filtros = array("where t.id=$id");
+        $productoEditable = $this->runNamedQuery(ProductoFacade::$editarProducto,$filtros);
+        return array('producto'=>$productoEditable[0]);
     }
     
-    public function queryActualizarTable($id){
+    public function queryActualizarTable($id) {
         $this->id=$id;
         $productoResponse = $this->runNamedQuery(ProductoFacade::$ActualizarProductoTable);
         return $productoResponse;
     }
     
-    public function findProductoByCategoria($idcategoria){
+    public function findProductoByCategoria($idcategoria) { 
         $this->idcategoria = $idcategoria;
         $productoResponse = $this->runNamedQuery(ProductoFacade::$ProductoByCategoria);
         return $productoResponse;
     }
     
     //** Metodo reemplazado en productoBodegaFacade
-    public function consultarExistencia($id){
+    public function consultarExistencia($id) {
         $this->id=$id;
         $response = $this->runNamedQuery(ProductoFacade::$consultarExistencia);
         if(isset($response[0]['existencia']) && $response[0]['existencia']!='')
@@ -75,7 +70,7 @@ class ProductoFacade extends AbstractFacade{
         else return 0;
     }
     
-    public function findProductoById($id){
+    public function findProductoById($id) {
         $filtros = array("and id =$id","and estado='ACT'");
         $entidades=$this->findEntitiesDos(array(),$filtros);
         if(count($entidades))

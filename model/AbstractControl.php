@@ -27,20 +27,20 @@ class AbstractControl {
     public $rutasCss=array();
     
     
-    function AbstractControl(){
+    function AbstractControl() {
         
     }
     
-    public function iniciar($vista = ""){
+    public function iniciar($vista = "") {
         $this->setVistaAccion("login");
     }
     
-    public function getVista($accion = null){
+    public function getVista($accion = null) {
         $accion = $accion ? $accion : $this->getVistaAccion();
         
         $archivoVista = rutaVistas.$accion.".php"; 
         
-        if(is_file($archivoVista)){
+        if(is_file($archivoVista)) {
             require_once $archivoVista;
         }
 
@@ -55,16 +55,16 @@ class AbstractControl {
         $this->vistaAccion = $vistaAccion;
     }
     
-    public function setSeleccionado($seleccionado){
+    public function setSeleccionado($seleccionado) {
         $this->seleccionado = $seleccionado;
     }
     
-    public function getSeleccionado(){
+    public function getSeleccionado() {
         return $this->seleccionado;
     }
     
-    public function getMensajeInformacion(){
-        if(isset($_SESSION["mensajeInfo"])){
+    public function getMensajeInformacion() {
+        if(isset($_SESSION["mensajeInfo"])) {
             $this->mensajeInformacion = new Pojo($_SESSION["mensajeInfo"]);
             unset($_SESSION["mensajeInfo"]);
         }
@@ -72,17 +72,17 @@ class AbstractControl {
         return $this->mensajeInformacion ? $this->mensajeInformacion : FALSE ;
     }
     
-    public function setMensajeInformacion($mensaje,$clase = null){
+    public function setMensajeInformacion($mensaje,$clase = null) {
         $mensajeInformacion["pojo_mensaje"] = $mensaje;
         $mensajeInformacion["pojo_clase"] = ($clase) ? $clase : "claseCorrecto"; 
         $_SESSION["mensajeInfo"] = $mensajeInformacion;
         $this->mensajeInformacion = new Pojo($mensajeInformacion);
     }
     
-    public function getFiltrosCr($clase,$atributo = ""){
+    public function getFiltrosCr($clase,$atributo = "") {
         
-        if(isset($_SESSION[$this->prepararParaFiltros($clase)])){
-            if($atributo && isset($_SESSION[$this->prepararParaFiltros($clase)][$atributo])){
+        if(isset($_SESSION[$this->prepararParaFiltros($clase)])) {
+            if($atributo && isset($_SESSION[$this->prepararParaFiltros($clase)][$atributo])) {
                 return $_SESSION[$this->prepararParaFiltros($clase)][$atributo];
             } else{
                 return $_SESSION[$this->prepararParaFiltros($clase)];
@@ -92,41 +92,41 @@ class AbstractControl {
         return false;
     }
 
-    public function setFiltrosCr($clase, $filtrosCr){
+    public function setFiltrosCr($clase, $filtrosCr) {
         
         $_SESSION[$this->prepararParaFiltros($clase)] = $filtrosCr;
     }
     
-    public function prepararParaFiltros($nombreClase){
+    public function prepararParaFiltros($nombreClase) {
         
         $nombreClase = preg_replace("/control|facade/","FiltrosCr",strtolower($nombreClase));
         
         return $nombreClase;
     }
     
-    public static function getBase(){
+    public static function getBase() {
 
         $url = str_replace("index.php", "", $_SERVER["SCRIPT_NAME"]);
 
         return "http://".$_SERVER['SERVER_NAME'].$url;
     }
 
-    public function getListaEntidades(){
+    public function getListaEntidades() {
         return $this->listaEntidades;
     }
     
-    public function setListaEntidades($listaEntidades){
+    public function setListaEntidades($listaEntidades) {
         $this->listaEntidades = $listaEntidades;
     }
     
-    public function getVer(){
+    public function getVer() {
         $this->setVistaAccion('ver');
     }
     
-    public static function factoryModel(){
+    public static function factoryModel() {
         $facadesArray = array();
         
-        foreach(func_get_args() as $className){
+        foreach(func_get_args() as $className) {
             $className = ucfirst($className);
             require_once rutaFacades."$className.php";
             $facadesArray[] = new $className(); 
@@ -136,22 +136,22 @@ class AbstractControl {
     }  
     
     
-    public function getEntitiesToJson($entities, $atributos = null){        
+    public function getEntitiesToJson($entities, $atributos = null) {        
         return json_encode($this->getEntitiesForJson($entities, $atributos));
     }
     
-    public function getEntitiesForJson($entities, $atributos = null){
+    public function getEntitiesForJson($entities, $atributos = null) {
         $entitiesArray = array();        
         $isArray       = is_array($entities);
         
-        if($entities){
+        if($entities) {
             $entities = $isArray ? $entities : array($entities);
-            foreach ($entities as $entitie){
+            foreach ($entities as $entitie) {
                 $entitieArray = array();
-                foreach ($atributos as $key=>$value){
+                foreach ($atributos as $key=>$value) {
                     $atributo = is_array($value) ? $key : $value;                    
                     $keyName  = preg_replace("/^tb/i", '', $atributo);
-                    if(property_exists($entitie, $atributo)){
+                    if(property_exists($entitie, $atributo)) {
                         $metodo = 'get'.ucfirst($atributo);
                         $entitieArray[$keyName] = is_array($value) ? $this->getEntitiesForJson($entitie->$metodo(), $value) : $entitie->$metodo();
                     }
@@ -162,16 +162,23 @@ class AbstractControl {
         return $isArray ? $entitiesArray : array_pop($entitiesArray);
     }
     
-    public function addRutaJs($ruta){
+    
+    public function verObj($obj) {
+        echo"<pre>";
+        var_dump($obj);
+        echo "</pre>";
+    }
+    
+    public function addRutaJs($ruta) {
         $this->rutasJs[]=rutaJs.$ruta;
     }
-    public function addRutaCss($ruta){
+    public function addRutaCss($ruta) {
         $this->rutasCss[]=rutaCss.$ruta;
     }
 
-    public function getRutasJs(){
+    public function getRutasJs() {
         $sRutasJs="";
-        foreach($this->rutasJs as $ruta){
+        foreach($this->rutasJs as $ruta) {
             $sRutasJs.="<script type='text/javascript' src='$ruta'></script> \n\t";
         }
         return $sRutasJs;
@@ -180,9 +187,9 @@ class AbstractControl {
     //** TODO: Las rutas js funcion bn, debido que los <script> estan al final del loyout
     //** Por lo tanto ya se ha llamado la vistaAccion. En los <link> estan al principio 
     //** no se muestran porque aun no se ha llamado vistaAccion
-    public function getRutasCss(){
+    public function getRutasCss() {
         $sRutasCss="";
-        foreach($this->rutasCss as $ruta){
+        foreach($this->rutasCss as $ruta) {
             $sRutasCss.="<link rel='stylesheet' type='text/css' href='$ruta' media='screen'/>";
         }
         return $sRutasCss;

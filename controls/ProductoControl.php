@@ -8,6 +8,7 @@ require_once rutaEntidades.'Producto.php';
 class ProductoControl extends AbstractControl {
     
     public $categorias;
+    public $terceros;
     
     function ProductoControl() {
         $this->facade = new ProductoFacade();
@@ -29,14 +30,13 @@ class ProductoControl extends AbstractControl {
     public function nuevo() {
         $categoriaFacade = new CategoriaFacade() ;
         $this->categorias = $categoriaFacade->getCategoriasActivas();
+        $this->terceros = $this->factoryModel('TerceroFacade')->getTercerosAct();
         $this->setVistaAccion('producto/nuevo');
     }
     
     //** TODO: Validaciones
     public function guardar() {
         $entidad = new Producto($_POST);
-        
-        $entidad->setEstado('ACT');
         $this->facade->doEdit($entidad);
         $this->listar();
     }
@@ -53,6 +53,8 @@ class ProductoControl extends AbstractControl {
         $this->layout=false;
         $idproducto = $_POST['id'];
         $producto=$this->facade->queryEditarProducto($idproducto);
+        $producto['categorias'] = $this->factoryModel('CategoriaFacade')->getCategoriasActivas();
+        $producto['terceros']   = $this->factoryModel('TerceroFacade')->getTercerosAct();
         echo json_encode($producto);
     }
     
@@ -124,12 +126,7 @@ class ProductoControl extends AbstractControl {
     }
 
 
-    public function verObj($obj){
-        echo"<pre>";
-        var_dump($obj);
-        echo "</pre>";
-    }
     
-
+    
 }
 

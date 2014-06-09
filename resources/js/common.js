@@ -1,6 +1,6 @@
 urlbase = "app.php/";
 
-$(function(){
+$(function() {
     //Active the dataTable
 //    $('#listaProductos').dataTable({
 ////	"sDom": 'C<"clear">R<"top">tr<"bottom"lp><"clear">',
@@ -47,9 +47,9 @@ $(function(){
     
     console.debug("inpu "+$('#inputExistencia').length);
     //***Ventana de salidas
-    if($('#inputExistencia').length>0){
+    if($('#inputExistencia').length>0) {
         console.debug("si inputExistencia sss");
-        $("#select_id_producto").change(function(){
+        $("#select_id_producto").change(function() {
             console.debug("por la funcion select");
             idpro=this.value;
             existenciaByProducto(idpro);
@@ -66,7 +66,7 @@ $(function(){
     
 });
 
-function mostrar_mensaje(tipo, mensaje){
+function mostrar_mensaje(tipo, mensaje) {
     var t = '.alert-'+tipo+':first';
     var alert = $(t).clone();
     alert.addClass("msj-visto");
@@ -75,87 +75,91 @@ function mostrar_mensaje(tipo, mensaje){
     $('.mensajes').append(alert);
 }
 
-function editarProducto(id,control){
+function editarProducto(id,control) {
     $.ajax({
             data: "id="+id,
             type: "POST",
             dataType: "json",
             url: "app.php/"+control+"/editarAjax",
-            success: function(datos){
+            success: function(datos) {
                 console.dir(datos);
                 llenarFormulario(datos);
                 console.debug("Datos llenados");
-                for(i in datos){
+                for(i in datos) {
                     console.debug(i+" : "+datos[i]);
                 }
             },
-            error: function(){
+            error: function() {
                 alert("Error en consulta ajax");
             }
         });
 }
 
-function editEntity(id,control){
+function editEntity(id,control) {
     $.ajax({
             data: "id="+id,
             type: "POST",
             dataType: "json",
             url: "app.php/"+control+"/editarAjax",
-            success: function(datos){
+            success: function(datos) {
                 console.debug("Datos editarAjax:");
                 console.dir(datos);
                 llenarFormulario(datos);
                 
-//                for(i in datos){
+//                for(i in datos) {
 //                    console.debug(i+" : "+datos[i]);
 //                }
             },
-            error: function(){
+            error: function() {
                 alert("Error en consulta ajax");
             }
         });
 }
 
-function llenarFormulario(datos){
-    var entity = datos[0];
+function llenarFormulario(datos) {
+    var entity = datos.producto;
     
-    for(item in entity){
+    for(item in entity) {
         $("#input_"+item).val(entity[item]);
     }
     
-    if(datos.length === 2){
-        var categorias = datos[1];
-//        var select = $("#id_categoria");
+    //** Select Categorias
+    if(datos.categorias) {
+        var categorias = datos.categorias;
         $("#select_id_categoria").empty();
         var options = "<option></option>";
-        for(cat in categorias){
-            if(entity['id_categoria']===categorias[cat]['id'])
-                options+="<option value='"+categorias[cat]['id']+"' selected='selected'>";
+        for(var categoria in categorias) {
+            if(entity['id_categoria']===categorias[categoria]['id'])
+                options+="<option value='"+categorias[categoria]['id']+"' selected='selected'>";
             else
-                options+="<option value='"+categorias[cat]['id']+"'>";
-            options+=categorias[cat]['descripcion'];
+                options+="<option value='"+categorias[categoria]['id']+"'>";
+            options+=categorias[categoria]['descripcion'];
             options+="</option>";
-//            console.debug("----");
-//            console.dir(categorias[cat]);
         }
-//        console.debug(options);
         $("#select_id_categoria").append(options);
     }
-    
-//    console.debug("Los datos fueron llenados");
-//    $("#input_id").val(datos[0]['id']);
-//    $("#input_descripcion").val(datos[0]['descripcion']);
-//    $("#input_cantidad_gr").val(datos[0]['cantidad_gr']);
-//    $("#input_codigo").val(datos[0]['codigo']);
-//    $("#input_tercero").val(datos[0]['tercero']);
-    //Asignar 
-//    $("#buttonGuardarForm").off();
-    
-    
+    //** Select Terceros
+    if(datos.categorias) {
+        var terceros = datos.terceros;
+        $("#select_id_tercero").empty();
+        var options = "<option></option>";
+        for(var tercero in terceros) {
+            if(entity['id_tercero']===terceros[tercero]['id'])
+                options+="<option value='"+terceros[tercero]['id']+"' selected='selected'>";
+            else
+                options+="<option value='"+terceros[tercero]['id']+"'>";
+            options+=terceros[tercero]['descripcion'];
+            options+="</option>";
+        }
+        console.debug("categorias");
+        console.debug(options);
+        $("#select_id_tercero").append(options);
+    }
+  
     $('#ModalForm').modal('show');
 }
 
-function guardarFormulario(){
+function guardarFormulario() {
     var entity = $("#name_entity").val();
     var form_datos=$('#form_edit').serialize();
     console.dir(form_datos);
@@ -164,23 +168,23 @@ function guardarFormulario(){
             type: "POST",
             dataType: "json",
             url: "app.php/"+entity+"/guardarAjax",
-            success: function(datos){
+            success: function(datos) {
                 actualizarNotificarRegistroEnTabla(datos);
                 console.debug("datos: ");
                 console.dir(datos);
             },
-            error: function(){
+            error: function() {
                 mostrar_mensaje("danger","Error en el servidor!");
             }
         });
 }
 
-function actualizarNotificarRegistroEnTabla(datos){
+function actualizarNotificarRegistroEnTabla(datos) {
     var name_entity = $("#name_entity").val();
     var entity = datos['objEnt'][0];
     var id = entity['id'];
     var fila = $("#"+name_entity+"_"+id);
-    for(item in entity){
+    for(item in entity) {
         fila.find(".td_"+item).html(entity[item]);
     }    
     mostrar_mensaje(datos['tipo'],datos['msj']);
@@ -188,23 +192,23 @@ function actualizarNotificarRegistroEnTabla(datos){
 
 
 
-function eliminarEntity(id,control){
+function eliminarEntity(id,control) {
     $(".idEntity").html(id);
     $("#buttonEliminarReg").off();
-    $("#buttonEliminarReg").on("click",function(){
+    $("#buttonEliminarReg").on("click",function() {
             $.ajax({
             data: "id="+id,
             type: "POST",
             dataType: "json",
             url: "app.php/"+control+"/inactivarRegistro",
-            success: function(datos){
+            success: function(datos) {
 //                actualizarNotificarRegistroEnTabla(datos);
                 console.debug("respuesta del servidor");
                 console.dir(datos);
                 mostrar_mensaje(datos['tipo'],datos['msj']);
                 eliminarFilaTable(id);
             },
-            error: function(){
+            error: function() {
                 mostrar_mensaje("danger","Error en el servidor!");
             }
         }); 
@@ -213,23 +217,23 @@ function eliminarEntity(id,control){
     console.debug("Metodo para eliminar el producto "+id);
 }
 
-function eliminarEntity2(id,control){
+function eliminarEntity2(id,control) {
     $(".idproducto").html(id);
     $("#buttonEliminarReg").off();
-    $("#buttonEliminarReg").on("click",function(){
+    $("#buttonEliminarReg").on("click",function() {
             $.ajax({
             data: "id="+id,
             type: "POST",
             dataType: "json",
             url: "app.php/Producto/inactivarRegistro",
-            success: function(datos){
+            success: function(datos) {
 //                actualizarNotificarRegistroEnTabla(datos);
                 console.debug("respuesta del servidor");
                 console.dir(datos);
                 mostrar_mensaje(datos['tipo'],datos['msj']);
                 eliminarFilaTable(id);
             },
-            error: function(){
+            error: function() {
                 mostrar_mensaje("danger","Error en el servidor!");
             }
         }); 
@@ -239,7 +243,7 @@ function eliminarEntity2(id,control){
 }
 
 
-function eliminarFilaTable(id){
+function eliminarFilaTable(id) {
     var name_entity = $("#name_entity").val();
     $("#"+name_entity+"_"+id).delay(100);
     $("#"+name_entity+"_"+id).fadeOut(700, function () {
@@ -247,22 +251,22 @@ function eliminarFilaTable(id){
      });
 }
 
-function trim (myString){
+function trim (myString) {
     return myString.replace(/^\s+/g,'').replace(/\s+$/g,'')
 }
 
 
-function consultar(id){
+function consultar(id) {
     $.ajax({
             data: "id="+id,
             type: "POST",
             dataType: "json",
             url: "app.php/Producto/consultar",
-            success: function(datos){
+            success: function(datos) {
                 console.debug("datos consultados");
                 console.dir(datos);
             },
-            error: function(){
+            error: function() {
                 alert("Error en consulta ajax");
             }
         });
@@ -276,16 +280,16 @@ function log(data) {
 	console.log(data);
 } 
 
-function opt2url(opt){
+function opt2url(opt) {
 	var url = "";
-	if(opt) $.each(opt,function(key,value){
+	if(opt) $.each(opt,function(key,value) {
 	    var dup = key + "=" + value + "&";
 	    url += dup;
 	});
 	return url;
 }
 
-function getResponse(method, url, data){
+function getResponse(method, url, data) {
 	$.ajax({
 	    type: method,
 	    url: urlbase+url,
@@ -295,7 +299,7 @@ function getResponse(method, url, data){
 	    data: data
 	}).done(function( msg ) {
 	    ret = msg;
-	}).error(function(jqXHR, text){
+	}).error(function(jqXHR, text) {
             console.debug("Revisar Error en: "+url);
 	    ret = false;
 	});

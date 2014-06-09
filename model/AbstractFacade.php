@@ -302,6 +302,7 @@ class AbstractFacade {
         $consulta = $this->getNamedQuery($namequery);
         //***
         $consulta .= implode(" ", $filtros);
+        //echo $consulta;die;
         //***
         $entidades = $this->getEntityManager()->executeQueryObject($consulta);
         //***
