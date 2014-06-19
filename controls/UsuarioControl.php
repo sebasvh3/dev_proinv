@@ -19,6 +19,10 @@ class UsuarioControl extends AbstractControl {
         
     }
     
+    public function guardarUsuario() {
+        $this->layout=false;
+        echo json_encode(array("men"=>"full servidor"));
+    }
     
 }
 

@@ -12,7 +12,7 @@
  */
 require_once rutaModel.'AbstractFacade.php';
 
-class UsuarioFacade extends AbstractFacade{
+class UsuarioFacade extends AbstractFacade {
     public static $GETALLUSUARIO = "getAllUsuario";
     
     public function UsuarioFacade(){

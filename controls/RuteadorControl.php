@@ -33,6 +33,9 @@ class RuteadorControl {
 //            echo "-----";
 //            echo"<pre>hola Sesion:<br>";
 //            var_dump($_SESSION);
+//            $usuario = json_decode($_SESSION['usuario']);
+//            var_dump($usuario);
+//            var_dump($usuario->rols[0]->descripcion);
 //            echo "</pre>";
 //            var_dump();
 //            echo $this->getRequestUri();

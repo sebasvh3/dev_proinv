@@ -22,4 +22,4 @@
 <br><br><br>
 <!--<a href="app.php/Categoria/probarGet?var=14&id=12">Probar Get</a>-->
 
-<?php  echo"<pre>";var_dump($this); ?>
+<?php //  echo"<pre>";var_dump($this); ?>
